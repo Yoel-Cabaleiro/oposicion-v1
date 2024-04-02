@@ -1,5 +1,5 @@
 import os
-from api.model import db, Users
+from api.model import db, Users, Estadisticas, Estudiantes, Categorias, Preguntas
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 
@@ -15,7 +15,10 @@ def setup_admin(app):
     
     # Admin panel views
     # admin.add_view(ProAdminView(Pro, db.session))
-    admin.add_view(ModelView(Users, db.session))
+    admin.add_view(ModelView(Estudiantes, db.session))
+    admin.add_view(ModelView(Estadisticas, db.session))
+    admin.add_view(ModelView(Categorias, db.session))
+    admin.add_view(ModelView(Preguntas, db.session))
 
 
 
