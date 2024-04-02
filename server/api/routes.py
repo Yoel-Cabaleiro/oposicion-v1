@@ -15,15 +15,34 @@ api = Blueprint('api', __name__)
 
 
 #########################################################
+#Categorias
+
+#Get all Categorias
+@api.route('/categorias', methods=['GET'])
+def get_categorias():
+    categorias = Categorias.query.all()
+    if not categorias:
+        return jsonify({"mensaje": "No se han encontrado categorias"})
+    return jsonify({"mensaje": "categorias descargadas", "data": [categoria.serialized() for categoria in categorias]})
+
+
+#########################################################
 #Preguntas
 
-#Get all Preguntas 
-@api.route('/preguntas', methods=['GET'])
+#Get and Delete all Preguntas 
+@api.route('/preguntas', methods=['GET', 'DELETE'])
 def get_preguntas():
     preguntas = Preguntas.query.all()
     if not preguntas:
         return jsonify({"mensaje": "No se han encontrado preguntas"})
-    return jsonify({"mensaje": "Preguntas descargadas", "data": [pregunta.serialized() for pregunta in preguntas]})
+    if request.method == 'GET':
+        return jsonify({"mensaje": "Preguntas descargadas", "data": [pregunta.serialized() for pregunta in preguntas]})
+    if request.method == 'DELETE':
+        db.session.query(Preguntas).delete()
+        db.session.commit()
+        return jsonify({"mensaje": "Todas las Preguntas borradas!!"})
+
+
 
 
 
