@@ -43,7 +43,7 @@ export default function Login() {
   
   return (
     <> 
-    <section id="signup" className="" style={{ minHeight: '100vh'}}>
+    <section id="login" className="" style={{ minHeight: '100vh'}}>
       <div className="container bg-green py-3 mt-5 mb-0">
 
         <div className="text-center mb-5">
@@ -87,13 +87,13 @@ export default function Login() {
 
 
             <hr className="my-4" />
-            <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5" />
+            <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5 text-black" />
 
           </form>
 
           <div>
-            <p className="mb-2">No account yet? <Link to="/signup">Signup here</Link></p>
-            <p>Forgot your password? <Link to="/password-request">Recovery now</Link></p>
+            <p className="mb-2">No account yet? <Link to="/signup" className="text-dark">Signup here</Link></p>
+            <p>Forgot your password? <Link to="/password-request" className="text-dark">Recovery now</Link></p>
           </div>
         </div>
 
