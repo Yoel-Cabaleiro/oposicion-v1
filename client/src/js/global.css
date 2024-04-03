@@ -6,9 +6,9 @@ COLOR SISTEM
 ////////////////////////*/
 
 :root {
-  --primary: #e68b45;
+  --primary: #fbfbfb;
   --primary-subtle: #ffe0c8;
-  --primary-hover: #e96500;
+  --primary-hover: #5ccc37;
   --on-primary: rgb(250, 250, 250);
   
   --secondary: #989898;

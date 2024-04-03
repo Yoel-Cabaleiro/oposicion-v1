@@ -3,7 +3,7 @@ import { useNavigate, Link} from 'react-router-dom'
 import { Context } from "../../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-
+import "../login/login.css"
 
 export default function Login() {
 
@@ -43,14 +43,14 @@ export default function Login() {
   
   return (
     <> 
-    <section id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
-      <div className="container py-5">
+    <section id="signup" className="" style={{ minHeight: '100vh'}}>
+      <div className="container bg-green py-3 mt-5 mb-0">
 
         <div className="text-center mb-5">
-          <p className="text-white fw-bolder fs-1">Login</p>
+          <p className="text-dark fw-bolder fs-1">Login</p>
         </div>
 
-        <div className="col-md-7 col-lg-8 m-auto text-white">
+        <div className="col-md-7 col-lg-8 m-auto text-dark">
           <form onSubmit={handleSubmit} className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
         
