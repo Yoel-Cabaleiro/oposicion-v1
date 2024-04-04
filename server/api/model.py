@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_jwt_extended import JWTManager
 
+
 import jwt
 
 db = SQLAlchemy()
@@ -22,6 +23,7 @@ class Users(db.Model):
     
     def __repr__(self):
         return f'{self.user_name}'
+    
     
 
 class Estudiantes(db.Model):
@@ -71,6 +73,7 @@ class Estadisticas(db.Model):
     categoria_id = db.Column(db.ForeignKey("categorias.id"), nullable=False)
     estudiante = db.relationship("Estudiantes")
     categoria = db.relationship("Categorias")
+    preguntas_falladas = db.relationship("EstadisticasPreguntas", primaryjoin="Estadisticas.id == EstadisticasPreguntas.estadistica_id")
 
     def serialized(self):
         return {
@@ -82,6 +85,7 @@ class Estadisticas(db.Model):
             'porcentaje_aciertos': self.porcentaje_aciertos,
             'estudiante': self.estudiante.email,
             'categoria': self.categoria.nombre,
+            'preguntas_falladas': [pregunta.pregunta.id for pregunta in self.preguntas_falladas]
 
         }
     
@@ -123,4 +127,16 @@ class Preguntas(db.Model):
         return f'{self.numero}, {self.categoria.nombre}'
 
 
+class EstadisticasPreguntas(db.Model):
+    __tablename__ = "estadisticas_preguntas"
+    estadistica_id = db.Column(db.ForeignKey("estadisticas.id"), primary_key=True)
+    pregunta_id = db.Column(db.ForeignKey("preguntas.id"), primary_key=True)
+    fallos = db.Column(db.Integer)
+    pregunta = db.relationship("Preguntas")
 
+    def serialized(self):
+        return {
+            'categoria_id': self.categoria_id,
+            'pregunta_id': self.pregunta_id,
+            'fallos': self.fallos
+        }
