@@ -1,60 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-// import logoEO from '../../../../img/logoEO.png';
+import { Context } from "../store/appContext";
 import './home.css'
+import { Link } from "react-router-dom";
+// import logoEO from '../../../../img/logoEO.png';
 
 export default function Home() {
+  const { store, actions } = useContext(Context);
 
   return (
     <>
-      <main className="d-flex align-items-center prueba min-vh-100" style={{ minHeight: '100vh' }}>
+      <main className="d-flex align-items-center prueba overflow-hidden" style={{ minHeight: '100vh' }}>
         <div className="container-fluid">
-          <div className="d-flex flex-column">
-            <img className="card-img-top mx-auto d-block align-self-center w-25" src="https://res.cloudinary.com/dx23woi99/image/upload/v1712171346/EOlogo_rortoa.png"></img>
+          <div className="d-flex flex-column justify-content-center" style={{ height: '100%' }}>
+            <img className="card-img-top mx-auto d-block w-25" src="https://res.cloudinary.com/dx23woi99/image/upload/v1712171346/EOlogo_rortoa.png" alt="EasyOp logo"></img>
             <h1 className="text-black text-center" style={{ fontSize: "5rem" }}>EasyOp</h1>
             <h5 className="text-black text-center">Prepara tus oposiciones, fácilmente.<br /></h5>
-            <button className="mx-auto px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold">Empieza ahora</button>
+            <Link to="/dashboard/" className="text-center">
+              <button type="button" className="mx-auto px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold">Empieza ahora</button>
+            </Link>
           </div>
-          <section className="row text-white py-3 px-2 mb-4">
-
-            {/* <div className="col-sm-4">
-              <h4 className=" fw-normal text-primary">Frontend</h4>
-              <ul>
-                <li>Node</li>
-                <li>React</li>
-                <li>Bootstraps</li>
-                <li>Font Awesome</li>
-                <li>Webpack</li>
-              </ul>
-            </div>
-
-            <div className="col-sm-4">
-              <h4 className=" fw-normal text-primary">Backend</h4>
-              <ul>
-                <li>Python</li>
-                <li>Flask</li>
-                <li>SQLAlchemy</li>
-                <li>Flux - server</li>
-                <li>React Router</li>
-                <li>JWT - auth manager</li>
-                <li>SQLight DB</li>
-                <li>Bcrypt - psw hashing</li>
-                <li>Smtplib - email sender</li>
-              </ul>
-            </div>
-
-            <div className="col-sm-4">
-              <h4 className=" fw-normal text-primary">Functionality</h4>
-              <ul>
-                <li>Signup</li>
-                <li>Login/Logout</li>
-                <li>Dashboard</li>
-                <li>PSW encription</li>
-                <li>Password recovery</li>
-              </ul>
-            </div> */}
-
-          </section>
-
         </div>
       </main>
     </>
