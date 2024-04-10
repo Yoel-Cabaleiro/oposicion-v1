@@ -45,7 +45,6 @@ export default function Dashboard() {
         <div className="d-flex">
           <div className="text-gray border rounded bg-light p-3 w-50 me-3 h-auto">
             <h4 className="mb-3 text-decoration-underline" >My data</h4>
-            <p className="fw-lighter"> Username - <span className="fw-normal">{store.user.user_name}</span></p>
             <p className="fw-lighter"> Email - <span className="fw-normal">{store.user.email}</span></p>
             <div className="d-flex">
               <button className="btn-sm btn-light border" onClick={handleChangePassword}>Change psw</button>
@@ -55,7 +54,7 @@ export default function Dashboard() {
           <div className="text-gray border rounded bg-light p-3 w-50">
             <h4 className="mb-3 text-decoration-underline" >Users List</h4>
             {usersList.map( user => {
-              return <p key={user.id} className="fw-lighter"><span className="fw-normal">{user.user_name}</span></p>
+              return <p key={user.id} className="fw-lighter"><span className="fw-normal">{user.email}</span></p>
             })}
           </div>
         </div>

@@ -17,6 +17,7 @@ flask-mail = "*"
 colorama = "*"
 pypdf2 = "*"
 reportlab = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

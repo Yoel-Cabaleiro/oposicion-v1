@@ -10,7 +10,6 @@ export default function SignupPersonalData() {
   const navigate = useNavigate()
   const {store, actions} = useContext(Context)
 
-  const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
 
   const [showPassword, setShowPassword] = useState(false)
@@ -22,7 +21,7 @@ export default function SignupPersonalData() {
     e.preventDefault()
 
     try{
-      const signup = await actions.signup(userName, email, password)
+      const signup = await actions.signup(email, password)
       if(signup){
         actions.logout()
         console.log('response: ', signup)
@@ -62,18 +61,6 @@ export default function SignupPersonalData() {
           <form onSubmit={ handleSubmit } className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
           
-            <div className="col-12 mb-3">
-              <label htmlFor="username" className="form-label">Username</label>
-              <input 
-                type="text" 
-                className="form-control" 
-                id="username" 
-                placeholder="you@example.com" 
-                value={userName} 
-                onChange={(e) => setUserName(e.target.value)}
-                autoComplete="username" // Gestisce l'autocompletamento per l'username
-              />
-            </div>
 
             <div className="col-12 mb-3">
               <label htmlFor="email" className="form-label">Email</label>
@@ -114,7 +101,7 @@ export default function SignupPersonalData() {
               type='submit' 
               value="submit" 
               className="w-100 btn btn-primary btn-lg mt-5"
-              disabled={ passwordError.length != 0 || password.length === 0 || userName.length === 0 || !email.includes("@") ? true : false } />
+              disabled={ passwordError.length != 0 || password.length === 0 || !email.includes("@") ? true : false } />
             
           </form>
 

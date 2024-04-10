@@ -31,7 +31,7 @@ class Estudiantes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-    suscripcion = db.Column(db.String, nullable=False)
+    suscripcion = db.Column(db.String)
 
     def serialized(self):
         return {
@@ -84,9 +84,9 @@ class Estadisticas(db.Model):
             'mejor_racha': self.mejor_racha,
             'porcentaje_aciertos': self.porcentaje_aciertos,
             'estudiante': self.estudiante.email,
+            'categoria_id': self.categoria_id,
             'categoria': self.categoria.nombre,
             'preguntas_falladas': [pregunta.pregunta.id for pregunta in self.preguntas_falladas]
-
         }
     
     def __repr__(self):
@@ -136,7 +136,7 @@ class EstadisticasPreguntas(db.Model):
 
     def serialized(self):
         return {
-            'categoria_id': self.categoria_id,
+            'categoria_id': self.estadistica_id,
             'pregunta_id': self.pregunta_id,
             'fallos': self.fallos
         }
