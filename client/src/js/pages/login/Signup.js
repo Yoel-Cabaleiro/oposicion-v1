@@ -50,14 +50,14 @@ export default function SignupPersonalData() {
 
   return (
     <> 
-    <section id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
-      <div className="container py-5">
+    <section id="signup" className="" style={{ minHeight: '100vh'}}>
+      <div className="container bg-green py-3 mt-5">
 
         <div className="text-center mb-5">
-          <p className="text-white fw-bolder fs-1">Signup</p>
+          <p className="text-dark fw-bolder fs-1">Signup</p>
         </div>
 
-        <div className="col-md-7 col-lg-8 m-auto text-white">
+        <div className="col-md-7 col-lg-8 m-auto text-dark">
           <form onSubmit={ handleSubmit } className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
           
@@ -100,13 +100,18 @@ export default function SignupPersonalData() {
             <input 
               type='submit' 
               value="submit" 
+<<<<<<< HEAD
               className="w-100 btn btn-primary btn-lg mt-5"
               disabled={ passwordError.length != 0 || password.length === 0 || !email.includes("@") ? true : false } />
+=======
+              className="w-100 btn btn-primary btn-lg mt-5 text-dark"
+              disabled={ passwordError.length != 0 || password.length === 0 || userName.length === 0 || !email.includes("@") ? true : false } />
+>>>>>>> a5d949e019ab81b0fcee1d8d1dd5747ddedf0997
             
           </form>
 
           <div>
-            <span>Already have an account? <Link to="/login">Login here</Link></span>
+            <span>Already have an account? <Link to="/login" className="text-dark">Login here</Link></span>
           </div>
         </div>
 

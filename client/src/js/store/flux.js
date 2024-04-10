@@ -8,8 +8,12 @@ const getState = ({getStore, getActions, setStore}) => {
 		store: {
 			login: false,
       user: {},
+<<<<<<< HEAD
       estadisticasEstudiante: [],
       preguntasSeleccionadas: [],
+=======
+      preguntas: [],
+>>>>>>> a5d949e019ab81b0fcee1d8d1dd5747ddedf0997
 		},
 		actions: {
       getUsers : async ()=>{

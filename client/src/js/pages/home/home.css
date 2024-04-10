@@ -1,0 +1,8 @@
+.prueba {
+    /* background-color: blue; */
+    background-image: url("https://res.cloudinary.com/dx23woi99/image/upload/v1712171386/Captura_de_pantalla_2024-04-03_191346_qwzdua.png");
+    background-repeat: no-repeat;
+    /* background-position: 90% 30%; */
+    background-size: cover;
+
+}
