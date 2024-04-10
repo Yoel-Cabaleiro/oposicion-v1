@@ -3,7 +3,7 @@ import { useNavigate, Link} from 'react-router-dom'
 import { Context } from "../../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-
+import "../login/login.css"
 
 export default function Login() {
 
@@ -43,14 +43,14 @@ export default function Login() {
   
   return (
     <> 
-    <section id="signup" className="bg-dark" style={{ minHeight: '100vh'}}>
-      <div className="container py-5">
+    <section id="login" className="" style={{ minHeight: '100vh'}}>
+      <div className="container bg-green py-3 mt-5 mb-0">
 
         <div className="text-center mb-5">
-          <p className="text-white fw-bolder fs-1">Login</p>
+          <p className="text-dark fw-bolder fs-1">Login</p>
         </div>
 
-        <div className="col-md-7 col-lg-8 m-auto text-white">
+        <div className="col-md-7 col-lg-8 m-auto text-dark">
           <form onSubmit={handleSubmit} className="needs-validation mb-3" noValidate="">
             <hr className="my-4" />
         
@@ -87,13 +87,13 @@ export default function Login() {
 
 
             <hr className="my-4" />
-            <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5" />
+            <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5 text-black" />
 
           </form>
 
           <div>
-            <p className="mb-2">No account yet? <Link to="/signup">Signup here</Link></p>
-            <p>Forgot your password? <Link to="/password-request">Recovery now</Link></p>
+            <p className="mb-2">No account yet? <Link to="/signup" className="text-dark">Signup here</Link></p>
+            <p>Forgot your password? <Link to="/password-request" className="text-dark">Recovery now</Link></p>
           </div>
         </div>
 

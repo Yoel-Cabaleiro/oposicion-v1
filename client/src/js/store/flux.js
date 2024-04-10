@@ -8,6 +8,7 @@ const getState = ({getStore, getActions, setStore}) => {
 		store: {
 			login: false,
       user: {},
+      preguntas: [],
 		},
 		actions: {
 
