@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGhost } from '@fortawesome/free-solid-svg-icons'
-
+import "./navbar.css"
+import easyopLogo from '../../../../img/easyopLogo.png'
 
 // Components
 
@@ -14,7 +14,7 @@ export default function NavLogo() {
 
         <div className="me-auto fw-lighter">
           <Link to="/" className="text-decoration-none">
-            <FontAwesomeIcon icon={faGhost} className="me-2" style={{height:'35px'}}/><span className="fw-bold">Template</span>
+            <img src={easyopLogo} className="card-img-top mt-3" alt="..." style={{ width: "40%" }}></img>
           </Link>
         </div>
 

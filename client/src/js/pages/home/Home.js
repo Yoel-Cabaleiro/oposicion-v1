@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-// import logoEO from '../../../../img/logoEO.png';
 import './home.css'
-
+import { Link } from "react-router-dom";
 export default function Home() {
 
   return (
@@ -12,7 +11,9 @@ export default function Home() {
             <img className="card-img-top mx-auto d-block align-self-center w-25" src="https://res.cloudinary.com/dx23woi99/image/upload/v1712171346/EOlogo_rortoa.png"></img>
             <h1 className="text-black text-center" style={{ fontSize: "5rem" }}>EasyOp</h1>
             <h5 className="text-black text-center">Prepara tus oposiciones, fácilmente.<br /></h5>
-            <button className="mx-auto px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold">Empieza ahora</button>
+            <Link to="/dashboard/">
+              <button className="mx-auto px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold">Empieza ahora</button>
+            </Link>
           </div>
           <section className="row text-white py-3 px-2 mb-4">
 

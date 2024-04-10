@@ -12,7 +12,7 @@ import NavbarLayout from "../layouts/NavbarLayout";
 
 // Pages
 import Login from "../pages/login/login.js";
-import Home from "../pages/home/home";
+import Home from "../pages/home/Home.js";
 import Signup from "../pages/login/Signup";
 import PasswordRequest from "../pages/login/PasswordRequest.js";
 import PasswordSetting from "../pages/login/PasswordSetting.js";
@@ -32,22 +32,22 @@ const Router = () => {
 				<ScrollToTop>
 					<Routes>
 
-            {/* FRONTPAGE */}
-              <Route index element={<NavbarLayout><Home /></NavbarLayout>} />
-              <Route path="*" element={<NavbarLayout><File404 /></NavbarLayout>} />
-              
-              {/* SIGNUP */}
-              <Route path="/login/" element={<LogoLayout><Login /></LogoLayout>} />
-              <Route path="/signup/" element={<LogoLayout><Signup /></LogoLayout>} />
-              <Route path="/password-request/" element={<LogoLayout><PasswordRequest /></LogoLayout>} />
-              <Route path="/password-setting" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
-              {/* <Route path="/password-setting/*" element={<LogoLayout><PasswordSetting /></LogoLayout>} /> */}
+						{/* FRONTPAGE */}
+						<Route index element={<NavbarLayout><Home /></NavbarLayout>} />
+						<Route path="*" element={<NavbarLayout><File404 /></NavbarLayout>} />
+
+						{/* SIGNUP */}
+						<Route path="/login/" element={<LogoLayout><Login /></LogoLayout>} />
+						<Route path="/signup/" element={<LogoLayout><Signup /></LogoLayout>} />
+						<Route path="/password-request/" element={<LogoLayout><PasswordRequest /></LogoLayout>} />
+						<Route path="/password-setting" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
+						{/* <Route path="/password-setting/*" element={<LogoLayout><PasswordSetting /></LogoLayout>} /> */}
 
 
 
-              {/* DASHBOARD */}
-              <Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-						
+						{/* DASHBOARD */}
+						<Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+
 					</Routes>
 				</ScrollToTop>
 			</BrowserRouter>
