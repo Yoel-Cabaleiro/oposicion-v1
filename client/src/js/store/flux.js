@@ -8,12 +8,16 @@ const getState = ({getStore, getActions, setStore}) => {
 		store: {
 			login: false,
       user: {},
+<<<<<<< HEAD
+      estadisticasEstudiante: [],
+      preguntasSeleccionadas: [],
+=======
       preguntas: [],
+>>>>>>> a5d949e019ab81b0fcee1d8d1dd5747ddedf0997
 		},
 		actions: {
-
       getUsers : async ()=>{
-        const url = process.env.BACK_URL + "/api/users"
+        const url = process.env.BACK_URL + "/api/estudiantes"
         const options = {
           method: 'GET',
           headers: { "Content-Type": "application/json"}
@@ -29,7 +33,6 @@ const getState = ({getStore, getActions, setStore}) => {
           return {error: errorData.message, data: errorData.data};
         }
       },
-
 
       /////////////////////////////
       // AUTHENTICATION AND LOGIN
@@ -75,7 +78,6 @@ const getState = ({getStore, getActions, setStore}) => {
 				}
 			},
 
-
       authentication: async () => {
         const token = localStorage.getItem('token');
         const url = process.env.BACK_URL + '/api/authentication';
@@ -104,13 +106,11 @@ const getState = ({getStore, getActions, setStore}) => {
         }
       },
 
-      
-
-      signup: async (userName, email, password) => {
+      signup: async (email, password) => {
         const url = process.env.BACK_URL + "/api/signup";
         const options = {
           method: "POST",
-          body: JSON.stringify({ userName, email, password }),
+          body: JSON.stringify({ email, password }),
           headers: { "Content-Type": "application/json"}
         };
       
@@ -128,8 +128,65 @@ const getState = ({getStore, getActions, setStore}) => {
         }
       },
 
+      /////////////////////////////////
+      // ESTADISTICAS
 
+      getEstadísticasByEstudiante: async(estudianteId) => {
+        const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}/estadisticas`
+        const options = {
+          method: 'GET',
+          headers: { "Content-Type": "application/json"}
+        }
+        const response = await fetch(url, options)
+        if(response.ok){
+          const data = await response.json()
+          setStore({estadisticasEstudiante: data.data})
+          return {mensaje: data.mensaje, data: data.data}
+        }
+        else {
+          const data = await response.json()
+          return {error: data.mensaje}
+        }
+      },
 
+      newEstadistica: async(categoriaId, estudianteId) => {
+        const url = process.env.BACK_URL + "/api/estadisticas";
+        const options = {
+          method: "POST",
+          body: JSON.stringify({categoriaId, estudianteId}),
+          headers: { "Content-Type": "application/json"}
+        }
+        const response = await fetch(url, options)
+        if(response.ok){
+          const data = await response.json()
+          return {mensaje: data.mensaje, data: data.data}
+        }
+        else {
+          const data = await response.json()
+          return {error: data.mensaje}
+        }
+      },
+
+      ////////////////////////////////
+      //PREGUNTAS
+
+      getPreguntasByCategoria: async(categoriaId) => {
+        const url = process.env.BACK_URL + `/api/categoria/${categoriaId}/preguntas`
+        const options = {
+          method: 'GET',
+          headers: { "Content-Type": "application/json"}
+        }
+        const response = await fetch(url, options)
+        if(response.ok){
+          const data = await response.json()
+          setStore({preguntasSeleccionadas: data.data})
+          return {"mensaje": data.mensaje, "data": data.data}
+        }
+        else {
+          const data = await response.json()
+          return {"error": data.mensaje}
+        }
+      }
 		}
 	};
 };

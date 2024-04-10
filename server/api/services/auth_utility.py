@@ -4,7 +4,7 @@ from flask_jwt_extended import create_access_token
 
 import jwt
 import os
-from api.model import db, Users
+from api.model import db, Users, Estudiantes
 import bcrypt
 from time import time
 
@@ -12,40 +12,39 @@ from time import time
 
 #LOGIN
 def user_login(email, password):
-    pro = Users.query.filter_by(email=email).first()
+    estudiante = Estudiantes.query.filter_by(email=email).first()
 
-    if pro and bcrypt.checkpw(password, pro.password):
+    if estudiante and bcrypt.checkpw(password, estudiante.password):
         identity = {
-            "id": pro.id,
-            "username": pro.user_name,
-            "email": pro.email,
+            "id": estudiante.id,
+            "email": estudiante.email,
         }
         token = create_access_token(identity=identity)
-        return jsonify(access_token=token, message="user logged in successfully"), 200
+        return jsonify(access_token=token, message="Estudiante logeado con éxito"), 200
     
-    return jsonify(message="User not found: invalid Email or Password"), 404
+    return jsonify(message="Estudiante no encontrado"), 404
 
 
 
 # SIGNUP: New User creation
-def register_user(user_name, email, password):
+def register_user(email, password):
     password_bytes = password.encode('utf-8')
     hashed_password = bcrypt.hashpw(password_bytes, bcrypt.gensalt())
 
-    existing_user = Users.query.filter_by(email=email).first()
-    if existing_user:
-        return False, "User already exists"
+    existing_estudiante = Estudiantes.query.filter_by(email=email).first()
+    if existing_estudiante:
+        return False, "El estudiante ya existe."
 
-    if not (email and password and user_name):
-        return False, "Invalid Email, Password, or Username"
+    if not (email and password):
+        return False, "Email o contraseña erróneos"
 
     if len(password) < 6:
-        return False, "Password must be at least 6 characters long"
+        return False, "La contraseña debe contener al menos 6 carácteres"
 
-    new_user = Users(user_name=user_name, email=email, password=hashed_password)
-    db.session.add(new_user)
+    new_estudiante = Estudiantes(email=email, password=hashed_password)
+    db.session.add(new_estudiante)
     db.session.commit()
-    return True, "User registered successfully"
+    return True, "Estudiante registrado con éxito"
 
 
 
@@ -56,13 +55,13 @@ def generate_reset_token(user_email):
     if secret_key is None:
         raise ValueError("SECRET_KEY_FLASK not set correctly")
     
-    user = Users.query.filter_by(email = user_email).first()
+    user = Estudiantes.query.filter_by(email = user_email).first()
     if user is None:
-        return False, "No user with this email"
+        return False, "No se ha encontrado ningún estudiante con este email"
     
     if user:
-        token = jwt.encode({'email': user.email, 'reset_password': user.user_name, 'exp': time() + expires}, key=secret_key)
-        return token, "Token Generated"
+        token = jwt.encode({'email': user.email, 'reset_password': True, 'exp': time() + expires}, key=secret_key)
+        return token, "Token Generado"
 
 
 
@@ -74,12 +73,12 @@ def verify_reset_token(token):
     try:
         payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
         user_email = payload.get('email')
-        user = Users.query.filter_by(email=user_email).first()
+        user = Estudiantes.query.filter_by(email=user_email).first()
 
         if user:
             return jsonify(user.serialized()), 200
         else:
-            return jsonify({"error": "User not found"}), 404
+            return jsonify({"error": "Estudiante no encontrado"}), 404
 
     except jwt.ExpiredSignatureError:
         return jsonify({"error": "Token expired"}), 400
@@ -100,7 +99,6 @@ def set_new_password(token):
     try:
         payload = jwt.decode(token, key=os.getenv('SECRET_KEY_FLASK'), algorithms=["HS256"])
         user_email = payload.get('email')
-
         email = request.json.get('email')
         new_password = request.json.get('password')
         new_password_bytes = new_password.encode('utf-8') if new_password is not None else None # Convert string to byte string
@@ -108,7 +106,7 @@ def set_new_password(token):
         if user_email != email:
             return jsonify({"error": "Email in the token don't match email provided"}), 400
 
-        user = Users.query.filter_by(email=email).first()
+        user = Estudiantes.query.filter_by(email=email).first()
         if user:
             hashed_password = bcrypt.hashpw(new_password_bytes, bcrypt.gensalt())
             user.password = hashed_password

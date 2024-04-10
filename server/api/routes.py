@@ -107,16 +107,12 @@ def estadisticas_by_estudiante(estudianteid):
     if not estadisticas:
         return jsonify({"mensaje": "No existen estadísticas para el estudiante"}), 404
     if request.method == 'GET':
-        return jsonify({"mensaje": "Estadísticas descargadas", "data": [estadistica.serialized() for estadistica in estadisticas]})
+        return jsonify({"mensaje": "Estadísticas descargadas", "data": [estadistica.serialized() for estadistica in estadisticas]}), 200
     if request.method == 'DELETE':
         for estadistica in estadisticas:
             db.session.delete(estadistica)
         db.session.commit()
-        return jsonify({"mensaje": "Estadisticas borradas para este estudiante"})
-
-
-
-
+        return jsonify({"mensaje": "Estadisticas borradas para este estudiante"}), 200
 
 
 
@@ -154,11 +150,10 @@ def send_token_reset_email():
 
 @api.route("/signup", methods=['POST'])
 def signup():
-    user_name = request.json.get("userName", None) 
     email = request.json.get("email", None) 
     password = request.json.get("password", None)
 
-    success, message = register_user(user_name, email, password)
+    success, message = register_user(email, password)
     if success:
         return jsonify({"message": message}), 200
     else:
@@ -183,22 +178,26 @@ def pro_authentication():
     identity = get_jwt_identity()
     email = identity.get('email')
     if email:
-        pro = Users.query.filter_by(email=email).first()
-        if pro:
-            return jsonify(pro.serialized())
+        estudiante = Estudiantes.query.filter_by(email=email).first()
+        if estudiante:
+            return jsonify(estudiante.serialized())
     
     return jsonify({"message": "Pro not found"}), 404
 
 
 
-@api.route("/users", methods=["GET"])
+##########################################################
+# ESTUDIANTES
+
+#Get all estudiantes
+@api.route("/estudiantes", methods=["GET"])
 def get_users():
     # call db table /pro
-    users_array = Users.query.all()
+    users_array = Estudiantes.query.all()
 
     if users_array:
         # Serializza la lista di utenti in un formato JSON e restituiscila
-        users = [{"id": user.id, "user_name": user.user_name, "email": user.email} for user in users_array]
+        users = [{"id": user.id, "email": user.email} for user in users_array]
         return jsonify(users)
 
     return jsonify({"message": "no users", "data":[]}), 404

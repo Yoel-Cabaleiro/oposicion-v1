@@ -1,11 +1,11 @@
 import os
 import smtplib
-from api.model import Users 
+from api.model import Users, Estudiantes 
 
 
 def send_recovery_email(user_email, token):
     
-    user = Users.query.filter_by(email=user_email).first()
+    user = Estudiantes.query.filter_by(email=user_email).first()
     if not user:
         return False, "User email invalid"
 
