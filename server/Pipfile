@@ -18,6 +18,7 @@ colorama = "*"
 pypdf2 = "*"
 reportlab = "*"
 python-dotenv = "*"
+stripe = "*"
 
 [dev-packages]
 

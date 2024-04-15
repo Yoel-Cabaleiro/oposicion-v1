@@ -8,6 +8,7 @@ from flask import Flask, jsonify, request # Blueprint
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+import stripe
 
 
 # Flask configuration
@@ -34,6 +35,8 @@ migrate = Migrate(app, db)
 setup_admin(app)
 CORS(app)  # Allow CORS requests to this API
 
+# pasamos la key de stripe
+stripe.api_key = 'sk_test_51P5vU4IsYGRLwhP6jdVmVpBdOPwArooSaWafkQWmTIOgQsfL174SLJF1knICdirJPhf3GyNWZC2eyaB5AguJLSIw00rvwBdd0s'
 
 # On server launch
 if __name__ == "__main__":
