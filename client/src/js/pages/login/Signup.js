@@ -25,7 +25,7 @@ export default function SignupPersonalData() {
       if (signup) {
         actions.logout()
         console.log('response: ', signup)
-        navigate('/login')
+        navigate('/paymentplan/')
       } else {
         alert('Signup faild, try with other email or password')
       }
@@ -51,7 +51,7 @@ export default function SignupPersonalData() {
   return (
     <>
       <section id="signup" className="" style={{ minHeight: '100vh' }}>
-        <div className="container bg-green py-3 mt-5">
+        <div className="container bg-green py-3 mt-5 rounded-3">
 
           <div className="text-center mb-5">
             <p className="text-dark fw-bolder fs-1">Signup</p>

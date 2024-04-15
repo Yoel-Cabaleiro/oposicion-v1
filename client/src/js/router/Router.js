@@ -14,10 +14,13 @@ import NavbarLayout from "../layouts/NavbarLayout";
 import Login from "../pages/login/login.js";
 import Home from "../pages/home/Home.js";
 import Signup from "../pages/login/Signup";
+import PaymentPlan from "../pages/paymentPlan/PaymentPlan.js";
+import SelectCategory from "../pages/selectCategory/SelectCategory.js";
 import PasswordRequest from "../pages/login/PasswordRequest.js";
 import PasswordSetting from "../pages/login/PasswordSetting.js";
 import Dashboard from "../pages/dashboard/Dashboard.js";
 import File404 from "../pages/404/File404";
+
 
 
 const Router = () => {
@@ -37,12 +40,15 @@ const Router = () => {
 						<Route path="*" element={<NavbarLayout><File404 /></NavbarLayout>} />
 
 						{/* SIGNUP */}
-						<Route path="/login/" element={<LogoLayout><Login /></LogoLayout>} />
+						<Route path="/login" element={<NavbarLayout><Login /></NavbarLayout>} />
 						<Route path="/signup/" element={<LogoLayout><Signup /></LogoLayout>} />
 						<Route path="/password-request/" element={<LogoLayout><PasswordRequest /></LogoLayout>} />
 						<Route path="/password-setting" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
 						{/* <Route path="/password-setting/*" element={<LogoLayout><PasswordSetting /></LogoLayout>} /> */}
 
+						{/* PAYMENT PAGES */}
+						<Route path="/paymentplan/" element={<DashboardLayout><PaymentPlan /></DashboardLayout>} />
+						<Route path="/selectcategory/" element={<DashboardLayout><SelectCategory /></DashboardLayout>} />
 
 
 						{/* DASHBOARD */}
