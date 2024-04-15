@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGhost } from '@fortawesome/free-solid-svg-icons'
 import { Context } from "../../../store/appContext";
-import "./navbar.css"
-import easyopLogo from '../../../../img/easyopLogo.png'
-
+import easyopLogo from "../../../../img/easyopLogo.png"
 // Components
 
 export default function NavDashboard() {

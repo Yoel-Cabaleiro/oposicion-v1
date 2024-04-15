@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       estadisticasEstudiante: [],
       preguntasSeleccionadas: [],
+      categorias: [],
     },
     actions: {
       getUsers: async () => {
@@ -165,6 +166,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       ////////////////////////////////
       //PREGUNTAS
+
+      getCategorias: async () => {
+        const url = process.env.BACK_URL + `/api/categorias`
+        const options = {
+          method: 'GET',
+          headers: { "Content-Type": "application/json" }
+        }
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          setStore({ categorias: data.data })
+          return { "mensaje": data.mensaje, "data": data.data }
+        }
+        else {
+          const data = await response.json()
+          return { "error": data.mensaje }
+        }
+      },
 
       getPreguntasByCategoria: async (categoriaId) => {
         const url = process.env.BACK_URL + `/api/categoria/${categoriaId}/preguntas`

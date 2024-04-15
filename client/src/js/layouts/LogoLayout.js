@@ -3,10 +3,10 @@ import NavLogo from './components/navigation/NavLogo'
 import Footer from './components/Footer'
 
 
-export default function LogoLayout({children}) {
+export default function LogoLayout({ children }) {
   return (
     <div>
-      <NavLogo />    
+      <NavLogo />
       {children}
       <Footer />
     </div>
