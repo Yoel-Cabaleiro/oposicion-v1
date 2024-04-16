@@ -31,6 +31,8 @@ export default function SelectCategory() {
 
     const handleAddCategory = () => {
         setFinalCategories([...finalCategories, selectedCategory])
+        setSelectedCategory(null)
+        setSelectedGroup(null)
         console.log(finalCategories)
     }
 
@@ -90,17 +92,23 @@ export default function SelectCategory() {
                         </div>
                     ): null}
 
-                    <div className="container-fluid d-flex flex-row align-items-center justify-content-start my-4 border border-success col-lg-5">
+                    <div className="container-fluid d-flex flex-column align-items-start justify-content-start my-4 border border-success col-lg-5">
                         <h5>Mis categorías</h5>
                         {finalCategories ? (
                                 <ul>
                                     {finalCategories.map(category => (
-                                        <li>{category.nombre}</li>
+                                        <li key={category.id}>{category.nombre}</li>
                                     ))}
                                 </ul>
                         ) : null}
+                        <div className="container d-flex justify-content-end mb-2">
+                            {finalCategories.length > 0 ? (
+                                <button className="btn btn-success">Continuar</button>
+                            ) : null}
+                        </div>
                     </div>
-                </div> </>
+                </div> 
+            </>
         );
     }
 };
