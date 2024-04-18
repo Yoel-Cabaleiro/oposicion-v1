@@ -9,6 +9,7 @@ import injectContext from "../store/appContext";
 import LogoLayout from "../layouts/LogoLayout";
 import DashboardLayout from "../layouts/DashLayout";
 import NavbarLayout from "../layouts/NavbarLayout";
+import NavbarExamLayout from "../layouts/NavbarExamLayout.js";
 
 // Pages
 import Login from "../pages/login/login.js";
@@ -17,6 +18,7 @@ import Signup from "../pages/login/Signup";
 import PaymentPlan from "../pages/paymentPlan/PaymentPlan.js";
 import SelectCategory from "../pages/selectCategory/SelectCategory.js";
 import Questions from "../pages/questions/questions.js";
+import Exam from "../pages/exam/exam.js";
 import PasswordRequest from "../pages/login/PasswordRequest.js";
 import PasswordSetting from "../pages/login/PasswordSetting.js";
 import Dashboard from "../pages/dashboard/Dashboard.js";
@@ -55,7 +57,7 @@ const Router = () => {
 						{/* DASHBOARD */}
 						<Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
 						<Route path="/questions" element={<NavbarLayout><Questions /></NavbarLayout>} />
-
+						<Route path="/exam" element={<NavbarExamLayout><Exam /></NavbarExamLayout>} />
 
 					</Routes>
 				</ScrollToTop>
