@@ -33,8 +33,12 @@ export default function SelectCategory() {
         setFinalCategories([...finalCategories, selectedCategory])
         setSelectedCategory(null)
         setSelectedGroup(null)
-        actions.setCategoriasSeleccionadas(finalCategories);
         // console.log(finalCategories)
+    }
+
+    const handleContinuar = () => {
+        actions.setCategoriasSeleccionadas(finalCategories);
+        navigate("/dashboard/")
     }
 
     useEffect(() => {
@@ -51,8 +55,6 @@ export default function SelectCategory() {
         }
     }, [store.categorias]);
 
-    console.log(store.categorias.grupo)
-
     if (store.categorias.length > 0) {
         return (
             <>
@@ -60,7 +62,7 @@ export default function SelectCategory() {
                     <h4 className="text-center mx-5">Selecciona la categoría:</h4>
                     <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
                         <div className="dropdown">
-                            <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button className="btn btn-secondary dropdown-toggle px-5 py-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {selectedGroup ? selectedGroup : 'Selecciona un grupo'}
                             </button>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -75,12 +77,12 @@ export default function SelectCategory() {
                     {selectedGroup && (
                         <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
                             <div className="dropdown">
-                                <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button className="btn btn-secondary dropdown-toggle px-5 py-3 w-100" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {!filteredCategories.length > 0 ? 'No hay categorías' : selectedCategory ? selectedCategory.nombre : 'Selecciona una categoria'}
                                 </button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                     {filteredCategories.map((category, index) => (
-                                        <button key={index} className="dropdown-item" onClick={() => handleCategorySelect(category)}>
+                                        <button key={index} className="dropdown-item px-5 py-3" onClick={() => handleCategorySelect(category)}>
                                             {category.nombre}
                                         </button>
                                     ))}
@@ -90,24 +92,22 @@ export default function SelectCategory() {
                     )}
                     {selectedGroup && selectedCategory ? (
                         <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
-                            <button className="btn btn-warning" type="button" onClick={() => handleAddCategory()}>Añadir categoria</button>
+                            <button className="btn btn-success px-5 py-3" type="button" onClick={() => handleAddCategory()}>Añadir categoria</button>
                         </div>
                     ) : null}
 
-                    <div className="container-fluid d-flex flex-column align-items-start justify-content-start my-4 border border-success col-lg-5">
+                    <div className="container-fluid d-flex flex-column align-items-start justify-content-start my-4 border border-dark col-lg-5 p-5 mt-5 rounded">
                         <h5>Mis categorías</h5>
                         {finalCategories ? (
                             <ul>
                                 {finalCategories.map(category => (
-                                    <li key={category.id}>{category.nombre}</li>
+                                    <li className="fs-5" key={category.id}>{category.nombre}</li>
                                 ))}
                             </ul>
                         ) : null}
                         <div className="container d-flex justify-content-end mb-2">
                             {finalCategories.length > 0 ? (
-                                <Link to="/dashboard/">
-                                    <button className="btn btn-success">Continuar</button>
-                                </Link>
+                                <button className="btn btn-light bg-green btn-lg px-3" onClick={handleContinuar}>Continuar</button>
                             ) : null}
                         </div>
                     </div>

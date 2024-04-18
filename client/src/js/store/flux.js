@@ -212,6 +212,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json()
           return { "error": data.mensaje }
         }
+      },
+
+      getPreguntasFalladas: () => {
+        let fallos = localStorage.getItem("fallos")
+        const store = getStore()
+        if (!fallos) {
+          localStorage.setItem("fallos", JSON.stringify([]))
+        }
+        else {
+          setStore({ preguntasFalladas: JSON.parse(fallos) })
+        }
       }
     }
   };
