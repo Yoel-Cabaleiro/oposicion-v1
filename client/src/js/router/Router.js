@@ -16,6 +16,7 @@ import Home from "../pages/home/Home.js";
 import Signup from "../pages/login/Signup";
 import PaymentPlan from "../pages/paymentPlan/PaymentPlan.js";
 import SelectCategory from "../pages/selectCategory/SelectCategory.js";
+import Questions from "../pages/questions/questions.js";
 import PasswordRequest from "../pages/login/PasswordRequest.js";
 import PasswordSetting from "../pages/login/PasswordSetting.js";
 import Dashboard from "../pages/dashboard/Dashboard.js";
@@ -53,6 +54,8 @@ const Router = () => {
 
 						{/* DASHBOARD */}
 						<Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+						<Route path="/questions" element={<NavbarLayout><Questions /></NavbarLayout>} />
+
 
 					</Routes>
 				</ScrollToTop>

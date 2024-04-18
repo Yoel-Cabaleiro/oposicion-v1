@@ -11,6 +11,11 @@ export default function Dashboard() {
   const [usersList, setUsersList] = useState([])
   const [usersName, setUsersName] = useState([])
   const [email, setEmail] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  // const [selectedGroup, setSelectedGroup] = useState(null);
+  // const [uniqueGroups, setUniqueGroups] = useState(new Set());
+
+
 
   useEffect(() => {
     if (!store.login) { navigate("/") }
@@ -19,6 +24,8 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       const users = await actions.getUsers()
+      const categorias = actions.getCategoriasSeleccionadas();
+      setSelectedCategory(categorias);
 
       if (users.message) {
         setUsersList(users.data)
@@ -35,12 +42,28 @@ export default function Dashboard() {
 
   return (
     <>
-      <main id="signup" className="bg-dark" style={{ minHeight: '100vh' }}>
+      <main id="signup" className="" style={{ minHeight: '100vh' }}>
         <div className="container py-5">
 
-          <div className="mb-5">
-            <h1 className="text-white fw-bolder fs-1">Dashboard</h1>
+          <div className="mb-5 d-flex justify-content-center flex-column">
+            <h1 className="text-black fw-bolder fs-1 text-center">DASHBOARD</h1>
+            <div>
+              <h3 className="text-center mt-5">Selecciona la categoria:</h3>
+            </div>
+            <div className="dropdown align-self-center mt-5">
+              {/* <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {selectedGroup ? selectedGroup : 'Selecciona un grupo'}
+              </button> */}
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {store.categoriasSeleccionadas.map((categoria, index) => (
+                  <button key={index} className="dropdown-item" onClick={() => handleCategorySelect(categoria)}>
+                    {categoria.nombre}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
+
 
           <div className="d-flex">
             <div className="text-gray border rounded bg-light p-3 w-50 me-3 h-auto">
