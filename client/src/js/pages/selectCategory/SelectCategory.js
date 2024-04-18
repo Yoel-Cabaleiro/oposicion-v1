@@ -33,12 +33,14 @@ export default function SelectCategory() {
         setFinalCategories([...finalCategories, selectedCategory])
         setSelectedCategory(null)
         setSelectedGroup(null)
-        console.log(finalCategories)
+        actions.setCategoriasSeleccionadas(finalCategories);
+        // console.log(finalCategories)
     }
 
     useEffect(() => {
         actions.getCategorias();
         actions.getUsers();
+        actions.getCategoriasSeleccionadas();
     }, []);
 
     useEffect(() => {
@@ -74,7 +76,7 @@ export default function SelectCategory() {
                         <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
                             <div className="dropdown">
                                 <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {!filteredCategories.length > 0 ? 'No hay categorías' : selectedCategory ? selectedCategory.nombre : 'Selecciona una categoria'  }
+                                    {!filteredCategories.length > 0 ? 'No hay categorías' : selectedCategory ? selectedCategory.nombre : 'Selecciona una categoria'}
                                 </button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                     {filteredCategories.map((category, index) => (
@@ -87,27 +89,29 @@ export default function SelectCategory() {
                         </div>
                     )}
                     {selectedGroup && selectedCategory ? (
-                        <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4"> 
+                        <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
                             <button className="btn btn-warning" type="button" onClick={() => handleAddCategory()}>Añadir categoria</button>
                         </div>
-                    ): null}
+                    ) : null}
 
                     <div className="container-fluid d-flex flex-column align-items-start justify-content-start my-4 border border-success col-lg-5">
                         <h5>Mis categorías</h5>
                         {finalCategories ? (
-                                <ul>
-                                    {finalCategories.map(category => (
-                                        <li key={category.id}>{category.nombre}</li>
-                                    ))}
-                                </ul>
+                            <ul>
+                                {finalCategories.map(category => (
+                                    <li key={category.id}>{category.nombre}</li>
+                                ))}
+                            </ul>
                         ) : null}
                         <div className="container d-flex justify-content-end mb-2">
                             {finalCategories.length > 0 ? (
-                                <button className="btn btn-success">Continuar</button>
+                                <Link to="/dashboard/">
+                                    <button className="btn btn-success">Continuar</button>
+                                </Link>
                             ) : null}
                         </div>
                     </div>
-                </div> 
+                </div>
             </>
         );
     }

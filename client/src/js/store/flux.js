@@ -11,7 +11,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       estadisticasEstudiante: [],
       preguntasSeleccionadas: [],
       categorias: [],
+      categoriasSeleccionadas: [],
     },
+
     actions: {
       getUsers: async () => {
         const url = process.env.BACK_URL + "/api/estudiantes"
@@ -183,6 +185,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json()
           return { "error": data.mensaje }
         }
+      },
+
+      setCategoriasSeleccionadas: (categorias) => {
+        setStore({ categoriasSeleccionadas: categorias });
+        // console.log(categoriasSeleccionadas)
+      },
+
+      getCategoriasSeleccionadas: () => {
+        return getStore().categoriasSeleccionadas;
       },
 
       getPreguntasByCategoria: async (categoriaId) => {
