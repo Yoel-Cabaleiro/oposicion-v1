@@ -202,6 +202,26 @@ def get_users():
 
     return jsonify({"message": "no users", "data":[]}), 404
 
+#Get, Put or Delete a specific Estudiante
+@api.route('/estudiantes/<int:estudianteid>', methods=['GET', 'PUT', 'DELETE'])
+def handle_estudiante(estudianteid):
+    estudiante = Estudiantes.query.get(estudianteid)
+    if not estudiante:
+        return jsonify({"mensaje": "Estudiante no encontrado"}), 404
+    if request.method == 'GET':
+        return jsonify({"mensaje": "Estudiante descargado", "data": estudiante.serialized()}), 200
+    if request.method == 'PUT':
+        data = request.json
+        estudiante.email = data.get('email', estudiante.email)
+        estudiante.suscripcion = data.get('suscripcion', estudiante.suscripcion)
+        db.session.commit()
+        return jsonify({"mensaje": "Estudiante actualizado con éxito", "data": estudiante.serialized()}), 200
+    if request.method == 'DELETE':
+        db.session.delete(estudiante)
+        db.session.commit()
+        return jsonify ({"mensaje": "Estudiante borrado"}), 200
+
+
 
 
 ##########################################################

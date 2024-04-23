@@ -7,13 +7,13 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       login: false,
-      user: {},
+      estudiante: {},
       estadisticasEstudiante: [],
       preguntasSeleccionadas: [],
       categorias: [],
     },
     actions: {
-      getUsers: async () => {
+      getEstudiantes: async () => {
         const url = process.env.BACK_URL + "/api/estudiantes"
         const options = {
           method: 'GET',
@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         if (response.ok) {
           const data = await response.json()
-          return { message: "user list downloaded", data };
+          return { message: "Estudiantes list downloaded", data };
         } else {
           const errorData = await response.json()
           return { error: errorData.message, data: errorData.data };
@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
         if (!token) {
-          setStore({ login: false, user: {} });
+          setStore({ login: false, estudiante: {} });
           return { error: 'Pro no authenticated' };
         }
 
@@ -94,11 +94,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         if (response.ok) {
           const data = await response.json();
-          setStore({ login: true, user: data });
+          setStore({ login: true, estudiante: data });
           return { message: "pro authenticated", data };
         } else {
           const data = await response.json();
-          setStore({ login: false, user: {} });
+          setStore({ login: false, estudiante: {} });
           return { error: data }
         }
       },
@@ -200,6 +200,45 @@ const getState = ({ getStore, getActions, setStore }) => {
         else {
           const data = await response.json()
           return { "error": data.mensaje }
+        }
+      },
+
+      //////////////////////////////////////////////////////
+      // ESTUDIANTES
+
+      updateEstudiante: async (estudiante) => {
+        const url = process.env.BACK_URL + `/api/estudiantes/${estudiante.id}`
+        const options = {
+          method: 'PUT',
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(estudiante)
+        }
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          setStore({estudiante: data.data})
+          return {mensaje: data.mensaje, data: data.data}
+        }
+        else {
+          const data = await response.json()
+          return {error: data.mensaje}
+        }
+      },
+
+      getEstudiante: async (estudianteId) => {
+        const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}`
+        const options = {
+          method: 'GET',
+          headers: {"Content-Type": "application/json"}
+        }
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          setStore({estudiante: data.data})
+          return {mensaje: data.mensaje, estudiante: data.data}
+        }
+        else {
+          
         }
       }
     }
