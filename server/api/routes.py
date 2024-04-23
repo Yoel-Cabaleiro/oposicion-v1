@@ -197,7 +197,7 @@ def get_users():
 
     if users_array:
         # Serializza la lista di utenti in un formato JSON e restituiscila
-        users = [{"id": user.id, "email": user.email} for user in users_array]
+        users = [{"id": user.id, "email": user.email, "suscripcion": user.suscripcion} for user in users_array]
         return jsonify(users)
 
     return jsonify({"message": "no users", "data":[]}), 404

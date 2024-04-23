@@ -11,7 +11,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       estadisticasEstudiante: [],
       preguntasSeleccionadas: [],
       categorias: [],
+      categoriasSeleccionadas: [],
     },
+
     actions: {
       getEstudiantes: async () => {
         const url = process.env.BACK_URL + "/api/estudiantes"
@@ -185,6 +187,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      setCategoriasSeleccionadas: (categorias) => {
+        setStore({ categoriasSeleccionadas: categorias });
+        // console.log(categoriasSeleccionadas)
+      },
+
+      getCategoriasSeleccionadas: () => {
+        return getStore().categoriasSeleccionadas;
+      },
+
       getPreguntasByCategoria: async (categoriaId) => {
         const url = process.env.BACK_URL + `/api/categoria/${categoriaId}/preguntas`
         const options = {
@@ -203,42 +214,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      //////////////////////////////////////////////////////
-      // ESTUDIANTES
-
-      updateEstudiante: async (estudiante) => {
-        const url = process.env.BACK_URL + `/api/estudiantes/${estudiante.id}`
-        const options = {
-          method: 'PUT',
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(estudiante)
-        }
-        const response = await fetch(url, options)
-        if (response.ok) {
-          const data = await response.json()
-          setStore({estudiante: data.data})
-          return {mensaje: data.mensaje, data: data.data}
+      getPreguntasFalladas: () => {
+        let fallos = localStorage.getItem("fallos")
+        const store = getStore()
+        if (!fallos) {
+          localStorage.setItem("fallos", JSON.stringify([]))
         }
         else {
-          const data = await response.json()
-          return {error: data.mensaje}
-        }
-      },
-
-      getEstudiante: async (estudianteId) => {
-        const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}`
-        const options = {
-          method: 'GET',
-          headers: {"Content-Type": "application/json"}
-        }
-        const response = await fetch(url, options)
-        if (response.ok) {
-          const data = await response.json()
-          setStore({estudiante: data.data})
-          return {mensaje: data.mensaje, estudiante: data.data}
-        }
-        else {
-          
+          setStore({ preguntasFalladas: JSON.parse(fallos) })
         }
       }
     }

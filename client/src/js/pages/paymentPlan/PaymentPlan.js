@@ -10,9 +10,16 @@ export default function PaymentPlan() {
     const navigate = useNavigate()
     const { store, actions } = useContext(Context)
     const [state, setState] = useState({});
+    const [userSubscription, setUserSubscription] = useState("")
 
-    console.log("hola")
+    // console.log("hola")
+    // handleClickFreePlan = () => {
+    //     setUserSubscription("Free Trial")
+    //     store.user.subscription
+    // }
+
     useEffect(() => {
+        store.user
     }, []);
 
     return (
