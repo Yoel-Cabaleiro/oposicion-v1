@@ -16,6 +16,9 @@ export default function Dashboard() {
   // const [selectedGroup, setSelectedGroup] = useState(null);
   // const [uniqueGroups, setUniqueGroups] = useState(new Set());
 
+  // deberia hacer que las categorias que se seleccionen se queden fijas en el usuario!!!!!! para que al cargar el dashboard se queden registradas. ahora están desapareciendo
+
+  console.log(store.categoriasSeleccionadas)
   console.log(store.user)
 
   useEffect(() => {
@@ -36,6 +39,10 @@ export default function Dashboard() {
     }
     fetchData()
   }, [store.login]);
+
+  useEffect(() => {
+    actions.getCategoriasSeleccionadas();
+  }, []);
 
   const handleChangePassword = () => {
     alert("to change your password go to http://localhost:1954/#/password-request")
@@ -74,6 +81,10 @@ export default function Dashboard() {
               <p className="fw-lighter"> Tu suscripcion - <span className="fw-normal">{store.user.suscripcion}</span></p>
               <div className="d-flex">
                 <button className="btn-sm btn-light border" onClick={handleChangePassword}>Change psw</button>
+              </div>
+              <div>
+                <p>User categories</p>
+                {/* <p>{[store.categoriasSeleccionadas]}</p> */}
               </div>
             </div>
 

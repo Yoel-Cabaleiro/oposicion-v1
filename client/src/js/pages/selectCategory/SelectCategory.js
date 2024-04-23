@@ -51,6 +51,7 @@ export default function SelectCategory() {
 
     const handleContinuar = () => {
         actions.setCategoriasSeleccionadas(finalCategories);
+        console.log(store.categoriasSeleccionadas)
         navigate("/dashboard/")
     }
 
@@ -60,7 +61,7 @@ export default function SelectCategory() {
     useEffect(() => {
         actions.getCategorias();
         actions.getUsers();
-        actions.getCategoriasSeleccionadas();
+        // actions.getCategoriasSeleccionadas();
     }, []);
 
     useEffect(() => {
