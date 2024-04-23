@@ -38,13 +38,14 @@ export default function SelectCategory() {
 
     const handleContinuar = () => {
         actions.setCategoriasSeleccionadas(finalCategories);
+        console.log(store.categoriasSeleccionadas)
         navigate("/dashboard/")
     }
 
     useEffect(() => {
         actions.getCategorias();
         actions.getUsers();
-        actions.getCategoriasSeleccionadas();
+        // actions.getCategoriasSeleccionadas();
     }, []);
 
     useEffect(() => {

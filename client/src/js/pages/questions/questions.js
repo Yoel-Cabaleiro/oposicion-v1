@@ -9,13 +9,17 @@ export default function Questions() {
     const { store, actions } = useContext(Context)
     const [state, setState] = useState({});
 
+    console.log(store.user)
+    console.log(store.preguntasSeleccionadas)
 
     useEffect(() => {
-        // actions.getPreguntasByCategoria();
+        actions.getPreguntasByCategoria();
     }, []);
 
     // Hacer una función handleClick () para que cuando se le de a la opción que el usuario seleccione, ejecute el código que Yoel hizo para que aparezca la correcta y las falladas marcadas.y se sumen en caso de correcta al current streak
-    // Deberiamos hacer una función en handleclick siguiente para que se vuelva a cargar la misma vista generando una nueva pregunta random y que se actualicen las medias de los div grises
+    // Deberiamos hacer una función en handleclick siguiente para que se vuelva a cargar la misma vista generando una nueva pregunta random y que se actualicen las medias de los div grises.
+
+    // Deberiamos hacer una ruta dinámica en router.js para que depende de que categoria de las que ha seleccionado el usuario se haga una ruta dependiendo del id para que se cojan las preguntas del endpoint.
 
     return (
         <div className="container-fluid min-vh-100 overflow-hidden mt-3 mb-0 mx-auto">
