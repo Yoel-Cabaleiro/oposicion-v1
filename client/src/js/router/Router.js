@@ -55,7 +55,7 @@ const Router = () => {
 
 
 						{/* DASHBOARD */}
-						<Route path="/dashboard/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+						<Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
 						<Route path="/questions" element={<NavbarLayout><Questions /></NavbarLayout>} />
 						<Route path="/exam" element={<NavbarExamLayout><Exam /></NavbarExamLayout>} />
 

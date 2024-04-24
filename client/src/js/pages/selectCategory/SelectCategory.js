@@ -19,7 +19,6 @@ export default function SelectCategory() {
 
     useEffect(() => {
         actions.getCategorias();
-        actions.getUsers();
     }, []);
 
     useEffect(() => {
@@ -28,9 +27,9 @@ export default function SelectCategory() {
             setUniqueGroups(groups);
         }
     }, [store.categorias]);
-    
-    
-    
+
+
+
     const handleGroupSelect = (group) => {
         setSelectedGroup(group);
         const categories = store.categorias.filter(categoria => categoria.grupo === group);
@@ -46,32 +45,13 @@ export default function SelectCategory() {
         setFinalCategories([...finalCategories, selectedCategory])
         setSelectedCategory(null)
         setSelectedGroup(null)
-        // console.log(finalCategories)
     }
 
     const handleContinuar = () => {
         actions.setCategoriasSeleccionadas(finalCategories);
         console.log(store.categoriasSeleccionadas)
-        navigate("/dashboard/")
+        navigate("/dashboard")
     }
-
-<<<<<<< HEAD
-    
-=======
-    useEffect(() => {
-        actions.getCategorias();
-        actions.getUsers();
-        // actions.getCategoriasSeleccionadas();
-    }, []);
-
-    useEffect(() => {
-        if (store.categorias) {
-            // Obtener grupos únicos y almacenarlos en un conjunto
-            const groups = new Set(store.categorias.map(categoria => categoria.grupo));
-            setUniqueGroups(groups);
-        }
-    }, [store.categorias]);
->>>>>>> e6761ae99102e4fc203e4229b8e9a356ae6bf5be
 
     if (store.categorias.length > 0) {
         return (
@@ -112,14 +92,9 @@ export default function SelectCategory() {
                         <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
                             <button className="btn btn-success px-5 py-3" type="button" onClick={() => handleAddCategory()}>Añadir categoria</button>
                         </div>
-<<<<<<< HEAD
-                    ): null}
-                    <div className="container-fluid d-flex flex-column align-items-start justify-content-start my-4 col-lg-5">
-=======
                     ) : null}
 
                     <div className="container-fluid d-flex flex-column align-items-start justify-content-start my-4 border border-dark col-lg-5 p-5 mt-5 rounded">
->>>>>>> e6761ae99102e4fc203e4229b8e9a356ae6bf5be
                         <h5>Mis categorías</h5>
                         {finalCategories ? (
                             <ul>

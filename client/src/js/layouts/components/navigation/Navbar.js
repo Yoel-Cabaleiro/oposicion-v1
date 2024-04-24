@@ -12,7 +12,6 @@ export default function Navbar() {
 
         <div className="me-auto fw-lighter">
           <Link to="/" className="text-decoration-none">
-            {/* <FontAwesomeIcon icon={faGhost} className="me-2" style={{height:'35px'}}/> */}
             <img src={easyopLogo} className="card-img-top mt-3" alt="..." style={{ width: "40%" }}></img>
             <span className="fw-bold">EasyOp</span>
           </Link>
