@@ -5,25 +5,27 @@ export default function Home() {
 
   const navigate = useNavigate()
 
-  const handleEmpiezaAhora = () => {
-    navigate("/dashboard/")
-  }
-
+  // const handleEmpiezaAhora = () => {
+  //   navigate("/dashboard/")
+  // }
 
   return (
     <>
-      <main className="d-flex align-items-center prueba min-vh-100" style={{ minHeight: '100vh' }}>
-        <div className="container-fluid">
-          <div className="d-flex flex-column">
-            <img className="card-img-top mx-auto d-block align-self-center w-25" src="https://res.cloudinary.com/dx23woi99/image/upload/v1712171346/EOlogo_rortoa.png"></img>
-            <h1 className="text-black text-center" style={{ fontSize: "5rem" }}>EasyOp</h1>
-            <h5 className="text-black text-center">Prepara tus oposiciones, fácilmente.<br /></h5>
-            <Link to="/dashboard/" className="mx-auto">
-              <button className=" px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold">Empieza ahora</button>
+      <main className="d-flex align-items-center w-100 overflow-hidden h-100 py-5 mt-5 mb-0">
+        <div className="container-fluid h-100">
+          <div className="row d-flex flex-column mx-5 justify-content-start align-items-center">
+            <div className="col-md-12 text-start">
+              <h1 className="text-black texto-grande-1 fw-normal fw-lg-bold" style={{ fontSize: "5.5vw" }}>Prepara tus oposiciones<br />
+                de manera práctica y fácil.</h1>
+            </div>
+            <h5 className="text-black text-start fw-light mt-4 fs-5">Modo examen, preguntas test y múltiples categorías.</h5>
+            <h5 className="text-black text-start fw-light">Información actualizada diariamente sobre tus actividades.</h5>
+            <Link to="/signup/" className="">
+              <button className=" px-5 btn btn-dark btn-lg mt-5 text-white border border-dark rounded-3 fw-light">Empieza ahora</button>
             </Link>
           </div>
         </div>
-      </main>
+      </main >
     </>
   )
 }

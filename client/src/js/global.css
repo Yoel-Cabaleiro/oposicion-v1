@@ -68,7 +68,7 @@ body {
   color: var(--on-background);
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -76,7 +76,7 @@ h5 {
   font-family: 'Baloo 2', sans-serif;
   color: var(--on-background);
   font-weight: 700;
-}
+} */
 
 a {
   color: var(--primary);
@@ -168,4 +168,10 @@ p {
 
 .rounded-2 {
   border-radius: 15px !important
+}
+
+/* Ocultar la barra de desplazamiento en navegadores webkit (chrome, safari)*/
+body::-webkit-scrollbar {
+  width: 0;
+  /* Ancho 0 para ocultar la barra de desplazamiento vertical */
 }
