@@ -8,8 +8,8 @@ COLOR SISTEM
 :root {
   --primary: #fbfbfb;
   --primary-subtle: #ffe0c8;
-  --primary-hover: #a9f56a;
-  --on-primary: rgb(198, 236, 133);
+  --primary-hover: #e8eae6;
+  --on-primary: rgb(203, 205, 199);
 
   --secondary: #989898;
   /* --secondary-subtle: #e4e4e4; */

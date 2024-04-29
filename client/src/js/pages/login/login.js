@@ -44,12 +44,10 @@ export default function Login() {
   return (
     <>
       <section id="login" className="" style={{ minHeight: '100vh' }}>
-        <div className="container bg-green py-3 mt-5 mb-0 rounded-3">
-
+        <div className="container py-3 mt-5 mb-0 rounded-3 mx-auto">
           <div className="text-center mb-5">
-            <p className="text-dark fw-bolder fs-1">Login</p>
+            <p className="text-dark fw-bolder fs-1 texto-grande-1">Inicia sesión</p>
           </div>
-
           <div className="col-md-7 col-lg-8 m-auto text-dark">
             <form onSubmit={handleSubmit} className="needs-validation mb-3" noValidate="">
               <hr className="my-4" />
@@ -92,8 +90,8 @@ export default function Login() {
             </form>
 
             <div>
-              <p className="mb-2">No account yet? <Link to="/signup" className="text-dark">Signup here</Link></p>
-              <p>Forgot your password? <Link to="/password-request" className="text-dark">Recovery now</Link></p>
+              <p className="mb-2">¿No tienes cuenta todavía? <Link to="/signup" className="text-dark">Regístrate aquí</Link></p>
+              <p>¿Has olvidado tu contraseña?<Link to="/password-request" className="text-dark">  Recuperar</Link></p>
             </div>
           </div>
 
