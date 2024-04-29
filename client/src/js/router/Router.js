@@ -44,7 +44,7 @@ const Router = () => {
 
 						{/* SIGNUP */}
 						<Route path="/login" element={<NavbarLayout><Login /></NavbarLayout>} />
-						<Route path="/signup/" element={<LogoLayout><Signup /></LogoLayout>} />
+						<Route path="/signup" element={<LogoLayout><Signup /></LogoLayout>} />
 						<Route path="/password-request/" element={<LogoLayout><PasswordRequest /></LogoLayout>} />
 						<Route path="/password-setting" element={<LogoLayout><PasswordSetting /></LogoLayout>} />
 						{/* <Route path="/password-setting/*" element={<LogoLayout><PasswordSetting /></LogoLayout>} /> */}

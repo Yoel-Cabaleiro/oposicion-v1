@@ -7,28 +7,25 @@ import easyopLogo from '../../../../img/easyopLogo.png'
 export default function Navbar() {
 
   return (
-    <nav className="navbar-bg text-black sticky-top">
-      <div className="d-flex align-items-center container" style={{ height: "7vh" }}>
+    <nav className="sticky-top mt-5">
+      <div className="d-flex align-items-center justify-content-between container w-100 p-0 ms-5 me-0" style={{ height: "7vh" }}>
 
-        <div className="me-auto fw-lighter">
-          <Link to="/" className="text-decoration-none">
-            <img src={easyopLogo} className="card-img-top mt-3" alt="..." style={{ width: "40%" }}></img>
-            <span className="fw-bold">EasyOp</span>
+        <div className="d-flex align-items-center fw-lighter ms-0">
+          <Link to="/" className="text-decoration-none d-flex align-items-center">
+            <img src={easyopLogo} className="card-img-top mt-3" alt="..." style={{ width: "30%" }}></img>
+            <span className="fw-bold text-black">EasyOp</span>
           </Link>
         </div>
 
 
         <div>
           <Link to="/login" className="text-decoration-none">
-            <span className="mb-0 me-4">Login</span>
-          </Link>
-          <Link to="/signup/" className="text-decoration-none">
-            <button className="btn btn-sm btn-primary text-dark mb-0">New Account</button>
+            <button className="btn btn-lg btn-outline-dark rounded-3 border border-dark mb-0">Inicia sesión</button>
           </Link>
         </div>
 
-
       </div>
+      {/* <hr className="container bg-secondary"></hr> */}
     </nav>
   );
 }
