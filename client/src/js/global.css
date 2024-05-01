@@ -175,3 +175,17 @@ body::-webkit-scrollbar {
   width: 0;
   /* Ancho 0 para ocultar la barra de desplazamiento vertical */
 }
+
+
+.texto-grande-1> {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+      "slnt" 0;
+}
+
+.bg-grey {
+  background-color: #f1f5f9;
+}

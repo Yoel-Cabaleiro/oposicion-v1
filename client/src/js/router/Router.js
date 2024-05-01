@@ -50,7 +50,7 @@ const Router = () => {
 						{/* <Route path="/password-setting/*" element={<LogoLayout><PasswordSetting /></LogoLayout>} /> */}
 
 						{/* PAYMENT PAGES */}
-						<Route path="/paymentplan/" element={<DashboardLayout><PaymentPlan /></DashboardLayout>} />
+						<Route path="/paymentplan" element={<DashboardLayout><PaymentPlan /></DashboardLayout>} />
 						<Route path="/selectcategory/" element={<DashboardLayout><SelectCategory /></DashboardLayout>} />
 
 

@@ -15,8 +15,8 @@ export default function Home() {
         <div className="container-fluid h-100">
           <div className="row d-flex flex-column mx-5 justify-content-start align-items-center">
             <div className="col-md-12 text-start">
-              <h1 className="text-black texto-grande-1 fw-normal fw-lg-bold" style={{ fontSize: "5.5vw" }}>Prepara tus oposiciones<br />
-                de manera práctica y fácil.</h1>
+              <h1 className="text-black texto-grande-1 fw-normal fw-lg-bold" style={{ fontSize: "5.5vw" }}>Prepara Tus Oposiciones<br />
+                De Manera Práctica y Fácil.</h1>
             </div>
             <h5 className="text-black text-start fw-light mt-4 fs-5">Modo examen, preguntas test y múltiples categorías.</h5>
             <h5 className="text-black text-start fw-light">Información actualizada diariamente sobre tus actividades.</h5>

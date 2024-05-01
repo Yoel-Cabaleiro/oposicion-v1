@@ -23,40 +23,45 @@ export default function PaymentPlan() {
     }, []);
 
     return (
-        <div className="container-fluid min-vh-100 overflow-hidden mt-5 mb-0">
-            <h4 className="text-start mx-5 texto-grande-1">Selecciona el plan que mejor se adapte a tus necesidades:</h4>
-            <div className="row d-flex align-items-center justify-content-center my-auto mt-5">
-                <div className="text-center col-md-4 p-5">
-                    <h3>Plan Prueba</h3>
-                    <div className="bg-green rounded py-5 mt-5 text-center">
-                        <h4 className="fs-1">GRATIS</h4>
-                        <h6 className="p-2 lh-sm text-justify">Número limitado de preguntas gratuitas para que pruebes nuestra plataforma.</h6>
-                        <h6 className="p-2 lh-sm text-justify ">Después, necesitarás suscribirte a uno de nuestros planes de pago.</h6>
+        <div className="container-fluid overflow-hidden mt-5 mb-0">
+            <h4 className="text-center mx-5 texto-grande-1 fw-normal my-5 fs-5">Selecciona el plan que mejor se adapte a tus necesidades:</h4>
+            <div className="row d-flex align-items-start justify-content-center my-auto gap-5 mt-4 mb-2">
+                <div className="text-center col-md-3 p-4 bg-grey">
+                    <h3 className="fs-5 fw-normal">PLAN PRUEBA</h3>
+                    <div className="py-3 mt-2 text-center">
+                        <h4 className="fs-2">GRATIS</h4>
+                        <ul className="list-unstyled text-center fw-light">
+                            <li className="p-2 lh-sm text-justify fw-light"><span className="bullet">&#8226;</span> Número limitado de preguntas gratuitas para que pruebes nuestra plataforma.</li>
+                            <li className="p-2 lh-sm text-justify fw-light"><span className="bullet">&#8226;</span> Después, necesitarás suscribirte a uno de nuestros planes de pago.</li>
+                        </ul>
                     </div>
                     <Link to="/selectcategory/">
-                        <button type="button" className="w-100 btn btn-outline-dark border border-dark btn-lg mt-5">Selecciona</button>
+                        <button type="button" className="px-5 btn btn-dark btn-lg text-white border border-dark rounded-3 fw-light">Selecciona</button>
                     </Link>
                 </div>
-                <div className="text-center col-md-4 p-5">
-                    <h3>Plan Básico</h3>
-                    <div className="bg-green rounded py-5 mt-5 text-center">
-                        <h4 className="fs-1">10 €</h4>
-                        <h6 className="p-2 lh-sm text-justify">Acceso al contenido de una categoría de oposición.</h6>
-                        <h6 className="p-2 lh-sm text-justify ">Práctica y preparación específica en dos modos: Exámen y preguntas sueltas.</h6>
-
+                <div className="text-center col-md-3 p-4 bg-grey">
+                    <h3 className="fs-5 fw-normal">PLAN BÁSICO</h3>
+                    <div className="py-4 mt-2 text-center">
+                        <h4 className="fs-2">10 €</h4>
+                        <ul className="list-unstyled text-center fw-light">
+                            <li className="p-2 lh-sm text-justify fw-light"><span className="bullet">&#8226;</span> Acceso al contenido de una categoría de oposición.</li>
+                            <li className="p-2 lh-sm text-justify fw-light"><span className="bullet">&#8226;</span> Práctica y preparación específica en dos modos: Exámen y preguntas sueltas.</li>
+                        </ul>
                     </div>
-                    <button type="button" className="w-100 btn btn-outline-dark border border-dark btn-lg mt-5">Selecciona</button>
+                    <button type="button" className="px-5 btn btn-dark btn-lg text-white border border-dark rounded-3 fw-light">Selecciona</button>
                 </div>
-                <div className="text-center col-md-4 p-5">
-                    <h3>Plan Premium</h3>
-                    <div className="bg-green rounded py-5 mt-5 text-center">
-                        <h4 className="fs-1">20 €</h4>
-                        <h6 className="p-2 lh-sm text-justify">Acceso ilimitado a todas las categorías de oposición.</h6>
-                        <h6 className="p-2 lh-sm text-justify ">Ideal si estás considerando presentarte a exámenes de múltiples categorías.</h6>
+                <div className="text-center col-md-3 p-4 bg-grey">
+                    <h3 className="fs-5 fw-normal">PLAN PREMIUM</h3>
+                    <div className="py-4 mt-2 text-center">
+                        <h4 className="fs-2">20 €</h4>
+                        <ul className="list-unstyled text-center fw-light">
+                            <li className="p-2 lh-sm text-justify fw-light"><span className="bullet">&#8226;</span> Acceso ilimitado a todas las categorías de oposición.</li>
+                            <li className="p-2 lh-sm text-justify fw-light"><span className="bullet">&#8226;</span> Ideal si estás considerando presentarte a exámenes de múltiples categorías.</li>
+                        </ul>
                     </div>
-                    <button type="button" className="w-100 btn btn-outline-dark border border-dark btn-lg mt-5">Selecciona</button>
+                    <button type="button" className="px-5 btn btn-dark btn-lg text-white border border-dark rounded-3 fw-light">Selecciona</button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
