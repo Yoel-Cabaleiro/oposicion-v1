@@ -25,7 +25,7 @@ export default function SignupPersonalData() {
       if (signup) {
         actions.logout()
         console.log('response: ', signup)
-        navigate('/paymentplan/')
+        navigate('/paymentplan')
       } else {
         alert('Signup faild, try with other email or password')
       }
@@ -62,7 +62,7 @@ export default function SignupPersonalData() {
 
 
                 <div className="col-12 mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">EMAIL</label>
                   <input
                     type="email"
                     className="form-control"
@@ -75,7 +75,7 @@ export default function SignupPersonalData() {
                 </div>
 
                 <div className="col-12 mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">CONTRASEÑA</label>
                   <div className="input-group has-validation">
                     <input
                       type={!showPassword ? "password" : "text"}
