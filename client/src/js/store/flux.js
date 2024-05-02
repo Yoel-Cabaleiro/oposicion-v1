@@ -166,8 +166,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      ////////////////////////////////
-      //PREGUNTAS
+      
+      ////////////////////////////
+      //Categorias
 
       getCategorias: async () => {
         const url = process.env.BACK_URL + `/api/categorias`
@@ -192,12 +193,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         // console.log(categoriasSeleccionadas)
       },
 
-      getCategoriasSeleccionadas: () => {
-        return getStore().categoriasSeleccionadas;
-      },
+      ////////////////////////////////
+      //PREGUNTAS
 
       getPreguntasByCategoria: async (categoriaId) => {
-        const url = process.env.BACK_URL + `/api/categoria/${categoriaId}/preguntas`
+        const url = process.env.BACK_URL + `/api/categorias/${categoriaId}/preguntas`
         const options = {
           method: 'GET',
           headers: { "Content-Type": "application/json" }

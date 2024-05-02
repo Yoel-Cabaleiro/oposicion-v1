@@ -9,12 +9,10 @@ export default function Dashboard() {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate()
 
-  const [usersList, setUsersList] = useState([])
-  const [usersName, setUsersName] = useState([])
-  const [email, setEmail] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  // const [selectedGroup, setSelectedGroup] = useState(null);
-  // const [uniqueGroups, setUniqueGroups] = useState(new Set());
+
+  const [selectedEstadistica, setSelectedEstadistica] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [uniqueGroups, setUniqueGroups] = useState(new Set());
 
   // deberia hacer que las categorias que se seleccionen se queden fijas en el usuario!!!!!! para que al cargar el dashboard se queden registradas. ahora están desapareciendo
 
@@ -23,10 +21,31 @@ export default function Dashboard() {
     if (!store.login) { navigate("/") }
   }, [])
 
+  useEffect(() => {
+    const fetchData = async() => {
+      try {
+        await actions.getEstadísticasByEstudiante(store.estudiante.id)
+        console.log("Estadísticas descargadas")
+      }
+      catch {
+        console.log("Error al cargar las estadísticas del estudiante")
+      }
+    }  
+    fetchData()
+  }, [])
 
-  const handleChangePassword = () => {
-    alert("to change your password go to http://localhost:1954/#/password-request")
+  const handleCategorySelect = async(estadistica) => {
+    try {
+      await actions.getPreguntasByCategoria(estadistica.categoria_id)
+      setSelectedEstadistica(estadistica)
+      console.log("Preguntas descargadas")
+    }
+    catch {
+      console.log("Error al descargar las preguntas")
+    }
   }
+
+
 
   return (
     <>
@@ -40,18 +59,41 @@ export default function Dashboard() {
             </div>
             <div className="dropdown align-self-center m-4 w-75">
               <button className="btn btn-success dropdown-toggle px-5 py-3 w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {/* {selectedGroup ? selectedGroup : 'Selecciona un grupo'} */}
+                {selectedEstadistica ? selectedEstadistica.categoria : 'Selecciona un grupo'}
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {store.categoriasSeleccionadas.map((categoria, index) => (
-                  <button key={index} className="dropdown-item" onClick={() => handleCategorySelect(categoria)}>
-                    {categoria.nombre}
+                {store.estadisticasEstudiante.map((estadistica, index) => (
+                  <button key={index} className="dropdown-item" onClick={() => handleCategorySelect(estadistica)}>
+                    {estadistica.categoria}
                   </button>
                 ))}
               </div>
             </div>
-
           </div>
+          {selectedEstadistica ? (
+            <div>
+              <div>
+                <h4>Último Examen</h4>
+                <div>{selectedEstadistica.ultimo_examen}</div>
+              </div>
+              <div>
+                <h4>Media de exámenes total</h4>
+                <div>{selectedEstadistica.media_examen}</div>
+              </div>
+              <div>
+                <h4>Media de últimos 10 exámenes</h4>
+                <div>{selectedEstadistica.media_10_examenes}</div>
+              </div>
+              <div>
+                <h4>Mejor racha en práctica</h4>
+                <div>{selectedEstadistica.mejor_racha}</div>
+              </div>
+              <div>
+                <h4>Porcentaje aciertos en la última práctica</h4>
+                <div>{selectedEstadistica.porcentaje_aciertos}%</div>
+              </div>
+            </div>
+          ): null}
 
           <div className="container-fluid mx-auto">
             <div className="row d-flex flex-row justify-content-center align-items-center mx-auto">
