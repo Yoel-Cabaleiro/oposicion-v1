@@ -22,7 +22,7 @@ export default function Dashboard() {
   }, [])
 
   useEffect(() => {
-    const fetchData = async() => {
+    const fetchData = async () => {
       try {
         await actions.getEstadísticasByEstudiante(store.estudiante.id)
         console.log("Estadísticas descargadas")
@@ -30,11 +30,11 @@ export default function Dashboard() {
       catch {
         console.log("Error al cargar las estadísticas del estudiante")
       }
-    }  
+    }
     fetchData()
   }, [])
 
-  const handleCategorySelect = async(estadistica) => {
+  const handleCategorySelect = async (estadistica) => {
     try {
       await actions.getPreguntasByCategoria(estadistica.categoria_id)
       setSelectedEstadistica(estadistica)
@@ -53,17 +53,17 @@ export default function Dashboard() {
         <div className="container py-5">
 
           <div className="mb-5 d-flex justify-content-center flex-column">
-            <h1 className="text-black fw-bolder fs-1 text-center">DASHBOARD</h1>
+            <h1 className="text-black fs-6 text-start lato-light">DASHBOARD</h1>
             <div>
-              <h3 className="text-center mt-5">Selecciona la categoria:</h3>
+              <h3 className="text-start mt-5 lato-regular display-4">Selecciona La Categoria:</h3>
             </div>
-            <div className="dropdown align-self-center m-4 w-75">
-              <button className="btn btn-success dropdown-toggle px-5 py-3 w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div className="dropdown align-self-start m-3 ms-0 w-50">
+              <button className="btn lato-regular btn-dark border border-dark rounded-3 dropdown-toggle px-3 py-3 w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {selectedEstadistica ? selectedEstadistica.categoria : 'Selecciona un grupo'}
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {store.estadisticasEstudiante.map((estadistica, index) => (
-                  <button key={index} className="dropdown-item" onClick={() => handleCategorySelect(estadistica)}>
+                  <button key={index} className="dropdown-item lato-regular" onClick={() => handleCategorySelect(estadistica)}>
                     {estadistica.categoria}
                   </button>
                 ))}
@@ -73,12 +73,12 @@ export default function Dashboard() {
           {selectedEstadistica ? (
             <div>
               <div>
-                <h5>Último Examen</h5>
-                <div>{selectedEstadistica.ultimo_examen}</div>
+                <h5 className="fs-6 lato-regular">PUNTUACIÓN ÚLTIMO EXÁMEN</h5>
+                <div className="fs-1">{selectedEstadistica.ultimo_examen}</div>
               </div>
-              <div>
-                <h5>Media de exámenes total</h5>
-                <div>{selectedEstadistica.media_examen}</div>
+              <div className="my-5 fs-5 lato-regular">
+                <h5>MEDIA DE EXAMENES TOTAL</h5>
+                <div className="fs-1">{selectedEstadistica.media_examen}</div>
               </div>
               <div>
                 <h5>Media de últimos 10 exámenes</h5>
@@ -93,7 +93,7 @@ export default function Dashboard() {
                 <div>{selectedEstadistica.porcentaje_aciertos}%</div>
               </div>
             </div>
-          ): null}
+          ) : null}
 
           <div className="container-fluid mx-auto">
             <div className="row d-flex flex-row justify-content-center align-items-center mx-auto">

@@ -1,31 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import "./navbar.css"
 import easyopLogo from '../../../../img/easyopLogo.png'
+import "./navbar.css"
 
 export default function Navbar() {
-
   return (
-    <nav className="sticky-top mt-5">
-      <div className="d-flex align-items-center justify-content-between container w-100 p-0 ms-5 me-0" style={{ height: "7vh" }}>
+    <nav className="sticky-top">
+      <div className="container-fluid px-0">
+        <div className="row align-items-center justify-content-between p-3">
+          <div className="col-6 col-md-3">
+            <Link to="/" className="text-decoration-none d-flex align-items-center">
+              <img src={easyopLogo} className="card-img-top mt-3 ms-md-5 ms-sm-5" alt="..." style={{ width: "20%" }} />
+              <span className="fw-bold text-black fs-6">EasyOp</span>
+            </Link>
+          </div>
 
-        <div className="d-flex align-items-center fw-lighter ms-0">
-          <Link to="/" className="text-decoration-none d-flex align-items-center">
-            <img src={easyopLogo} className="card-img-top mt-3" alt="..." style={{ width: "30%" }}></img>
-            <span className="fw-bold text-black">EasyOp</span>
-          </Link>
+          <div className="col-md-6 d-none d-md-block">
+            {/* Empty div for center alignment */}
+          </div>
+
+          <div className="col-6 col-md-3 text-end">
+            <Link to="/login" className="text-decoration-none">
+              <button className="btn btn-md py-2 me-md-5 px-4 btn-outline-dark rounded-3 border border-dark mb-0 fuente-lato fw-light">Inicia sesión</button>
+            </Link>
+          </div>
         </div>
-
-
-        <div>
-          <Link to="/login" className="text-decoration-none">
-            <button className="btn btn-lg btn-outline-dark rounded-3 border border-dark mb-0">Inicia sesión</button>
-          </Link>
-        </div>
-
       </div>
-      {/* <hr className="container bg-secondary"></hr> */}
     </nav>
   );
 }
