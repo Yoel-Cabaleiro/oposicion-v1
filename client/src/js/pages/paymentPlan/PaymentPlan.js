@@ -24,7 +24,7 @@ export default function PaymentPlan() {
 
     return (
         <div className="container-fluid overflow-hidden mt-5 mb-0">
-            <h4 className="text-center mx-5 texto-grande-1 fw-normal my-5 fs-5">Selecciona el plan que mejor se adapte a tus necesidades:</h4>
+            <h4 className="text-center mx-5 texto-grande-1 fw-normal my-5 fs-1">Selecciona el plan que mejor se adapte a tus necesidades:</h4>
             <div className="row d-flex align-items-start justify-content-center my-auto gap-5 mt-4 mb-2">
                 <div className="text-center col-md-3 p-4 bg-grey">
                     <h3 className="fs-5 fw-normal">PLAN PRUEBA</h3>

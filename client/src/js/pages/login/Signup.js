@@ -53,7 +53,7 @@ export default function SignupPersonalData() {
       <section id="signup" className="" style={{ minHeight: '100vh' }}>
         <div className="container py-2 mt-5">
           <div className="text-center mb-5">
-            <p className="text-dark fw-bolder fs-1 texto-grande-1">Regístrate</p>
+            <p className="text-dark fw-bolder fs-1 lato-regular">Regístrate</p>
           </div>
           <div>
             <div className="col-md-7 col-lg-8 m-auto text-dark">
@@ -65,7 +65,7 @@ export default function SignupPersonalData() {
                   <label htmlFor="email" className="form-label">EMAIL</label>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control lato-light"
                     id="email"
                     placeholder="you@example.com"
                     value={email}
@@ -75,7 +75,7 @@ export default function SignupPersonalData() {
                 </div>
 
                 <div className="col-12 mb-3">
-                  <label htmlFor="password" className="form-label">CONTRASEÑA</label>
+                  <label htmlFor="password" className="form-label lato-light">CONTRASEÑA</label>
                   <div className="input-group has-validation">
                     <input
                       type={!showPassword ? "password" : "text"}
