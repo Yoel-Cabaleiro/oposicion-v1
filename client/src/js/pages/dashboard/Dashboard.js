@@ -73,23 +73,23 @@ export default function Dashboard() {
           {selectedEstadistica ? (
             <div>
               <div>
-                <h4>Último Examen</h4>
+                <h5>Último Examen</h5>
                 <div>{selectedEstadistica.ultimo_examen}</div>
               </div>
               <div>
-                <h4>Media de exámenes total</h4>
+                <h5>Media de exámenes total</h5>
                 <div>{selectedEstadistica.media_examen}</div>
               </div>
               <div>
-                <h4>Media de últimos 10 exámenes</h4>
+                <h5>Media de últimos 10 exámenes</h5>
                 <div>{selectedEstadistica.media_10_examenes}</div>
               </div>
               <div>
-                <h4>Mejor racha en práctica</h4>
+                <h5>Mejor racha en práctica</h5>
                 <div>{selectedEstadistica.mejor_racha}</div>
               </div>
               <div>
-                <h4>Porcentaje aciertos en la última práctica</h4>
+                <h5>Porcentaje aciertos en la última práctica</h5>
                 <div>{selectedEstadistica.porcentaje_aciertos}%</div>
               </div>
             </div>
