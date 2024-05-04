@@ -9,54 +9,50 @@ export default function Exam() {
     const { store, actions } = useContext(Context)
     const [state, setState] = useState({});
 
-    // const [listaPreguntas, setListaPreguntas] = useState([])
-    // const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({})
-    // const [resultado, setResultado] = useState("?")
-    // const [corregido, setCorregido] = useState(false)
+    const [listaPreguntas, setListaPreguntas] = useState([])
+    const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({})
+    const [resultado, setResultado] = useState("?")
+    const [corregido, setCorregido] = useState(false)
 
 
     console.log(store.preguntasSeleccionadas)
     useEffect(() => {
-        // Generar una lista random de preguntas al cargar la pag.
-        // const randomIndexes = new Set()
-        // while (randomIndexes.size < 50) {
-        //     const randomIndex = Math.floor(Math.random() * store.preguntasSeleccionadas.length)
-        //     randomIndexes.add(randomIndex)
-        // }
-        // const finalList = Array.from(randomIndexes).map(item => store.preguntasSeleccionadas[item])
-        // setListaPreguntas(finalList)
+        const randomIndexes = new Set()
+        while (randomIndexes.size < 50) {
+            const randomIndex = Math.floor(Math.random() * store.preguntasSeleccionadas.length)
+            randomIndexes.add(randomIndex)
+        }
+        const finalList = Array.from(randomIndexes).map(item => store.preguntasSeleccionadas[item])
+        setListaPreguntas(finalList)
+        console.log(finalList)
     }, []);
 
     // Función para cuando el usuario le de a la respuesta que considere.
-    // const handleSelected = (e, preguntaIndex, respuestaIndex) => {
-    //     if (respuestasSeleccionadas[preguntaIndex] !== respuestaIndex) {
-    //         setRespuestasSeleccionadas({ ...respuestasSeleccionadas, [preguntaIndex]: respuestaIndex })
-    //     } else {
-    //         const updatedRespuestasSeleccionadas = { ...respuestasSeleccionadas }
-    //         delete updatedRespuestasSeleccionadas[preguntaIndex]
-    //         setRespuestasSeleccionadas(updatedRespuestasSeleccionadas)
-    //     }
-    // };
+    const handleSelected = (e, preguntaIndex, respuestaIndex) => {
+        if (respuestasSeleccionadas[preguntaIndex] !== respuestaIndex) {
+            setRespuestasSeleccionadas({ ...respuestasSeleccionadas, [preguntaIndex]: respuestaIndex })
+        } else {
+            const updatedRespuestasSeleccionadas = { ...respuestasSeleccionadas }
+            delete updatedRespuestasSeleccionadas[preguntaIndex]
+            setRespuestasSeleccionadas(updatedRespuestasSeleccionadas)
+        }
+    };
 
-    // const handleClass = (item, index, indx) => {
-    //     if (corregido) {
-    //         const respuestaCorrectaIndex = item.Respuestas.findIndex(resp => resp.correct === true);
-    //         if (respuestaCorrectaIndex === indx) {
-    //             return "my-2 success";
-    //         } else if (respuestasSeleccionadas[index] === indx) {
-    //             store.preguntasFalladas.push(Object.keys(item)[0])
-    //             return "my-2 wrong";
-    //         }
-    //         console.log(store.preguntasFalladas)
-    //         localStorage.setItem("fallos", JSON.stringify(store.preguntasFalladas))
-    //     } else {
-    //         if (respuestasSeleccionadas[index] === indx) {
-    //             return "my-2 selected";
-    //         }
-    //     }
-
-    //     return "my-2"
-    // };
+    const handleClass = (item, index, indx) => {
+        if (corregido) {
+            const respuestaCorrectaIndex = item.Respuestas.findIndex(resp => resp.correct === true);
+            if (respuestaCorrectaIndex === indx) {
+                return "my-2 success";
+            } else if (respuestasSeleccionadas[index] === indx) {
+                return "my-2 wrong";
+            }
+        } else {
+            if (respuestasSeleccionadas[index] === indx) {
+                return "my-2 selected";
+            }
+        }
+        return "my-2"
+    };
 
     // const evaluate = () => {
     //     let count = 0
@@ -85,32 +81,32 @@ export default function Exam() {
 
 
     return (
-        <div className="container-fluid min-vh-100 overflow-hidden mt-3 mb-0 mx-auto">
-            <h2 className="m-5 px-4" >EXAMEN</h2>
-            <h4 className="m-5 px-4" >Hora de prácticar en modo examen. <br></br> El resultado podrás verlo al finalizar el exámen. Mucha suerte!</h4>
-            <hr className="m-5"></hr>
-            <div className="container text-start mx-4 px-5 fs-6 text-justify fw-bold my-5 py-2">
-                <p className="mb-5">1. Este parrafo deberia mostrar una pregunta random seleccionada en la categoria que hemos clicado en el dropdown de arriba. Me gustaria que las preguntas se vieran en el centro con con un texto bonito y con el texto justificado ya que lo veran muchas personas y tiene que verse bien bonito. Pruebo escribiendo porque no hay internet y no puedo coger el Lorem Ipsum: </p>
-                <div className="text-center">
-                    <p className="mb-3">A) Aquí debera ir la respuesta de la pregunta random en el indice 0</p>
-                    <p className="mb-3">B) Aquí debera ir la respuesta de la pregunta random en el indice 1</p>
-                    <p className="mb-3">C) Aquí debera ir la respuesta de la pregunta random en el indice 2</p>
-                    <p className="">D) Aquí debera ir la respuesta de la pregunta random en el indice 3</p>
-                </div>
+        <>
+            <div className="container-fluid min-vh-100 overflow-hidden mt-3 mb-0 mx-auto">
+                <h2 className="m-5 px-4" >EXAMEN</h2>
+                <h4 className="m-5 px-4" >Hora de prácticar en modo examen. <br></br> El resultado podrás verlo al finalizar el exámen. Mucha suerte!</h4>
+                <hr className="m-5"></hr>
+                {listaPreguntas && (
+                    <div>
+                        {listaPreguntas.map((item, index) => {
+                            return (
+                                <div className="container text-start mx-4 px-5 fs-6 text-justify fw-bold my-5 py-2">
+                                <p className="mb-5">{index + 1}. {Object.values(item)[0]} </p>
+                                    <ul className="pb-5">
+                                        {item.Respuestas.map((resp, indx) => {
+                                            return (
+                                                <li style={corregido ? { pointerEvents: 'none' } : {}} key={indx} onClick={(e) => handleSelected(e, index, indx)} className={handleClass(item, index, indx)} ><b>{Object.keys(resp)[0]}:</b> {Object.values(resp)[0]}</li>
+                                            )
+                                        })}
+                                    </ul> 
+                            </div>
+                            ) 
+                        })}
+                        <hr className="m-5"></hr>
+                    </div>
+                )}
             </div>
-            <hr className="m-5"></hr>
-
-            <div className="container text-start mx-4 px-5 fs-6 text-justify fw-bold my-5 py-5">
-                <p className="mb-5">1. Este parrafo deberia mostrar una pregunta random seleccionada en la categoria que hemos clicado en el dropdown de arriba. Me gustaria que las preguntas se vieran en el centro con con un texto bonito y con el texto justificado ya que lo veran muchas personas y tiene que verse bien bonito. Pruebo escribiendo porque no hay internet y no puedo coger el Lorem Ipsum: </p>
-                <div className="text-center">
-                    <p className="mb-3">A) Aquí debera ir la respuesta de la pregunta random en el indice 0</p>
-                    <p className="mb-3">B) Aquí debera ir la respuesta de la pregunta random en el indice 1</p>
-                    <p className="mb-3">C) Aquí debera ir la respuesta de la pregunta random en el indice 2</p>
-                    <p className="">D) Aquí debera ir la respuesta de la pregunta random en el indice 3</p>
-                </div>
-            </div>
-            <hr className="m-5"></hr>
-        </div>
+        </>
     )
 
 }

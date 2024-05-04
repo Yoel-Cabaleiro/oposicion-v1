@@ -1,3 +1,20 @@
 .bg-questions-media {
     background-color: rgb(212, 209, 209);
 }
+
+/* hover para que la lista aprezca un boton */
+li:hover {
+    background-color: rgba(211, 211, 211, 0.61);
+    cursor: pointer;
+}
+
+/* clases respuestas una vez hecho click */
+.success{
+    background-color: rgba(17, 187, 40, 0.404);
+}
+.wrong{
+    background-color: rgba(165, 42, 42, 0.479);
+}
+.selected{
+    background-color: rgb(245, 245, 164) !important;
+}
