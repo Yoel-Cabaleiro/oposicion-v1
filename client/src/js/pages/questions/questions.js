@@ -12,6 +12,7 @@ export default function Questions() {
     const [clases, setClases] = useState(["", "", "", ""])
     const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(false)
     const [count, setCount] = useState(0)
+    const [aciertos, setAciertos] = useState(0)
 
     console.log(store.estudiante)
     console.log(store.preguntasSeleccionadas)
@@ -35,6 +36,26 @@ export default function Questions() {
         setRespuestaSeleccionada(false)
     }
 
+    const resolve = (index, item) => {
+        const nuevasClases = [...clases]
+        if (item.correct === true) {
+            nuevasClases[index] = "success"
+            setAciertos((prevState) => prevState + 1)
+            setCount((prevState) => prevState + 1)
+        }
+        else {
+            nuevasClases[index] = "wrong"
+            pregunta.Respuestas.map((resp, indx) => {
+                if (resp.correct === true) {
+                    nuevasClases[indx] = "success"
+                }
+            })
+            setCount((prevState) => prevState + 1)
+        }
+        setClases(nuevasClases)
+        setRespuestaSeleccionada(true)
+    }
+
 
     // Hacer una función handleClick () para que cuando se le de a la opción que el usuario seleccione, ejecute el código que Yoel hizo para que aparezca la correcta y las falladas marcadas.y se sumen en caso de correcta al current streak
     // Deberiamos hacer una función en handleclick siguiente para que se vuelva a cargar la misma vista generando una nueva pregunta random y que se actualicen las medias de los div grises.
@@ -49,7 +70,7 @@ export default function Questions() {
                 <ul>
                     {pregunta && pregunta.Respuestas.map((item, index) => {
                         return (
-                            <li style={respuestaSeleccionada ? { pointerEvents: 'none' } : {}} key={index} /* onClick={() => resolve(index, item)} */ className={`my-2 ${clases[index]}`} ><b>{Object.keys(item)[0]}:</b> {Object.values(item)[0]}</li>
+                            <li style={respuestaSeleccionada ? { pointerEvents: 'none' } : {}} key={index} onClick={() => resolve(index, item)} className={`my-2 ${clases[index]}`} ><b>{Object.keys(item)[0]}:</b> {Object.values(item)[0]}</li>
                         )
                     })}
                 </ul>
@@ -59,7 +80,7 @@ export default function Questions() {
                 <div className="row d-flex flex-row justify-content-between px-3">
                     <div className="col-4 p-3 mx-5 bg-questions-media rounded d-flex flex-row justify-content-between">
                         <p className="fw-bold">Preguntas acertadas</p>
-                        <p className="fw-bold">6</p>
+                        <p className="fw-bold">{aciertos} / {count}</p>
                     </div>
                     <div className="col-3">
                         <button className="btn btn-outline border border-dark btn-lg align-self-end px-5" onClick={() => handleNext()}>Siguiente</button>
@@ -67,8 +88,8 @@ export default function Questions() {
                 </div>
                 <div className="row d-flex flex-row justify-content-between my-4 px-3">
                     <div className="col-4 p-3 mx-5 bg-questions-media rounded d-flex flex-row justify-content-between">
-                        <p className="fw-bold">Media de preguntas acertadas</p>
-                        <p className="fw-bold">6</p>
+                        <p className="fw-bold">Porcentaje de preguntas acertadas</p>
+                        <p className="fw-bold">{count != 0 ? ((aciertos / count) * 100).toFixed(1) + " %" : null}</p>
                     </div>
                 </div>
             </div>
