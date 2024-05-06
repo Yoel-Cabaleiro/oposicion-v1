@@ -5,7 +5,7 @@ import "./home.css";
 export default function Home() {
   return (
     <>
-      <main className="d-flex align-items-center w-100 overflow-hidden h-100 py-5 mt-5 mb-0">
+      <main className="d-flex align-items-center w-100 overflow-hidden h-100 my-0 min-vh-100">
         <div className="container-fluid h-100">
           <div className="row d-flex flex-column mx-5 justify-content-start align-items-center">
             <div className="col-md-12 text-start">

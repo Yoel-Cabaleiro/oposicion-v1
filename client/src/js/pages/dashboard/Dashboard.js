@@ -54,16 +54,18 @@ export default function Dashboard() {
 
           <div className="mb-5 d-flex justify-content-center flex-column">
             <h1 className="text-black fs-6 text-start lato-light">DASHBOARD</h1>
+            <h5 className="text-start mt-5 lato-regular">Aquí podrás ver toda la información sobre tus actividades en las diferentes categorias. Consultar tu media de preguntas acertadas </h5>
+
             <div>
-              <h3 className="text-start mt-5 lato-regular display-4">Selecciona La Categoria:</h3>
+              <h3 className="text-start mt-5 lato-regular display-6">Selecciona La Categoria:</h3>
             </div>
             <div className="dropdown align-self-start m-3 ms-0 w-50">
-              <button className="btn lato-regular btn-dark border border-dark rounded-3 dropdown-toggle px-3 py-3 w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button className="btn lato-regular btn-dark border border-dark rounded-3 dropdown-toggle px-3 py-3 w-100 fs-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {selectedEstadistica ? selectedEstadistica.categoria : 'Selecciona un grupo'}
               </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div className="dropdown-menu w-100 rounded rounded-3" aria-labelledby="dropdownMenuButton">
                 {store.estadisticasEstudiante.map((estadistica, index) => (
-                  <button key={index} className="dropdown-item lato-regular" onClick={() => handleCategorySelect(estadistica)}>
+                  <button key={index} className="dropdown-item lato-regular rounded rounded-3 text-center" onClick={() => handleCategorySelect(estadistica)}>
                     {estadistica.categoria}
                   </button>
                 ))}

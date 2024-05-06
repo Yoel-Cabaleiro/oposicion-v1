@@ -11,17 +11,18 @@ export default function NavLogo() {
   return (
     <nav className="sticky-top">
       <div className="container-fluid px-0">
-        <div className="d-flex align-items-center justify-content-between container w-100 p-0 ms-5 me-0" style={{ height: "7vh" }}>
-
-          <div className="d-flex align-items-center fw-lighter ms-0">
+        <div className="row align-items-center justify-content-between p-3" style={{ width: "20%" }}>
+          <div className="col-6 col-md-3">
             <Link to="/" className="text-decoration-none d-flex align-items-center">
-              <img src={easyopLogo} className="card-img-top mt-3" alt="..." style={{ width: "30%" }}></img>
-              <span className="fw-bold text-black">EasyOp</span>
+              <img src={easyopLogo} className="card-img-top mt-3 ms-md-5 ms-sm-5" alt="..." style={{ width: "20%" }} />
+              <span className="fw-bold text-black fs-6">EasyOp</span>
             </Link>
+          </div>
+          <div className="col-md-6 d-none d-md-block">
+            {/* Empty div for center alignment */}
           </div>
 
         </div>
-        {/* <hr className="container bg-secondary"></hr> */}
       </div>
 
     </nav>
