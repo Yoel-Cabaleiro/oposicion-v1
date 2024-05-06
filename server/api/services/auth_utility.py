@@ -4,7 +4,7 @@ from flask_jwt_extended import create_access_token
 
 import jwt
 import os
-from api.model import db, Users, Estudiantes
+from api.model import db, Estudiantes
 import bcrypt
 from time import time
 

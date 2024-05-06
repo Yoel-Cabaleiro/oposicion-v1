@@ -8,7 +8,7 @@ export default function NavbarExamLayout({ children }) {
     <>
       <Navbar />
       {children}
-      <FooterExam />
+      {/* <FooterExam /> */}
     </>
   )
 }

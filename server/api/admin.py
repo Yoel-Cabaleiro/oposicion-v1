@@ -1,5 +1,5 @@
 import os
-from api.model import db, Users, Estadisticas, Estudiantes, Categorias, Preguntas
+from api.model import db, Estadisticas, Estudiantes, Categorias, Preguntas
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 

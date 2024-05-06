@@ -1,6 +1,6 @@
 import os
 import smtplib
-from api.model import Users, Estudiantes 
+from api.model import Estudiantes 
 
 
 def send_recovery_email(user_email, token):
