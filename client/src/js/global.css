@@ -58,6 +58,8 @@ GENERAL SETTING
 
 html {
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -66,6 +68,8 @@ body {
   font-weight: 200;
   background-color: var(--background);
   color: var(--on-background);
+  margin: 0;
+  padding: 0;
 }
 
 /* h1,

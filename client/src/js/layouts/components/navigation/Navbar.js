@@ -6,7 +6,7 @@ import "./navbar.css"
 
 export default function Navbar() {
   return (
-    <nav className="sticky-top">
+    <nav className="sticky-top bg-white">
       <div className="container-fluid px-0">
         <div className="row align-items-center justify-content-between p-3">
           <div className="col-6 col-md-3">
