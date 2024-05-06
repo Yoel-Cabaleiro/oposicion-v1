@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 
 
 # File import
-from api.model import db, Users, Estudiantes, Estadisticas, Categorias, Preguntas
+from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas
 from api.services.email_utility import send_recovery_email
 from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 

@@ -24,7 +24,6 @@ export default function Exam() {
         }
         const finalList = Array.from(randomIndexes).map(item => store.preguntasSeleccionadas[item])
         setListaPreguntas(finalList)
-        console.log(finalList)
     }, []);
 
     // Función para cuando el usuario le de a la respuesta que considere.
@@ -54,24 +53,43 @@ export default function Exam() {
         return "my-2"
     };
 
-    // const evaluate = () => {
-    //     let count = 0
-    //     let preguntasAcertadas = {}
-    //     if (Object.keys(respuestasSeleccionadas).length < listaPreguntas.length) {
-    //         alert("Completa el examen, selecciona una respuesta para cada pregunta")
+    const [timer, setTimer] = useState(0);
 
-    //     } else {
-    //         Object.keys(respuestasSeleccionadas).map((key) => {
-    //             if (listaPreguntas[key].Respuestas[respuestasSeleccionadas[key]].correct === true) {
-    //                 count += 1
-    //                 preguntasAcertadas[listaPreguntas[key]] = respuestasSeleccionadas[key]
-    //             }
-    //         })
-    //         let total = ((count * 100) / 50) / 10
-    //         setResultado(total)
-    //         setCorregido(true)
-    //     }
-    // }
+    // Función para formatear el tiempo en formato hh:mm:ss
+    const formatTime = (time) => {
+        const hours = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        const seconds = Math.floor(time % 60);
+        return `${hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimer((prevTimer) => prevTimer + 1);
+        }, 1000);
+
+        // Limpia el intervalo cuando el componente se desmonta
+        return () => clearInterval(interval);
+    }, []);
+
+    /* const evaluate = () => {
+        let count = 0
+        let preguntasAcertadas = {}
+        if (Object.keys(respuestasSeleccionadas).length < listaPreguntas.length) {
+            alert("Completa el examen, selecciona una respuesta para cada pregunta")
+
+        } else {
+            Object.keys(respuestasSeleccionadas).map((key) => {
+                if (listaPreguntas[key].Respuestas[respuestasSeleccionadas[key]].correct === true) {
+                    count += 1
+                    preguntasAcertadas[listaPreguntas[key]] = respuestasSeleccionadas[key]
+                }
+            })
+            let total = ((count * 100) / 50) / 10
+            setResultado(total)
+            setCorregido(true)
+        }
+    } */
 
     // Hacer una función handleClick () para que cuando se le de a la opción que el usuario seleccione, ejecute el código que Yoel hizo para que SE MARQUE LA QUE ESCOGIO EN GRIS
     // Deberiamos hacer una función en handleclick PARA CUANDO FINALICE Y LE DE AL BOTON APAREZCA UN ALERT CON EL TOTAL DE PREGUNTAS ACERTADAS Y AL DARLE AL CONSULTAR VUELTA A LA VISTA CON LAS PREGUNTAS MARCADAS CORRECTAS E INCORRECTAS Y ABAJO LA NOTA FINAL.
@@ -91,21 +109,43 @@ export default function Exam() {
                         {listaPreguntas.map((item, index) => {
                             return (
                                 <div className="container text-start mx-4 px-5 fs-6 text-justify fw-bold my-5 py-2">
-                                <p className="mb-5">{index + 1}. {Object.values(item)[0]} </p>
+                                    <p className="mb-5">{index + 1}. {Object.values(item)[0]} </p>
                                     <ul className="pb-5">
                                         {item.Respuestas.map((resp, indx) => {
                                             return (
                                                 <li style={corregido ? { pointerEvents: 'none' } : {}} key={indx} onClick={(e) => handleSelected(e, index, indx)} className={handleClass(item, index, indx)} ><b>{Object.keys(resp)[0]}:</b> {Object.values(resp)[0]}</li>
                                             )
                                         })}
-                                    </ul> 
-                            </div>
-                            ) 
+                                    </ul>
+                                </div>
+                            )
                         })}
                         <hr className="m-5"></hr>
                     </div>
                 )}
             </div>
+            <footer className="d-flex d-flex align-items-center bg-light justify-content-center fixed-bottom" style={{ height: "15vh" }}>
+                <div className="container-fluid row">
+                    <div className="col-4">
+                        <div className="bg-questions-media px-3 py-3 rounded d-flex flex-row align-items-between fw-bold">
+                            <p className="mx-auto">Contestadas</p>
+                            <p className="mx-auto">4</p>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <div className="bg-questions-media px-3 py-3 rounded d-flex flex-row align-items-between fw-bold mx-auto">
+                            <p className="mx-auto">Tiempo transcurrido</p>
+                            <p className="mx-auto">{formatTime(timer)}</p>
+                        </div>
+                    </div>
+                    <div className="col-4 bg-questions-media rounded">
+                        <button className="btn px-4 py-3 rounded d-flex flex-row fw-bold text-center w-100" /* onClick={handleFinish} */>
+                            <p className="mx-auto text-black" >Finalizar examen</p>
+                        </button>
+                    </div>
+                </div>
+                {/* <span className="p-4 fw-light text-black">© BIGWEB.club  - Web design, Web Development, Web Marketing. Milano, Madrid, London.</span> */}
+            </footer>
         </>
     )
 
