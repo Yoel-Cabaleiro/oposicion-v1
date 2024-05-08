@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: false,
       estudiante: {},
       estadisticasEstudiante: [],
+      estadisticaSeleccionadaId: null,
       preguntasSeleccionadas: [],
       categorias: [],
       categoriasSeleccionadas: [],

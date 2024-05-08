@@ -68,7 +68,7 @@ class Estadisticas(db.Model):
             'estudiante': self.estudiante.email,
             'categoria_id': self.categoria_id,
             'categoria': self.categoria.nombre,
-            'preguntas_falladas': [pregunta.pregunta for pregunta in self.preguntas_falladas]
+            'preguntas_falladas': [pregunta.serialized() for pregunta in self.preguntas_falladas]
         }
     
     def __repr__(self):
@@ -102,6 +102,7 @@ class Preguntas(db.Model):
                  "correct": self.respuesta_correcta == "D"},    
             ],
             'categoria': self.categoria.nombre,
+            'categoria_id': self.categoria_id,
             'id': self.id
         }
     
@@ -120,5 +121,5 @@ class EstadisticasPreguntas(db.Model):
         return {
             'categoria_id': self.estadistica_id,
             'pregunta_id': self.pregunta_id,
-            'fallos': self.fallos
+            'fallos': self.fallos,
         }

@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 
 
 # File import
-from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas
+from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas, EstadisticasPreguntas
 from api.services.email_utility import send_recovery_email
 from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 
@@ -113,8 +113,36 @@ def estadisticas_by_estudiante(estudianteid):
             db.session.delete(estadistica)
         db.session.commit()
         return jsonify({"mensaje": "Estadisticas borradas para este estudiante"}), 200
+    
 
+##########################################################
+# Estadisticas preguntas falladas
 
+# Actualizar los fallos segun array de ids
+@api.route('/actualizar_fallos', methods=['PUT'])
+def actualizar_fallos():
+    data = request.json
+    preguntas = data.get('preguntas')
+    estadistica_id = data.get('estadisticaId')
+    fallos_actualiazdos = []
+    for id in preguntas:
+        estadistica = EstadisticasPreguntas.query.filter_by(pregunta_id=id).first()
+        if estadistica:
+            estadistica.fallos += 2
+            fallos_actualiazdos.append(estadistica.serialized())
+        else:
+            pregunta = Preguntas.query.get(id)
+            nueva_estadistica = EstadisticasPreguntas(
+                pregunta_id=id,
+                estadistica_id=estadistica_id,
+                fallos = 2
+            )
+            db.session.add(nueva_estadistica)
+            fallos_actualiazdos.append(nueva_estadistica.serialized())
+    db.session.commit()
+    return jsonify({'mensaje': 'Estadisticas de fallos actualizadas', 'data': fallos_actualiazdos})
+            
+            
 
 ##########################################################
 # Login and authentication
