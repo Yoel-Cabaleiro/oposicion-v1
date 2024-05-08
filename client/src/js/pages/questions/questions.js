@@ -18,7 +18,7 @@ export default function Questions() {
     console.log(store.preguntasSeleccionadas)
 
     useEffect(() => {
-        const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length - 1))
+        const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length))
         const preguntaRandom = store.preguntasSeleccionadas[random]
         setPregunta(preguntaRandom)
         setRespuestaSeleccionada(false)
@@ -30,7 +30,7 @@ export default function Questions() {
     }, [pregunta])
 
     const handleNext = () => {
-        const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length - 1))
+        const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length))
         const preguntaRandom = store.preguntasSeleccionadas[random]
         setPregunta(preguntaRandom)
         setRespuestaSeleccionada(false)
