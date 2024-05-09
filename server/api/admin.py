@@ -1,5 +1,5 @@
 import os
-from api.model import db, Estadisticas, Estudiantes, Categorias, Preguntas
+from api.model import db, Estadisticas, Estudiantes, Categorias, Preguntas, EstadisticasPreguntas
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 
@@ -9,8 +9,8 @@ def setup_admin(app):
     admin = Admin(app, name='Admin panel', template_mode='bootstrap4')
 
 
-    # class ProAdminView(ModelView):
-    #     column_list = ['id', 'user_name', 'email', 'password'] 
+    class ProEstadisticasPreguntas(ModelView):
+         column_list = ['id', 'estadistica_id', 'pregunta_id', 'fallos'] 
 
     
     # Admin panel views
@@ -19,6 +19,8 @@ def setup_admin(app):
     admin.add_view(ModelView(Estadisticas, db.session))
     admin.add_view(ModelView(Categorias, db.session))
     admin.add_view(ModelView(Preguntas, db.session))
+    admin.add_view(ProEstadisticasPreguntas(EstadisticasPreguntas, db.session))
+
 
 
 

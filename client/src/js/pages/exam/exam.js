@@ -73,7 +73,7 @@ export default function Exam() {
         return () => clearInterval(interval);
     }, []);
 
-    const evaluate = () => {
+    const evaluate = async() => {
         let count = 0
         let preguntasAcertadas = {}
         if (Object.keys(respuestasSeleccionadas).length < listaPreguntas.length) {
@@ -100,8 +100,9 @@ export default function Exam() {
             return falladas;
         }, []);
         setPreguntasFalladas(nuevasPreguntasFalladas);
-    
         console.log('PREGUNTAS FALLADAS: ', nuevasPreguntasFalladas);
+        const response = await actions.actualizarFallos(nuevasPreguntasFalladas, store.estadisticaSeleccionadaId, store.estudiante.id)
+        return console.log(response)
     }
 
     // Hacer una función handleClick () para que cuando se le de a la opción que el usuario seleccione, ejecute el código que Yoel hizo para que SE MARQUE LA QUE ESCOGIO EN GRIS
