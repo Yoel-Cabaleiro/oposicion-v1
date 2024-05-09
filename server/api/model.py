@@ -119,7 +119,7 @@ class EstadisticasPreguntas(db.Model):
 
     def serialized(self):
         return {
-            'categoria_id': self.estadistica_id,
+            'estadistica_id': self.estadistica_id,
             'pregunta_id': self.pregunta_id,
             'fallos': self.fallos,
         }

@@ -148,7 +148,7 @@ def actualizar_fallos_practica():
     try:
         for fallo in fallos:
             estadistica_pregunta = EstadisticasPreguntas.query.filter_by(
-                categoria_id=fallo['categoria_id'],
+                estadistica_id=fallo['estadistica_id'],
                 pregunta_id=fallo['pregunta_id']
             ).first()
             if estadistica_pregunta:
