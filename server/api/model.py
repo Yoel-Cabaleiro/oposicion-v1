@@ -123,3 +123,6 @@ class EstadisticasPreguntas(db.Model):
             'pregunta_id': self.pregunta_id,
             'fallos': self.fallos,
         }
+    
+    def __repr__(self):
+        return f'{self.estadistica_id}, {self.pregunta_id}, {self.fallos}'

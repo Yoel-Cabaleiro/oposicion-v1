@@ -224,6 +224,28 @@ const getState = ({ getStore, getActions, setStore }) => {
         else {
           setStore({ preguntasFalladas: JSON.parse(fallos) })
         }
+      },
+
+      ////////////////////////////////
+      //FALLOS
+
+      actualizarFallos: async(listaFallos, estadisticaId, estudianteId) => {
+        const url = process.env.BACK_URL + "/api/actualizar_fallos";
+        const options = {
+          method: "PUT",
+          body: JSON.stringify({ 'preguntas': listaFallos, estadisticaId }),
+          headers: { "Content-Type": "application/json" }
+        }
+        const actions = getActions()
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          const estadisticas = await actions.getEstadísticasByEstudiante(estudianteId)
+          return {'mensaje': data.mensaje, 'data': estadisticas.data}
+        }
+        else {
+          return {'error': 'Error al actualizar fallos'}
+        }
       }
     }
   };
