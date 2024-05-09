@@ -78,7 +78,6 @@ export default function Exam() {
         let preguntasAcertadas = {}
         if (Object.keys(respuestasSeleccionadas).length < listaPreguntas.length) {
             alert("Completa el examen, selecciona una respuesta para cada pregunta")
-
         } else {
             Object.keys(respuestasSeleccionadas).map((key) => {
                 if (listaPreguntas[key].Respuestas[respuestasSeleccionadas[key]].correct === true) {
@@ -91,8 +90,6 @@ export default function Exam() {
             setResultado(total)
             setCorregido(true)
         }
-        
-        console.log('PREGUNTAS ACERTADAS: ', preguntasAcertadas )
         const nuevasPreguntasFalladas = listaPreguntas.reduce((falladas, pregunta, index) => {
             if (!preguntasAcertadas.hasOwnProperty(index.toString())) {
                 falladas.push(pregunta.id);
@@ -100,8 +97,7 @@ export default function Exam() {
             return falladas;
         }, []);
         setPreguntasFalladas(nuevasPreguntasFalladas);
-        console.log('PREGUNTAS FALLADAS: ', nuevasPreguntasFalladas);
-        const response = await actions.actualizarFallos(nuevasPreguntasFalladas, store.estadisticaSeleccionadaId, store.estudiante.id)
+        const response = await actions.actualizarFallosExamen(nuevasPreguntasFalladas, store.estadisticaSeleccionadaId, store.estudiante.id)
         return console.log(response)
     }
 

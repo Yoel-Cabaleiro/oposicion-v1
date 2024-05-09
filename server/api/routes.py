@@ -118,9 +118,9 @@ def estadisticas_by_estudiante(estudianteid):
 ##########################################################
 # Estadisticas preguntas falladas
 
-# Actualizar los fallos segun array de ids
-@api.route('/actualizar_fallos', methods=['PUT'])
-def actualizar_fallos():
+# Actualizar los fallos en examen segun array de ids
+@api.route('/actualizar_fallos_examen', methods=['PUT'])
+def actualizar_fallos_examen():
     data = request.json
     preguntas = data.get('preguntas')
     estadistica_id = data.get('estadisticaId')
@@ -131,7 +131,6 @@ def actualizar_fallos():
             estadistica.fallos += 2
             fallos_actualiazdos.append(estadistica.serialized())
         else:
-            pregunta = Preguntas.query.get(id)
             nueva_estadistica = EstadisticasPreguntas(
                 pregunta_id=id,
                 estadistica_id=estadistica_id,
@@ -141,6 +140,32 @@ def actualizar_fallos():
             fallos_actualiazdos.append(nueva_estadistica.serialized())
     db.session.commit()
     return jsonify({'mensaje': 'Estadisticas de fallos actualizadas', 'data': fallos_actualiazdos})
+
+# Actualizar los fallos tras la práctica segun array de estadistica.preguntas_falladas
+@api.route('actualizar_fallos_practica', methods=['PUT'])
+def actualizar_fallos_practica():
+    fallos = request.json
+    try:
+        for fallo in fallos:
+            estadistica_pregunta = EstadisticasPreguntas.query.filter_by(
+                categoria_id=fallo['categoria_id'],
+                pregunta_id=fallo['pregunta_id']
+            ).first()
+            if estadistica_pregunta:
+                if fallo['fallos'] <= 0:
+                    db.session.delete(estadistica_pregunta)
+                else:
+                    estadistica_pregunta.fallos = fallo['fallos']
+        db.session.commit()
+        return {"message": "Actualización realizada con éxito"}, 200
+    except Exception as e:
+        db.session.rollback()
+        return {"error": str(e)}, 500
+    finally:
+        db.session.close()
+
+            
+
             
             
 
