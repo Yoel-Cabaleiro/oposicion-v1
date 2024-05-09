@@ -229,8 +229,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       ////////////////////////////////
       //FALLOS
 
-      actualizarFallos: async(listaFallos, estadisticaId, estudianteId) => {
-        const url = process.env.BACK_URL + "/api/actualizar_fallos";
+      actualizarFallosExamen: async(listaFallos, estadisticaId, estudianteId) => {
+        const url = process.env.BACK_URL + "/api/actualizar_fallos_examen";
         const options = {
           method: "PUT",
           body: JSON.stringify({ 'preguntas': listaFallos, estadisticaId }),
