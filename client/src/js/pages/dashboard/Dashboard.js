@@ -54,14 +54,14 @@ export default function Dashboard() {
         <div className="container py-5">
 
           <div className="mb-5 d-flex justify-content-center flex-column">
-            <h1 className="text-black fs-6 text-start lato-light">DASHBOARD</h1>
-            <h5 className="text-start mt-5 lato-regular">Aquí podrás ver toda la información sobre tus actividades en las diferentes categorias. Consultar tu media de preguntas acertadas </h5>
+            <h1 className="text-black fs-1 text-start lato-regular fw-bold">DASHBOARD</h1>
+            <h5 className="text-start mt-3 lato-regular display-7">Aquí podrás ver toda la información sobre tus actividades en las diferentes categorias,<br></br> Consultar tu media de preguntas acertadas </h5>
 
             <div>
-              <h3 className="text-start mt-5 lato-regular display-6">Selecciona La Categoria:</h3>
+              <h3 className="text-start mt-5 lato-regular fs-6">Selecciona La Categoria:</h3>
             </div>
-            <div className="dropdown align-self-start m-3 ms-0 w-50">
-              <button className="btn lato-regular btn-dark border border-dark rounded-3 dropdown-toggle px-3 py-3 w-100 fs-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div className="dropdown align-self-start m-3 ms-0 w-100">
+              <button className="btn lato-regular btn-dark border border-dark rounded-3 dropdown-toggle w-100 fs-6 py-2" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {selectedEstadistica ? selectedEstadistica.categoria : 'Selecciona un grupo'}
               </button>
               <div className="dropdown-menu w-100 rounded rounded-3" aria-labelledby="dropdownMenuButton">
@@ -75,17 +75,22 @@ export default function Dashboard() {
           </div>
           {selectedEstadistica ? (
             <div>
-              <div>
-                <h5 className="fs-6 lato-regular">PUNTUACIÓN ÚLTIMO EXÁMEN</h5>
-                <div className="fs-1">{selectedEstadistica.ultimo_examen}</div>
+              <h5 className="lato-regular mb-4">Tus Últimas Puntuaciones:</h5>
+              <div className="row">
               </div>
-              <div className="my-5 fs-5 lato-regular">
-                <h5>MEDIA DE EXAMENES TOTAL</h5>
-                <div className="fs-1">{selectedEstadistica.media_examen}</div>
-              </div>
-              <div>
-                <h5>Media de últimos 10 exámenes</h5>
-                <div>{selectedEstadistica.media_10_examenes}</div>
+              <div className="">
+                <div className="p-5 bg-grey w-25 rounded rounded-3 shadow text-center lato-regular" style={{ boxShadow: "0" }}>
+                  <div className="fs-1 text-secondary mb-3">{selectedEstadistica.ultimo_examen}</div>
+                  <h5 className="fs-6 fw-bold">ÚLTIMO EXÁMEN</h5>
+                </div>
+                <div className="p-5 bg-grey w-25 rounded rounded-3 shadow text-center lato-regular" style={{ boxShadow: "0" }}>
+                  <div className="fs-1 text-secondary mb-3">{selectedEstadistica.media_examen}</div>
+                  <h5 className="fs-6 fw-bold">MEDIA DE EXAMENES TOTAL</h5>
+                </div>
+                <div>
+                  <h5>Media de últimos 10 exámenes</h5>
+                  <div>{selectedEstadistica.media_10_examenes}</div>
+                </div>
               </div>
               <div>
                 <h5>Mejor racha en práctica</h5>
@@ -95,27 +100,27 @@ export default function Dashboard() {
                 <h5>Porcentaje aciertos en la última práctica</h5>
                 <div>{selectedEstadistica.porcentaje_aciertos}%</div>
               </div>
+              <div className="container-fluid mx-auto">
+                <div className="row d-flex flex-row justify-content-center align-items-center mx-auto">
+                  <div className="col-5">
+                    <Link to="/questions">
+                      <button className="px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold d-flex justify-content-center align-items-center">
+                        <p className="text-black">Práctica con preguntas</p>
+                      </button>
+                    </Link>
+                  </div>
+                  <div className="col-5">
+                    <Link to="/exam">
+                      <button className="px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold d-flex justify-content-center align-items-center">
+                        <p className="text-black">Simula un exámen</p>
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : null}
 
-          <div className="container-fluid mx-auto">
-            <div className="row d-flex flex-row justify-content-center align-items-center mx-auto">
-              <div className="col-5">
-                <Link to="/questions">
-                  <button className="px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold d-flex justify-content-center align-items-center">
-                    <p className="text-black">Práctica con preguntas</p>
-                  </button>
-                </Link>
-              </div>
-              <div className="col-5">
-                <Link to="/exam">
-                  <button className="px-5 btn btn-primary btn-lg mt-5 text-black border border-dark fw-bold d-flex justify-content-center align-items-center">
-                    <p className="text-black">Simula un exámen</p>
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
 
 
 
