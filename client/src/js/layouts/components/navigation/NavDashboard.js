@@ -16,7 +16,7 @@ export default function NavDashboard() {
   }
 
   return (
-    <nav className="text-black sticky-top ">
+    <nav className="text-black sticky-top " style={{ backgroundColor: "white" }}>
       <div className="container-fluid px-0">
         <div className="row align-items-center justify-content-between p-3">
           <div className="col-6 col-md-3">

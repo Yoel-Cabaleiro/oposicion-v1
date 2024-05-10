@@ -227,3 +227,7 @@ body::-webkit-scrollbar {
   font-weight: 400;
   font-style: normal;
 }
+
+.shadow {
+  box-shadow: #080043;
+}
