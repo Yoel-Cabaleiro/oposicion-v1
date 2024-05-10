@@ -126,7 +126,7 @@ def actualizar_fallos_examen():
     estadistica_id = data.get('estadisticaId')
     fallos_actualiazdos = []
     for id in preguntas:
-        estadistica = EstadisticasPreguntas.query.filter_by(pregunta_id=id).first()
+        estadistica = EstadisticasPreguntas.query.filter_by(pregunta_id=id, estadistica_id=estadistica_id).first()
         if estadistica:
             estadistica.fallos += 2
             fallos_actualiazdos.append(estadistica.serialized())
@@ -144,20 +144,18 @@ def actualizar_fallos_examen():
 # Actualizar los fallos tras la práctica segun array de estadistica.preguntas_falladas
 @api.route('actualizar_fallos_practica', methods=['PUT'])
 def actualizar_fallos_practica():
-    fallos = request.json
+    data = request.json
+    pregunta_id = data['preguntaId']
+    estadistica_id=data['estadisticaId']
     try:
-        for fallo in fallos:
-            estadistica_pregunta = EstadisticasPreguntas.query.filter_by(
-                estadistica_id=fallo['estadistica_id'],
-                pregunta_id=fallo['pregunta_id']
-            ).first()
-            if estadistica_pregunta:
-                if fallo['fallos'] <= 0:
-                    db.session.delete(estadistica_pregunta)
-                else:
-                    estadistica_pregunta.fallos = fallo['fallos']
+        estadistica_pregunta = EstadisticasPreguntas.query.filter_by(pregunta_id=pregunta_id, estadistica_id=estadistica_id).first()
+        if estadistica_pregunta:
+            if (estadistica_pregunta.fallos - 1) <= 0:
+                db.session.delete(estadistica_pregunta)
+            else:
+                estadistica_pregunta.fallos -= 1
         db.session.commit()
-        return {"message": "Actualización realizada con éxito"}, 200
+        return {"mensaje": "Actualización realizada con éxito"}, 200
     except Exception as e:
         db.session.rollback()
         return {"error": str(e)}, 500

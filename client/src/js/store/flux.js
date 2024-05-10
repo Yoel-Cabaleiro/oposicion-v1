@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: false,
       estudiante: {},
       estadisticasEstudiante: [],
-      estadisticaSeleccionadaId: null,
+      estadisticaSeleccionada: {},
       preguntasSeleccionadas: [],
       categorias: [],
       categoriasSeleccionadas: [],
@@ -245,6 +245,31 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         else {
           return {'error': 'Error al actualizar fallos'}
+        }
+      },
+
+      actualizarFallosPractica: async(preguntaId, estadisticaId, estudianteId) =>{
+        const url = process.env.BACK_URL + "/api/actualizar_fallos_practica";
+        const options = {
+          method: "PUT",
+          body: JSON.stringify({ preguntaId, estadisticaId }),
+          headers: { "Content-Type": "application/json" }
+        }
+        const actions = getActions()
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          const estadisticas = await actions.getEstadísticasByEstudiante(estudianteId)
+          estadisticas.data.map(estadistica => {
+            if (estadistica.id === estadisticaId) {
+              setStore({estadisticaSeleccionada: estadistica})
+            }
+          })
+          return {'mensaje': data.mensaje, 'data': estadisticas.data}
+        }
+        else {
+          const data = await response.json()
+          return {'error': data.error}
         }
       }
     }
