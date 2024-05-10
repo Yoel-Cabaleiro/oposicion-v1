@@ -13,9 +13,7 @@ export default function Questions() {
     const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(false)
     const [count, setCount] = useState(0)
     const [aciertos, setAciertos] = useState(0)
-
-    console.log(store.estudiante)
-    console.log(store.preguntasSeleccionadas)
+    const [preguntaFallada, setPreguntaFallada] = useState(null)
 
     useEffect(() => {
         const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length))
@@ -30,21 +28,43 @@ export default function Questions() {
     }, [pregunta])
 
     const handleNext = () => {
-        const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length))
-        const preguntaRandom = store.preguntasSeleccionadas[random]
-        setPregunta(preguntaRandom)
-        setRespuestaSeleccionada(false)
+        if (count % 4 == 0 && store.estadisticaSeleccionada.preguntas_falladas.length > 0) {
+            const random = Math.floor(Math.random() * (store.estadisticaSeleccionada.preguntas_falladas.length))
+            const preguntaRandom = store.estadisticaSeleccionada.preguntas_falladas[random]
+            const mapaPreguntas = {}
+            store.preguntasSeleccionadas.forEach(pregunta => {
+                mapaPreguntas[pregunta.id] = pregunta
+            })
+            const preguntaFinal = mapaPreguntas[preguntaRandom.pregunta_id]
+            setPreguntaFallada(preguntaFinal.id)
+            setPregunta(preguntaFinal)
+            setRespuestaSeleccionada(false)
+        }
+        else {
+            const random = Math.floor(Math.random() * (store.preguntasSeleccionadas.length))
+            const preguntaRandom = store.preguntasSeleccionadas[random]
+            setPregunta(preguntaRandom)
+            setRespuestaSeleccionada(false)
+        }
     }
 
-    const resolve = (index, item) => {
+    const resolve = async(index, item) => {
         const nuevasClases = [...clases]
         if (item.correct === true) {
             nuevasClases[index] = "success"
             setAciertos((prevState) => prevState + 1)
             setCount((prevState) => prevState + 1)
+            if (preguntaFallada) {
+                const response = await actions.actualizarFallosPractica(preguntaFallada, store.estadisticaSeleccionada.id, store.estudiante.id)
+                console.log(response)
+                setPreguntaFallada(null);
+            }
         }
         else {
             nuevasClases[index] = "wrong"
+            if (preguntaFallada) {
+                setPreguntaFallada(null)
+            }
             pregunta.Respuestas.map((resp, indx) => {
                 if (resp.correct === true) {
                     nuevasClases[indx] = "success"

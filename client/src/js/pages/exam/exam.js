@@ -97,7 +97,7 @@ export default function Exam() {
             return falladas;
         }, []);
         setPreguntasFalladas(nuevasPreguntasFalladas);
-        const response = await actions.actualizarFallosExamen(nuevasPreguntasFalladas, store.estadisticaSeleccionadaId, store.estudiante.id)
+        const response = await actions.actualizarFallosExamen(nuevasPreguntasFalladas, store.estadisticaSeleccionada.id, store.estudiante.id)
         return console.log(response)
     }
 
