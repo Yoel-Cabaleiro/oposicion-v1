@@ -44,16 +44,16 @@ export default function Login() {
   return (
     <>
       <section id="login" className="" style={{ minHeight: '100vh' }}>
-        <div className="container py-3 mt-5 mb-0 rounded-3 mx-auto">
+        <div className="container py-3 mb-0 rounded-3 mx-auto">
           <div className="text-center mb-5">
-            <p className="text-dark fw-bolder fs-1 texto-grande-1">Inicia sesión</p>
+            <p className="text-dark fw-bolder fs-1 lato-regular">Inicia sesión</p>
           </div>
           <div className="col-md-7 col-lg-8 m-auto text-dark">
             <form onSubmit={handleSubmit} className="needs-validation mb-3" noValidate="">
               <hr className="my-4" />
 
               <div className="col-12 mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
+                <label htmlFor="email" className="form-label lato-regular">Email</label>
                 <input
                   type="email"
                   className="form-control"
@@ -65,7 +65,7 @@ export default function Login() {
               </div>
 
               <div className="col-12 mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
+                <label htmlFor="password" className="form-label lato-regular">Password</label>
                 <div className="input-group has-validation">
                   <input
                     type={!showPassword ? "password" : "text"}
@@ -85,13 +85,13 @@ export default function Login() {
 
 
               <hr className="my-4" />
-              <input type='submit' value="submit" className="w-100 btn btn-primary btn-lg mt-5 text-black" />
+              <input type='submit' value="submit" className="btn btn-dark w-100 rounded rounded-3 btn-lg mt-5 lato-regular" />
 
             </form>
 
             <div>
-              <p className="mb-2">¿No tienes cuenta todavía? <Link to="/signup" className="text-dark">Regístrate aquí</Link></p>
-              <p>¿Has olvidado tu contraseña?<Link to="/password-request" className="text-dark">  Recuperar</Link></p>
+              <p className="mb-2 lato-regular">¿No tienes cuenta todavía? <Link to="/signup" className="text-dark lato-regular fw-bold">Regístrate aquí</Link></p>
+              <p className="lato-regular">¿Has olvidado tu contraseña?<Link to="/password-request" className="text-dark lato-regular fw-bold">  Recuperar</Link></p>
             </div>
           </div>
 
