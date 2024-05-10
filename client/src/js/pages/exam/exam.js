@@ -11,11 +11,11 @@ export default function Exam() {
 
     const [listaPreguntas, setListaPreguntas] = useState([])
     const [respuestasSeleccionadas, setRespuestasSeleccionadas] = useState({})
-    const [resultado, setResultado] = useState("?")
+    const [resultado, setResultado] = useState(null)
     const [corregido, setCorregido] = useState(false)
+    const [preguntasFalladas, setPreguntasFalladas] = useState([])
 
 
-    console.log(store.preguntasSeleccionadas)
     useEffect(() => {
         const randomIndexes = new Set()
         while (randomIndexes.size < 50) {
@@ -30,6 +30,7 @@ export default function Exam() {
     const handleSelected = (e, preguntaIndex, respuestaIndex) => {
         if (respuestasSeleccionadas[preguntaIndex] !== respuestaIndex) {
             setRespuestasSeleccionadas({ ...respuestasSeleccionadas, [preguntaIndex]: respuestaIndex })
+            
         } else {
             const updatedRespuestasSeleccionadas = { ...respuestasSeleccionadas }
             delete updatedRespuestasSeleccionadas[preguntaIndex]
@@ -72,24 +73,33 @@ export default function Exam() {
         return () => clearInterval(interval);
     }, []);
 
-    /* const evaluate = () => {
+    const evaluate = async() => {
         let count = 0
         let preguntasAcertadas = {}
         if (Object.keys(respuestasSeleccionadas).length < listaPreguntas.length) {
             alert("Completa el examen, selecciona una respuesta para cada pregunta")
-
         } else {
             Object.keys(respuestasSeleccionadas).map((key) => {
                 if (listaPreguntas[key].Respuestas[respuestasSeleccionadas[key]].correct === true) {
                     count += 1
-                    preguntasAcertadas[listaPreguntas[key]] = respuestasSeleccionadas[key]
+                    preguntasAcertadas[key] = respuestasSeleccionadas[key]
                 }
             })
             let total = ((count * 100) / 50) / 10
+            
             setResultado(total)
             setCorregido(true)
         }
-    } */
+        const nuevasPreguntasFalladas = listaPreguntas.reduce((falladas, pregunta, index) => {
+            if (!preguntasAcertadas.hasOwnProperty(index.toString())) {
+                falladas.push(pregunta.id);
+            }
+            return falladas;
+        }, []);
+        setPreguntasFalladas(nuevasPreguntasFalladas);
+        const response = await actions.actualizarFallosExamen(nuevasPreguntasFalladas, store.estadisticaSeleccionada.id, store.estudiante.id)
+        return console.log(response)
+    }
 
     // Hacer una función handleClick () para que cuando se le de a la opción que el usuario seleccione, ejecute el código que Yoel hizo para que SE MARQUE LA QUE ESCOGIO EN GRIS
     // Deberiamos hacer una función en handleclick PARA CUANDO FINALICE Y LE DE AL BOTON APAREZCA UN ALERT CON EL TOTAL DE PREGUNTAS ACERTADAS Y AL DARLE AL CONSULTAR VUELTA A LA VISTA CON LAS PREGUNTAS MARCADAS CORRECTAS E INCORRECTAS Y ABAJO LA NOTA FINAL.
@@ -129,7 +139,7 @@ export default function Exam() {
                     <div className="col-4">
                         <div className="bg-questions-media px-3 py-3 rounded d-flex flex-row align-items-between fw-bold">
                             <p className="mx-auto">Contestadas</p>
-                            <p className="mx-auto">4</p>
+                            <p className="mx-auto">{Object.keys(respuestasSeleccionadas).length} / 50</p>
                         </div>
                     </div>
                     <div className="col-4">
@@ -139,8 +149,8 @@ export default function Exam() {
                         </div>
                     </div>
                     <div className="col-4 bg-questions-media rounded">
-                        <button className="btn px-4 py-3 rounded d-flex flex-row fw-bold text-center w-100" /* onClick={handleFinish} */>
-                            <p className="mx-auto text-black" >Finalizar examen</p>
+                        <button className="btn px-4 py-3 rounded d-flex flex-row fw-bold text-center w-100" disabled={corregido} onClick={evaluate}>
+                            <p className="mx-auto text-black" >{corregido ? 'Nota final: ' + resultado + ' / 10' : 'Finalizar examen'}</p>
                         </button>
                     </div>
                 </div>

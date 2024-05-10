@@ -37,6 +37,7 @@ export default function Dashboard() {
   const handleCategorySelect = async (estadistica) => {
     try {
       await actions.getPreguntasByCategoria(estadistica.categoria_id)
+      store.estadisticaSeleccionada = estadistica
       setSelectedEstadistica(estadistica)
       console.log("Preguntas descargadas")
     }

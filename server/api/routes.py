@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 
 
 # File import
-from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas
+from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas, EstadisticasPreguntas
 from api.services.email_utility import send_recovery_email
 from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 
@@ -113,8 +113,59 @@ def estadisticas_by_estudiante(estudianteid):
             db.session.delete(estadistica)
         db.session.commit()
         return jsonify({"mensaje": "Estadisticas borradas para este estudiante"}), 200
+    
 
+##########################################################
+# Estadisticas preguntas falladas
 
+# Actualizar los fallos en examen segun array de ids
+@api.route('/actualizar_fallos_examen', methods=['PUT'])
+def actualizar_fallos_examen():
+    data = request.json
+    preguntas = data.get('preguntas')
+    estadistica_id = data.get('estadisticaId')
+    fallos_actualiazdos = []
+    for id in preguntas:
+        estadistica = EstadisticasPreguntas.query.filter_by(pregunta_id=id, estadistica_id=estadistica_id).first()
+        if estadistica:
+            estadistica.fallos += 2
+            fallos_actualiazdos.append(estadistica.serialized())
+        else:
+            nueva_estadistica = EstadisticasPreguntas(
+                pregunta_id=id,
+                estadistica_id=estadistica_id,
+                fallos = 2
+            )
+            db.session.add(nueva_estadistica)
+            fallos_actualiazdos.append(nueva_estadistica.serialized())
+    db.session.commit()
+    return jsonify({'mensaje': 'Estadisticas de fallos actualizadas', 'data': fallos_actualiazdos})
+
+# Actualizar los fallos tras la práctica segun array de estadistica.preguntas_falladas
+@api.route('actualizar_fallos_practica', methods=['PUT'])
+def actualizar_fallos_practica():
+    data = request.json
+    pregunta_id = data['preguntaId']
+    estadistica_id=data['estadisticaId']
+    try:
+        estadistica_pregunta = EstadisticasPreguntas.query.filter_by(pregunta_id=pregunta_id, estadistica_id=estadistica_id).first()
+        if estadistica_pregunta:
+            if (estadistica_pregunta.fallos - 1) <= 0:
+                db.session.delete(estadistica_pregunta)
+            else:
+                estadistica_pregunta.fallos -= 1
+        db.session.commit()
+        return {"mensaje": "Actualización realizada con éxito"}, 200
+    except Exception as e:
+        db.session.rollback()
+        return {"error": str(e)}, 500
+    finally:
+        db.session.close()
+
+            
+
+            
+            
 
 ##########################################################
 # Login and authentication
