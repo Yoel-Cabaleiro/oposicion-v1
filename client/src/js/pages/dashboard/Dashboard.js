@@ -42,7 +42,7 @@ export default function Dashboard() {
     <>
       <main id="signup" className="" style={{ minHeight: "100vh" }}>
         <div className="container py-5">
-          <div className="mb-5 d-flex justify-content-center flex-column">
+          <div className="mb-1 d-flex justify-content-center flex-column">
             <h1 className="text-black fs-1 text-start lato-regular fw-bold">
               DASHBOARD
             </h1>
@@ -87,7 +87,7 @@ export default function Dashboard() {
           </div>
           {selectedEstadistica ? (
             <div>
-              <h5 className="lato-regular mb-4">Tus Últimas Puntuaciones:</h5>
+              <h5 className="lato-regular mb-5">Tus Últimas Puntuaciones:</h5>
               <div className="row">
                 <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
                   <div className="p-5 bg-grey rounded rounded-2 shadow text-center lato-regular">
@@ -140,27 +140,24 @@ export default function Dashboard() {
               </div>
 
               <div className="container-fluid mx-auto">
-                <div className="row d-flex flex-row justify-content-center align-items-center mx-auto gap-1">
-                  <div className="col-6 d-flex justify-content-center">
-                    <Link to="/questions">
-                      <button className="px-5 btn btn-primary btn-lg mt-5 text-black border border-dark rounded rounded-3 fw-bold d-flex justify-content-center align-items-center">
-                        <p className="text-black lato-regular">Práctica con preguntas</p>
-                      </button>
+                <div className="row justify-content-md-center align-items-center">
+                  <div className="col-sm-12 col-md-6 mx-auto">
+                    <Link to="/questions" className="text-decoration-none">
+                      <button type="button" className="lato-regular px-5 w-100 btn btn-outline-dark btn-lg mt-5 border border-dark rounded rounded-3 d-flex justify-content-center align-items-center mb-2" style={{ cursor: 'pointer' }}>Práctica con preguntas</button>
                     </Link>
                   </div>
-                  <div className="col-6 d-flex justify-content-center">
-                    <Link to="/exam">
-                      <button className="px-5 btn btn-outline-dark btn-lg mt-5 text-black border border-dark rounded rounded-3 fw-bold d-flex justify-content-center align-items-center">
-                        <p className="text-black lato-regular">Simula un exámen</p>
-                      </button>
+                  <div className="col-sm-12 col-md-6 mx-auto">
+                    <Link to="/exam" className="text-decoration-none">
+                      <button type="button" className="lato-regular px-5 w-100 btn btn-outline-dark btn-lg mt-5 border border-dark rounded rounded-3 d-flex justify-content-center align-items-center mb-2" style={{ cursor: 'pointer' }}>Simula un exámen</button>
                     </Link>
                   </div>
                 </div>
               </div>
+
             </div>
           ) : null}
         </div>
-      </main>
+      </main >
     </>
   );
 }

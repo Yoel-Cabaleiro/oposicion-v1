@@ -84,13 +84,13 @@ export default function Questions() {
 
     return (
         <div className="container-fluid min-vh-100 overflow-hidden mt-3 mb-0 mx-auto">
-            <h2 className="m-5 mb-4 px-5 mx-3 text-start" >PRACTICA</h2>
+            <h2 className="m-5 mb-4 px-5 mx-3 text-start lato-regular fw-bold" >PRÁCTICA</h2>
             {pregunta && (<div className="container text-start mx-auto px-5 fs-6 text-justify">
-                <div className="mb-5"><h1>{Object.keys(pregunta)[0]}: </h1><h2>{Object.values(pregunta)[0]}</h2> </div>
+                <div className="mb-5"><h4 className="lato-regular">{Object.keys(pregunta)[0]}. {Object.values(pregunta)[0]}</h4></div>
                 <ul>
                     {pregunta && pregunta.Respuestas.map((item, index) => {
                         return (
-                            <li style={respuestaSeleccionada ? { pointerEvents: 'none' } : {}} key={index} onClick={() => resolve(index, item)} className={`my-2 ${clases[index]}`} ><b>{Object.keys(item)[0]}:</b> {Object.values(item)[0]}</li>
+                            <li style={respuestaSeleccionada ? { pointerEvents: 'none' } : {}} key={index} onClick={() => resolve(index, item)} className={`my-2 ${clases[index]} lato-regular`} ><b>{Object.keys(item)[0]}:</b> {Object.values(item)[0]}</li>
                         )
                     })}
                 </ul>
