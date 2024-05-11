@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import os
+import json
 from flask_jwt_extended import JWTManager
 
 
@@ -47,25 +48,39 @@ class Estadisticas(db.Model):
     __tablename__ = 'estadisticas'
     id = db.Column(db.Integer, primary_key=True)
     ultimo_examen = db.Column(db.Float)
-    media_examen = db.Column(db.Float)
-    media_10_examenes = db.Column(db.Float)
+    examenes_totales = db.Column(db.Integer)
+    media_5_examenes = db.Column(db.Float)
     mejor_racha = db.Column(db.Integer)
     porcentaje_aciertos = db.Column(db.Float)
+    ultimos_5_examenes = db.Column(db.String)
     estudiante_id = db.Column(db.ForeignKey("estudiantes.id"), nullable=False)
     categoria_id = db.Column(db.ForeignKey("categorias.id"), nullable=False)
     estudiante = db.relationship("Estudiantes")
     categoria = db.relationship("Categorias")
     preguntas_falladas = db.relationship("EstadisticasPreguntas", primaryjoin="Estadisticas.id == EstadisticasPreguntas.estadistica_id")
 
+    def guardar_ultimos_5_examenes_lista(self, lista):
+        lista_como_cadena = ','.join(str(valor) for valor in lista)
+        self.ultimos_5_examenes = lista_como_cadena
+
+    def obtener_ultimos_5_examenes_lista(self):
+        if self.ultimos_5_examenes:
+            return [float(valor) for valor in self.ultimos_5_examenes.split(',')]
+        else:
+            return []
+
     def serialized(self):
+        ultimos_5_examenes_lista = self.obtener_ultimos_5_examenes_lista()
         return {
             'id': self.id,
             'ultimo_examen': self.ultimo_examen,
-            'media_examen': self.media_examen,
-            'media_10_examenes': self.media_10_examenes,
+            'examenes_totales': self.examenes_totales,
+            'media_5_examenes': self.media_5_examenes,
+            'ultimos_5_examenes': ultimos_5_examenes_lista,
             'mejor_racha': self.mejor_racha,
             'porcentaje_aciertos': self.porcentaje_aciertos,
             'estudiante': self.estudiante.email,
+            'estudiante_id': self.estudiante_id,
             'categoria_id': self.categoria_id,
             'categoria': self.categoria.nombre,
             'preguntas_falladas': [pregunta.serialized() for pregunta in self.preguntas_falladas]

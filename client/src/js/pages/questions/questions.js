@@ -13,6 +13,7 @@ export default function Questions() {
     const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(false)
     const [count, setCount] = useState(0)
     const [aciertos, setAciertos] = useState(0)
+    const [racha, setRacha] =useState(0)
     const [preguntaFallada, setPreguntaFallada] = useState(null)
 
     useEffect(() => {
@@ -54,6 +55,7 @@ export default function Questions() {
             nuevasClases[index] = "success"
             setAciertos((prevState) => prevState + 1)
             setCount((prevState) => prevState + 1)
+            setRacha((prevState) => prevState + 1)
             if (preguntaFallada) {
                 const response = await actions.actualizarFallosPractica(preguntaFallada, store.estadisticaSeleccionada.id, store.estudiante.id)
                 console.log(response)
@@ -71,6 +73,12 @@ export default function Questions() {
                 }
             })
             setCount((prevState) => prevState + 1)
+            if (racha > store.estadisticaSeleccionada.mejor_racha) {
+                const nueva_racha = store.estadisticaSeleccionada
+                nueva_racha['mejor_racha'] = racha
+                await actions.actualizarEstadistica(nueva_racha)
+            }
+            setRacha(0)
         }
         setClases(nuevasClases)
         setRespuestaSeleccionada(true)
@@ -100,7 +108,7 @@ export default function Questions() {
                 <div className="row d-flex flex-row justify-content-between px-3">
                     <div className="col-4 p-3 mx-5 bg-questions-media rounded d-flex flex-row justify-content-between">
                         <p className="fw-bold">Preguntas acertadas</p>
-                        <p className="fw-bold">{aciertos} / {count}</p>
+                        <p className="fw-bold">{aciertos} / {count}  ({((aciertos / count) * 100).toFixed(1)}%)</p>
                     </div>
                     <div className="col-3">
                         <button className="btn btn-outline border border-dark btn-lg align-self-end px-5" onClick={() => handleNext()}>Siguiente</button>
@@ -108,8 +116,8 @@ export default function Questions() {
                 </div>
                 <div className="row d-flex flex-row justify-content-between my-4 px-3">
                     <div className="col-4 p-3 mx-5 bg-questions-media rounded d-flex flex-row justify-content-between">
-                        <p className="fw-bold">Porcentaje de preguntas acertadas</p>
-                        <p className="fw-bold">{count != 0 ? ((aciertos / count) * 100).toFixed(1) + " %" : null}</p>
+                        <p className="fw-bold">Racha actual</p>
+                        <p className="fw-bold">{racha}</p>
                     </div>
                 </div>
             </div>

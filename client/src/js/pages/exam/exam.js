@@ -18,7 +18,7 @@ export default function Exam() {
 
     useEffect(() => {
         const randomIndexes = new Set()
-        while (randomIndexes.size < 50) {
+        while (randomIndexes.size < 10) {
             const randomIndex = Math.floor(Math.random() * store.preguntasSeleccionadas.length)
             randomIndexes.add(randomIndex)
         }
@@ -89,16 +89,33 @@ export default function Exam() {
             
             setResultado(total)
             setCorregido(true)
-        }
-        const nuevasPreguntasFalladas = listaPreguntas.reduce((falladas, pregunta, index) => {
-            if (!preguntasAcertadas.hasOwnProperty(index.toString())) {
-                falladas.push(pregunta.id);
+            const nuevasPreguntasFalladas = listaPreguntas.reduce((falladas, pregunta, index) => {
+                if (!preguntasAcertadas.hasOwnProperty(index.toString())) {
+                    falladas.push(pregunta.id);
+                }
+                return falladas;
+            }, []);
+            setPreguntasFalladas(nuevasPreguntasFalladas);
+            const response_fallos = await actions.actualizarFallosExamen(nuevasPreguntasFalladas, store.estadisticaSeleccionada.id, store.estudiante.id)
+            const estadistica_a_actualizar = store.estadisticaSeleccionada
+            estadistica_a_actualizar['ultimo_examen'] = total
+            estadistica_a_actualizar['examenes_totales'] += 1
+            if (estadistica_a_actualizar.ultimos_5_examenes.length >= 5) {
+                estadistica_a_actualizar.ultimos_5_examenes.shift()
+                estadistica_a_actualizar.ultimos_5_examenes.push(total)
+                const suma_notas = estadistica_a_actualizar.ultimos_5_examenes.reduce((suma, nota) => suma + nota, 0);
+                estadistica_a_actualizar['media_5_examenes'] = suma_notas / 5;
             }
-            return falladas;
-        }, []);
-        setPreguntasFalladas(nuevasPreguntasFalladas);
-        const response = await actions.actualizarFallosExamen(nuevasPreguntasFalladas, store.estadisticaSeleccionada.id, store.estudiante.id)
-        return console.log(response)
+            else {
+               estadistica_a_actualizar.ultimos_5_examenes.push(total)
+               if (estadistica_a_actualizar.ultimos_5_examenes.length >= 5){
+                    const suma_notas = estadistica_a_actualizar.ultimos_5_examenes.reduce((suma, nota) => suma + nota, 0);
+                    estadistica_a_actualizar['media_5_examenes'] = suma_notas / 5;
+               } 
+            }
+            const response_estadistica = await actions.actualizarEstadistica(estadistica_a_actualizar)
+            return console.log(response_fallos, response_estadistica)
+        }
     }
 
     // Hacer una función handleClick () para que cuando se le de a la opción que el usuario seleccione, ejecute el código que Yoel hizo para que SE MARQUE LA QUE ESCOGIO EN GRIS
