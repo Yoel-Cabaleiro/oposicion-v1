@@ -180,20 +180,12 @@ body::-webkit-scrollbar {
   /* Ancho 0 para ocultar la barra de desplazamiento vertical */
 }
 
-
-.texto-grande-1> {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
-}
-
+/* Fondo gris aplicado a diferentes divs */
 .bg-grey {
   background-color: #f1f5f9;
 }
 
+/* Diferentes tipos de fuente lato */
 .fuente-lato {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
@@ -228,6 +220,7 @@ body::-webkit-scrollbar {
   font-style: normal;
 }
 
+/* shadow para los div con la info de las puntuaciones */
 .shadow {
-  box-shadow: #080043;
+  box-shadow: #070707;
 }
