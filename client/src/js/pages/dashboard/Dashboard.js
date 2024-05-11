@@ -24,7 +24,9 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await actions.getEstadísticasByEstudiante(store.estudiante.id)
+        if (store.estadisticasEstudiante.length === 0) {
+          await actions.getEstadísticasByEstudiante(store.estudiante.id)
+        }
         if (Object.keys(store.estadisticaSeleccionada).length != 0) {
           setSelectedEstadistica(store.estadisticaSeleccionada)
         }

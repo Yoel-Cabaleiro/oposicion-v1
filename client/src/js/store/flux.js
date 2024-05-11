@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
-        setStore({ login: false })
+        setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: [] })
         localStorage.removeItem("token")
       },
 
