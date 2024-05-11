@@ -167,6 +167,25 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      actualizarEstadistica: async (estadistica) => {
+        const actions = getActions()
+        const url = process.env.BACK_URL + `/api/estadisticas/${estadistica.id}`;
+        const options = {
+          method: "PUT",
+          body: JSON.stringify(estadistica),
+          headers: { "Content-Type": "application/json" }
+        }
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          const estadisticas = await actions.getEstadísticasByEstudiante(estadistica.estudiante_id)
+          return ({'mensaje': data.mensaje, 'data': estadisticas.data})
+        }
+        else{
+          return ({'error': 'error al actualizar la estadistica'})
+        }
+      },
+
       
       ////////////////////////////
       //Categorias
