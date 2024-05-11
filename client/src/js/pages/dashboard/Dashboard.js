@@ -17,9 +17,13 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await actions.getEstadísticasByEstudiante(store.estudiante.id);
-        if (Object.keys(store.estadisticaSeleccionada).length !== 0) {
-          setSelectedEstadistica(store.estadisticaSeleccionada);
+
+        if (store.estadisticasEstudiante.length === 0) {
+          await actions.getEstadísticasByEstudiante(store.estudiante.id)
+        }
+        if (Object.keys(store.estadisticaSeleccionada).length != 0) {
+          setSelectedEstadistica(store.estadisticaSeleccionada)
+
         }
       } catch {
         console.log("Error al cargar las estadísticas del estudiante");
