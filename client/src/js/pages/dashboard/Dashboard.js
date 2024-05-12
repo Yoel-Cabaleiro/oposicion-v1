@@ -17,9 +17,13 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await actions.getEstadísticasByEstudiante(store.estudiante.id);
-        if (Object.keys(store.estadisticaSeleccionada).length !== 0) {
-          setSelectedEstadistica(store.estadisticaSeleccionada);
+
+        if (store.estadisticasEstudiante.length === 0) {
+          await actions.getEstadísticasByEstudiante(store.estudiante.id)
+        }
+        if (Object.keys(store.estadisticaSeleccionada).length != 0) {
+          setSelectedEstadistica(store.estadisticaSeleccionada)
+
         }
       } catch {
         console.log("Error al cargar las estadísticas del estudiante");
@@ -89,6 +93,16 @@ export default function Dashboard() {
             <div>
               <h5 className="lato-regular mb-5">Tus Últimas Puntuaciones:</h5>
               <div className="row">
+              <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
+                  <div className="p-5 bg-grey rounded rounded-2 shadow text-center lato-regular">
+                    <div className="fs-1 text-secondary mb-3">
+                      {selectedEstadistica.examenes_totales}
+                    </div>
+                    <h5 className="fs-6 fw-bold">
+                      EXÁMENES REALIZADOS
+                    </h5>
+                  </div>
+                </div>
                 <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
                   <div className="p-5 bg-grey rounded rounded-2 shadow text-center lato-regular">
                     <div className="fs-1 text-secondary mb-3">
@@ -100,20 +114,10 @@ export default function Dashboard() {
                 <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
                   <div className="p-5 bg-grey rounded rounded-2 shadow text-center lato-regular">
                     <div className="fs-1 text-secondary mb-3">
-                      {selectedEstadistica.media_examen}
+                      {selectedEstadistica.media_5_examenes ? selectedEstadistica.media_5_examenes.toFixed(1) : null}
                     </div>
                     <h5 className="fs-6 fw-bold">
-                      MEDIA DE EXAMENES TOTAL
-                    </h5>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
-                  <div className="p-5 bg-grey rounded rounded-2 shadow text-center lato-regular">
-                    <div className="fs-1 text-secondary mb-3">
-                      {selectedEstadistica.media_10_examenes}
-                    </div>
-                    <h5 className="fs-6 fw-bold">
-                      MEDIA DE ÚLTIMOS EXÁMENES
+                      MEDIA DE ÚLTIMOS 5 EXÁMENES
                     </h5>
                   </div>
                 </div>

@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
-        setStore({ login: false })
+        setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: [] })
         localStorage.removeItem("token")
       },
 
@@ -164,6 +164,25 @@ const getState = ({ getStore, getActions, setStore }) => {
         else {
           const data = await response.json()
           return { error: data.mensaje }
+        }
+      },
+
+      actualizarEstadistica: async (estadistica) => {
+        const actions = getActions()
+        const url = process.env.BACK_URL + `/api/estadisticas/${estadistica.id}`;
+        const options = {
+          method: "PUT",
+          body: JSON.stringify(estadistica),
+          headers: { "Content-Type": "application/json" }
+        }
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          const estadisticas = await actions.getEstadísticasByEstudiante(estadistica.estudiante_id)
+          return ({'mensaje': data.mensaje, 'data': estadisticas.data})
+        }
+        else{
+          return ({'error': 'error al actualizar la estadistica'})
         }
       },
 

@@ -86,13 +86,15 @@ def handle_estadistica(estadisticaid):
         return jsonify({"mensaje": "Estadistica descargada", "data": estadistica.serialized()}), 200
     if request.method == 'PUT':
         data = request.json
-        estadistica.categoria_id = data.get('categoriaId', estadistica.categoria_id)
-        estadistica.estudiante_id = data.get('estudianteId', estadistica.estudiante_id)
-        estadistica.ultimo_examen = data.get('ultimoExamen', estadistica.ultimo_examen)
-        estadistica.media_examen = data.get('mediaExamen', estadistica.media_examen)
-        estadistica.media_10_examenes = data.get('media10Examenes', estadistica.media_10_examenes)
-        estadistica.mejor_racha = data.get('mejorRacha', estadistica.mejor_racha)
-        estadistica.porcentaje_aciertos = data.get('porcentajeAciertos', estadistica.porcentaje_aciertos)
+        estadistica.categoria_id = data.get('categoria_id', estadistica.categoria_id)
+        estadistica.estudiante_id = data.get('estudiante_id', estadistica.estudiante_id)
+        estadistica.ultimo_examen = data.get('ultimo_examen', estadistica.ultimo_examen)
+        estadistica.examenes_totales = data.get('examenes_totales', estadistica.examenes_totales)
+        estadistica.media_5_examenes = data.get('media_5_examenes', estadistica.media_5_examenes)
+        estadistica.mejor_racha = data.get('mejor_racha', estadistica.mejor_racha)
+        estadistica.porcentaje_aciertos = data.get('porcentaje_aciertos', estadistica.porcentaje_aciertos)
+        nuevos_ultimos_5_examenes = data.get('ultimos_5_examenes')
+        estadistica.guardar_ultimos_5_examenes_lista(nuevos_ultimos_5_examenes)
         db.session.commit()
         return jsonify({"mensaje": "Estadisticas actualizadas", "data": estadistica.serialized()}), 200
     if request.method == 'DELETE':
@@ -141,7 +143,7 @@ def actualizar_fallos_examen():
     db.session.commit()
     return jsonify({'mensaje': 'Estadisticas de fallos actualizadas', 'data': fallos_actualiazdos})
 
-# Actualizar los fallos tras la práctica segun array de estadistica.preguntas_falladas
+# Actualizar los fallos tras la práctica segun pregunta id
 @api.route('actualizar_fallos_practica', methods=['PUT'])
 def actualizar_fallos_practica():
     data = request.json

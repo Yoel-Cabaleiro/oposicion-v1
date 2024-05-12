@@ -13,6 +13,7 @@ export default function Questions() {
     const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(false)
     const [count, setCount] = useState(0)
     const [aciertos, setAciertos] = useState(0)
+    const [racha, setRacha] =useState(0)
     const [preguntaFallada, setPreguntaFallada] = useState(null)
 
     useEffect(() => {
@@ -54,6 +55,7 @@ export default function Questions() {
             nuevasClases[index] = "success"
             setAciertos((prevState) => prevState + 1)
             setCount((prevState) => prevState + 1)
+            setRacha((prevState) => prevState + 1)
             if (preguntaFallada) {
                 const response = await actions.actualizarFallosPractica(preguntaFallada, store.estadisticaSeleccionada.id, store.estudiante.id)
                 console.log(response)
@@ -71,6 +73,12 @@ export default function Questions() {
                 }
             })
             setCount((prevState) => prevState + 1)
+            if (racha > store.estadisticaSeleccionada.mejor_racha) {
+                const nueva_racha = store.estadisticaSeleccionada
+                nueva_racha['mejor_racha'] = racha
+                await actions.actualizarEstadistica(nueva_racha)
+            }
+            setRacha(0)
         }
         setClases(nuevasClases)
         setRespuestaSeleccionada(true)
