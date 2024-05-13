@@ -93,7 +93,7 @@ export default function Dashboard() {
             <div>
               <h5 className="lato-regular mb-5">Tus Últimas Puntuaciones:</h5>
               <div className="row">
-              <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
+                <div className="col-lg-4 col-md-6 col-sm-12 mb-5">
                   <div className="p-5 bg-grey rounded rounded-2 shadow text-center lato-regular">
                     <div className="fs-1 text-secondary mb-3">
                       {selectedEstadistica.examenes_totales}
