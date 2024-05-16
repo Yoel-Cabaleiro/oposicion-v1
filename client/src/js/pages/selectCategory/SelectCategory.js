@@ -57,7 +57,7 @@ export default function SelectCategory() {
         return (
             <>
                 <div className="container-fluid min-vh-100 overflow-hidden mt-5 mb-0">
-                    <h4 className="text-center mx-5">Selecciona la categoría:</h4>
+                    <h4 className="text-center mx-5 ">Selecciona la categoría:</h4>
                     <div className="container-fluid d-flex flex-row align-items-center justify-content-center my-4">
                         <div className="dropdown">
                             <button className="btn btn-secondary dropdown-toggle px-5 py-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

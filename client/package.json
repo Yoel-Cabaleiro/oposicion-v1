@@ -70,6 +70,8 @@
 	},
 	"dependencies": {
 		"@babel/plugin-transform-classes": "^7.24.1",
+		"@stripe/react-stripe-js": "^2.7.1",
+		"@stripe/stripe-js": "^3.4.0",
 		"memfs": "^4.8.1",
 		"prop-types": "^15.7.2",
 		"query-string": "^7.0.1",

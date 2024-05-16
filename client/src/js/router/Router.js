@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // funcitonal components
 import ScrollToTop from "./scrollToTop";
 import injectContext from "../store/appContext";
+import { Context } from "../store/appContext";
 
 // Layout
 import LogoLayout from "../layouts/LogoLayout";
@@ -15,8 +16,9 @@ import NavbarExamLayout from "../layouts/NavbarExamLayout.js";
 import Login from "../pages/login/login.js";
 import Home from "../pages/home/Home.js";
 import Signup from "../pages/login/Signup";
-import PaymentPlan from "../pages/paymentPlan/PaymentPlan.js";
+import PaymentPlan from "../pages/paymentPlan/paymentPlan.js";
 import SelectCategory from "../pages/selectCategory/SelectCategory.js";
+import CheckoutForm from "../layouts/components/checkoutForm.js";
 import Questions from "../pages/questions/questions.js";
 import Exam from "../pages/exam/exam.js";
 import PasswordRequest from "../pages/login/PasswordRequest.js";
@@ -51,6 +53,7 @@ const Router = () => {
 
 						{/* PAYMENT PAGES */}
 						<Route path="/paymentplan" element={<DashboardLayout><PaymentPlan /></DashboardLayout>} />
+						<Route path="/paymentdetails" element={<DashboardLayout><CheckoutForm /></DashboardLayout>} />
 						<Route path="/selectcategory/" element={<DashboardLayout><SelectCategory /></DashboardLayout>} />
 
 

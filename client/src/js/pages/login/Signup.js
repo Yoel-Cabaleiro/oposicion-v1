@@ -23,7 +23,7 @@ export default function SignupPersonalData() {
     try {
       const signup = await actions.signup(email, password)
       if (signup) {
-        actions.logout()
+        // actions.logout()
         console.log('response: ', signup)
         navigate('/paymentplan')
       } else {

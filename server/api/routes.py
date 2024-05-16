@@ -9,9 +9,16 @@ from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas, Esta
 from api.services.email_utility import send_recovery_email
 from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 
+# IMPORTAMOS STRIPE
+import stripe
+from stripe.error import InvalidRequestError
+import os
 
 # blueprint setting
 api = Blueprint('api', __name__)
+
+# pasamos la key de stripe 
+stripe.api_key = "pk_test_51P5vU4IsYGRLwhP6JdUXu3o7FzKTg9bioUvDg6KEudzzDlOMTbe5Sk0wJ6JIsu9YFhCU7c3MHqfLSEaZm4g2dkkx00h8XcipDL"
 
 
 #########################################################
@@ -280,7 +287,46 @@ def handle_estudiante(estudianteid):
 ##########################################################
 ##########################################################
 
+##########################################################
+# STRIPE 
 
+@api.route("/create-checkout-session", methods=["POST"])
+# Función para crear el formulario de pago
+# @jwt_required()
+def create_checkout_session():
+    try:
+        data = request.get_json()
+        option = data.get('option')
+
+        # Verifica si la opción es para una categoría
+        if option == "oneCategory":
+            price_id = 'price_1PGnwWIsYGRLwhP6A0JvHFGk'  # ID del precio de una categoría
+        else:
+            price_id = 'price_1PGnxEIsYGRLwhP658oSbyRf'  # ID del precio de dos categorías
+
+        # Crea la sesión de pago con el precio correspondiente
+        session = stripe.checkout.Session.create(
+            ui_mode='embedded',  # para que no se rediriga sino navegue entre nuestra app
+            line_items=[
+                {
+                    'price': price_id,  # ID del precio de la categoría seleccionada
+                    'quantity': 1,
+                },
+            ],
+            mode="payment",
+            return_url=os.getenv('FRONT_URL') + '/return?session_id={CHECKOUT_SESSION_ID}',
+        )
+
+        response_body = {
+            "option" : option,
+            "session_id" : session.id,
+            "clientSecret" : session.client_secret,
+        }
+
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+
+    return jsonify(response_body), 200
 
 
 
