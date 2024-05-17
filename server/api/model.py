@@ -3,7 +3,6 @@ import os
 import json
 from flask_jwt_extended import JWTManager
 
-
 import jwt
 
 db = SQLAlchemy()
@@ -15,6 +14,7 @@ class Estudiantes(db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     suscripcion = db.Column(db.String)
+    jti = db.Column(db.String)
 
     def serialized(self):
         return {
