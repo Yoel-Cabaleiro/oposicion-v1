@@ -7,7 +7,7 @@ from flask_jwt_extended import jwt_required
 # File import
 from api.model import db, Estudiantes, Estadisticas, Categorias, Preguntas, EstadisticasPreguntas
 from api.services.email_utility import send_recovery_email
-from api.services.auth_utility import set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
+from api.services.auth_utility import verify_jti, set_new_password, verify_reset_token, generate_reset_token, register_user, user_login
 
 
 # blueprint setting
@@ -227,7 +227,13 @@ def login():
 
 @api.route("/authentication", methods=["GET"])
 @jwt_required()
-def pro_authentication():  
+def pro_authentication():
+    # Verificar el JTI
+    verification_response = verify_jti()
+    if verification_response:
+        return verification_response
+    
+    # Continuar con la lógica original si el JTI es válido
     identity = get_jwt_identity()
     email = identity.get('email')
     if email:
@@ -237,6 +243,16 @@ def pro_authentication():
     
     return jsonify({"message": "Pro not found"}), 404
 
+
+@api.route('/logout', methods=['POST'])
+@jwt_required()
+def logout():
+    current_user = get_jwt_identity()
+    estudiante = Estudiantes.query.get(current_user['id'])
+    if estudiante:
+        estudiante.jti = None
+        db.session.commit()
+    return jsonify({'message': 'Logout successful'})
 
 
 ##########################################################

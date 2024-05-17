@@ -62,9 +62,28 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("token", token)
       },
 
-      logout: () => {
-        setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: [] })
-        localStorage.removeItem("token")
+      logout: async() => {
+        const token = localStorage.getItem('token');
+        const url = process.env.BACK_URL + '/api/logout';
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        if (!token) {
+          setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: []});
+          return { error: 'Pro no authenticated' };
+        }
+        const response = await fetch(url, options);
+        if (response.ok) {
+          const data = await response.json()
+          setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: [] })
+          localStorage.removeItem("token")
+          console.log(data)
+        }
+        
       },
 
       isLogged: () => {
