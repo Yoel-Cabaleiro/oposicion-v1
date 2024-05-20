@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       preguntasSeleccionadas: [],
       categorias: [],
       categoriasSeleccionadas: [],
+      clientSecret: "",
+      sessionId: "",
     },
 
     actions: {
@@ -309,12 +311,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }
         const response = await fetch(url, options);
-
+        // const actions = getActions()
         if (response.ok) {
           const data = await response.json();
           //   return { message: data.message };
           // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
           localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
+          // setStore(JSON.stringify({ clientSecret: data.clientSecret, sessionId: data.session_id }))
+
         } else {
           const dataError = await response.json();
           return { error: dataError.message }

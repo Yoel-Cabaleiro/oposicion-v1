@@ -25,6 +25,7 @@ import PasswordRequest from "../pages/login/PasswordRequest.js";
 import PasswordSetting from "../pages/login/PasswordSetting.js";
 import Dashboard from "../pages/dashboard/Dashboard.js";
 import File404 from "../pages/404/File404";
+import { Return } from "../pages/Stripe/return.js";
 
 
 
@@ -55,6 +56,7 @@ const Router = () => {
 						<Route path="/paymentplan" element={<DashboardLayout><PaymentPlan /></DashboardLayout>} />
 						<Route path="/paymentdetails" element={<DashboardLayout><CheckoutForm /></DashboardLayout>} />
 						<Route path="/selectcategory/" element={<DashboardLayout><SelectCategory /></DashboardLayout>} />
+						<Route path="/return" element={<DashboardLayout><Return /></DashboardLayout>} />
 
 
 						{/* DASHBOARD */}

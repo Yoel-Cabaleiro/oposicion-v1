@@ -24,12 +24,14 @@ const stripePromise = loadStripe("pk_test_51P5vU4IsYGRLwhP6JdUXu3o7FzKTg9bioUvDg
 
 const CheckoutForm = () => {
     const { store, actions } = useContext(Context);
-
+    // El clientSecret nos lo da el endpoint
     const [clientSecret, setClientSecret] = useState('');
     const navigate = useNavigate();
 
     // Al cargar la pagina se inicia el fetch 
     useEffect(() => {
+        // Si recibimos información del localstorage de payment setearemos el estado clienSecret con la info de localstorage
+        // Si no nos renvia a paymentDetails 
         const paymentInfo = JSON.parse(localStorage.getItem("payment"));
         actions.selectPaymentOption
         // Verifica si la información es válida

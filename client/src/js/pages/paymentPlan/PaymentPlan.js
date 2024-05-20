@@ -19,13 +19,13 @@ export default function PaymentPlan(email) {
 
     const handleClickOneCategory = async () => {
         setUserSubscription("oneCategory");
-        actions.selectedPaymentOption("oneCategory");
+        await actions.selectedPaymentOption("oneCategory");
         navigate("/paymentdetails");
     }
 
     const handleClickTwoCategories = async () => {
         setUserSubscription("twoCategories");
-        actions.selectedPaymentOption("twoCategories");
+        await actions.selectedPaymentOption("twoCategories");
         navigate("/paymentdetails");
     }
 
