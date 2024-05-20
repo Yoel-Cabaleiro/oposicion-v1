@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////
 /// FLUX
+
 ////////////////////////////////////////////////
 
 
@@ -13,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       preguntasSeleccionadas: [],
       categorias: [],
       categoriasSeleccionadas: [],
+      clientSecret: "",
+      sessionId: "",
     },
 
     actions: {
@@ -138,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json()
           console.log(data.message)
+          // setToken(data.access_token);
           return data
         }
         if (!response.ok) {
@@ -198,14 +202,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json()
           const estadisticas = await actions.getEstadísticasByEstudiante(estadistica.estudiante_id)
-          return ({'mensaje': data.mensaje, 'data': estadisticas.data})
+          return ({ 'mensaje': data.mensaje, 'data': estadisticas.data })
         }
-        else{
-          return ({'error': 'error al actualizar la estadistica'})
+        else {
+          return ({ 'error': 'error al actualizar la estadistica' })
         }
       },
 
-      
+
       ////////////////////////////
       //Categorias
 
@@ -267,7 +271,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ////////////////////////////////
       //FALLOS
 
-      actualizarFallosExamen: async(listaFallos, estadisticaId, estudianteId) => {
+      actualizarFallosExamen: async (listaFallos, estadisticaId, estudianteId) => {
         const url = process.env.BACK_URL + "/api/actualizar_fallos_examen";
         const options = {
           method: "PUT",
@@ -279,14 +283,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json()
           const estadisticas = await actions.getEstadísticasByEstudiante(estudianteId)
-          return {'mensaje': data.mensaje, 'data': estadisticas.data}
+          return { 'mensaje': data.mensaje, 'data': estadisticas.data }
         }
         else {
-          return {'error': 'Error al actualizar fallos'}
+          return { 'error': 'Error al actualizar fallos' }
         }
       },
 
-      actualizarFallosPractica: async(preguntaId, estadisticaId, estudianteId) =>{
+      actualizarFallosPractica: async (preguntaId, estadisticaId, estudianteId) => {
         const url = process.env.BACK_URL + "/api/actualizar_fallos_practica";
         const options = {
           method: "PUT",
@@ -300,16 +304,49 @@ const getState = ({ getStore, getActions, setStore }) => {
           const estadisticas = await actions.getEstadísticasByEstudiante(estudianteId)
           estadisticas.data.map(estadistica => {
             if (estadistica.id === estadisticaId) {
-              setStore({estadisticaSeleccionada: estadistica})
+              setStore({ estadisticaSeleccionada: estadistica })
             }
           })
-          return {'mensaje': data.mensaje, 'data': estadisticas.data}
+          return { 'mensaje': data.mensaje, 'data': estadisticas.data }
         }
         else {
           const data = await response.json()
-          return {'error': data.error}
+          return { 'error': data.error }
         }
-      }
+      },
+      ////////////////////////////////
+      // SELECCIONAR UN PLAN Y PAGAR
+      ////////////////////////////////
+      //STRIPE
+
+      selectedPaymentOption: async (option) => {
+        // const { setToken } = getActions();
+        const url = process.env.BACK_URL + "/api/create-checkout-session";
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            "option": option,
+          }),
+        }
+        const response = await fetch(url, options);
+        // const actions = getActions()
+        if (response.ok) {
+          const data = await response.json();
+          //   return { message: data.message };
+          // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
+          localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
+          // setStore(JSON.stringify({ clientSecret: data.clientSecret, sessionId: data.session_id }))
+
+        } else {
+          const dataError = await response.json();
+          return { error: dataError.message }
+        }
+      },
+      // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
+      // localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
+
+
     }
   };
 };
