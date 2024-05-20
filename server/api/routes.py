@@ -344,7 +344,7 @@ def create_checkout_session():
 
     return jsonify(response_body), 200
 
-
+# probando probando 
 
 # @api.route("/session-status", methods=["GET"])
 # # Función para crear el formulario de pago
