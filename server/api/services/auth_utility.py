@@ -1,5 +1,6 @@
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity, get_jwt
 
 
 import jwt
@@ -14,12 +15,18 @@ from time import time
 def user_login(email, password):
     estudiante = Estudiantes.query.filter_by(email=email).first()
 
-    if estudiante and bcrypt.checkpw(password, estudiante.password):
+    if estudiante and bcrypt.checkpw(password.encode('utf-8'), estudiante.password.encode('utf-8')):
+        jti = str(uuid.uuid4())  # Generar un nuevo JTI
         identity = {
             "id": estudiante.id,
             "email": estudiante.email,
+            "jti": jti
         }
         token = create_access_token(identity=identity)
+
+        estudiante.jti = jti  # Almacenar el JTI en la base de datos
+        db.session.commit()
+
         return jsonify(access_token=token, message="Estudiante logeado con éxito"), 200
     
     return jsonify(message="Estudiante no encontrado"), 404
@@ -121,6 +128,22 @@ def set_new_password(token):
         return jsonify({"error": "Token invalid"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+# Verify JTI // Login control
+def verify_jti():
+    current_user = get_jwt_identity()
+    estudiante = Estudiantes.query.get(current_user['id'])
+
+    if not estudiante:
+        return jsonify({'message': 'User not found'}), 404
+
+    jti = get_jwt()['jti']
+    if jti != estudiante.jti:
+        estudiante.jti = None
+        db.session.commit()
+        return jsonify({'message': 'Session expired. Please log in again.'}), 401
+
+    return None
     
 
 
