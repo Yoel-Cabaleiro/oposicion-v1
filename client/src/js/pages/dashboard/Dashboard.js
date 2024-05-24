@@ -10,9 +10,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!store.login) {
-      navigate("/");
+      navigate("/login");
     }
-  }, []);
+  }, [store.login]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -69,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const token = localStorage.getItem('token');
         const url = process.env.BACK_URL + '/api/logout';
         const options = {
-          method: 'GET',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,

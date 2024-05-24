@@ -12,7 +12,7 @@ export default function NavDashboard() {
 
   const handleLogout = () => {
     actions.logout()
-    navigate("/")
+    navigate("/login")
   }
 
   return (
