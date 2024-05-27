@@ -235,12 +235,10 @@ def login():
 @api.route("/authentication", methods=["GET"])
 @jwt_required()
 def pro_authentication():
-    # Verificar el JTI
     verification_response = verify_jti()
     if verification_response:
         return verification_response
     
-    # Continuar con la lógica original si el JTI es válido
     identity = get_jwt_identity()
     email = identity.get('email')
     if email:
