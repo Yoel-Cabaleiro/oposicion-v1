@@ -14,7 +14,7 @@ class Estudiantes(db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     suscripcion = db.Column(db.String)
-    jti = db.Column(db.String)
+    jti = db.Column(db.String(36))
 
     def serialized(self):
         return {
