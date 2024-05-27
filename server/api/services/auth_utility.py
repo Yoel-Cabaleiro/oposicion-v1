@@ -176,6 +176,3 @@ def verify_jti():
         return jsonify({'message': 'Session expired. Please log in again.'}), 401
 
     return None
-    
-
-
