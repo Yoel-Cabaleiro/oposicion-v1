@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity, get_jwt
+from flask_jwt_extended import get_jwt_identity, get_jwt, decode_token
 
 
 import jwt
@@ -15,22 +15,33 @@ import uuid
 #LOGIN
 def user_login(email, password):
     estudiante = Estudiantes.query.filter_by(email=email).first()
+    if estudiante and bcrypt.checkpw(password, estudiante.password):
+        jti = str(uuid.uuid4())
+        print(f"Generated JTI: {jti}")
+        
+        # Crear el token JWT con el JTI generado
+        additional_claims = {"jti": jti}
+        token = create_access_token(identity={"id": estudiante.id, "email": estudiante.email}, additional_claims=additional_claims)
+        print(f"Generated Token: {token}")
+        
+        # Decodificar el token para obtener el JTI
+        decoded_token = decode_token(token)
+        jti_from_token = decoded_token['jti']
+        print(f"Decoded Token JTI: {jti_from_token}")
 
-    if estudiante and bcrypt.checkpw(password.encode('utf-8'), estudiante.password.encode('utf-8')):
-        jti = str(uuid.uuid4())  # Generar un nuevo JTI
-        identity = {
-            "id": estudiante.id,
-            "email": estudiante.email,
-            "jti": jti
-        }
-        token = create_access_token(identity=identity)
-
-        estudiante.jti = jti  # Almacenar el JTI en la base de datos
-        db.session.commit()
+        estudiante.jti = jti_from_token
+        try:
+            db.session.add(estudiante)
+            db.session.commit()
+            print("JTI saved to the database")
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error saving JTI to the database: {e}")
+            return jsonify(message="Error al guardar el JTI"), 500
 
         return jsonify(access_token=token, message="Estudiante logeado con éxito"), 200
     
-    return jsonify(message="Estudiante no encontrado"), 404
+    return jsonify(message="Estudiante no encontrado o contraseña incorrecta"), 404
 
 
 
@@ -52,7 +63,21 @@ def register_user(email, password):
     new_estudiante = Estudiantes(email=email, password=hashed_password)
     db.session.add(new_estudiante)
     db.session.commit()
-    return True, "Estudiante registrado con éxito"
+    jti = str(uuid.uuid4())
+    token = create_access_token(identity={"id": new_estudiante.id, "email": new_estudiante.email}, additional_claims={"jti": jti})
+    decoded_token = decode_token(token)
+    jti_from_token = decoded_token['jti']
+
+    # Guardar el JTI en la base de datos
+    new_estudiante.jti = jti_from_token
+    try:
+        db.session.add(new_estudiante)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return False, "Error al guardar el JTI: " + str(e)
+
+    return True, {"message": "Estudiante registrado y autenticado con éxito", "access_token": token}
 
 
 
@@ -139,12 +164,15 @@ def verify_jti():
         return jsonify({'message': 'User not found'}), 404
 
     jti = get_jwt()['jti']
+    print(f"Token JTI: {jti}, Stored JTI: {estudiante.jti}")
     if jti != estudiante.jti:
         estudiante.jti = None
-        db.session.commit()
+        try:
+            db.session.add(estudiante)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error updating JTI to None: {e}")
         return jsonify({'message': 'Session expired. Please log in again.'}), 401
 
     return None
-    
-
-
