@@ -15,7 +15,7 @@ export default function Home() {
             <h5 className="text-black text-start fuente-lato fw-light mt-4 fs-4">Modo examen, preguntas test y múltiples categorías.</h5>
             <h5 className="text-black text-start fuente-lato fw-light fs-4">Información actualizada diariamente sobre tus actividades.</h5>
             <Link to="/signup/" className="">
-              <button className="px-5 btn btn-dark btn-lg mt-5 text-white border border-dark rounded-3 fuente-lato fw-light">Empieza ahora</button>
+              <button className="btn btn-dark btn-lg px-5 mt-5 text-white border border-dark rounded-3 fuente-lato fw-light">Empieza ahora</button>
             </Link>
           </div>
         </div>

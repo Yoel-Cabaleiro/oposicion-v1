@@ -342,42 +342,43 @@ def create_checkout_session():
 
     return jsonify(response_body), 200
 
-# probando probando 
 
-# @api.route("/session-status", methods=["GET"])
-# # Función para crear el formulario de pago
-# # @jwt_required()
-# def session_status():
-#     try:
-#         option = data.get('option')
-#         session_id = request.args.get('session_id')
-#         if not session_id:
-#             return jsonify(error='Session ID is required'), 400
-#         try:
-#             session = stripe.checkout.Session.retrieve(session_id)
-#         except stripe.error.InvalidRequestError as e:
-#             return jsonify(error=str(e)), 400
-#         except stripe.error.StripeError as e:
-#             return jsonify(error=str(e)), 500
+@api.route("/session-status", methods=["GET"])
+# Función para crear estado de la trasnaccion y pasarsela al componente return
+def session_status():
+    try:
+#         option = request.args.get('option')
+        session_id = request.args.get('session_id')
+        
+        if not session_id:
+            return jsonify(error='Session ID is required'), 400
+        try:
+            session = stripe.checkout.Session.retrieve(session_id)
+        except stripe.error.InvalidRequestError as e:
+            return jsonify(error=str(e)), 400
+        except stripe.error.StripeError as e:
+            return jsonify(error=str(e)), 500
     
-#         if not session:
-#             return jsonify(error='Session not found'), 404
+        if not session:
+            return jsonify(error='Session not found'), 404
     
-#         customer_email = session.customer_details.get('email', 'N/A')
+        customer_email = session.customer_details.get('email', 'N/A')
 
-#         if session.status == 'complete':
-#             estudiante = Estudiantes.query.filter_by(email=customer_email).first()
-#             if estudiante:
+        if session.status == 'complete':
+            estudiante = Estudiantes.query.filter_by(email=customer_email).first()
+            if estudiante:
 #                 estudiante.suscripcion = option
-#             db.session.commit()
-#             return jsonify(status=session.status, customer_email=session.customer_details.email)
-#         else:
-#             return jsonify(error='Estudiante not found'), 404
-    
-#     except Exception as e:
-#         return jsonify(error=str(e)), 500
+                suscripcion = request.args.get('option')
+                estudiante.suscripcion = suscripcion
+                db.session.commit()
+            return jsonify(status=session.status, customer_email=session.customer_details.email)
+        else:
+            return jsonify(status=session.status, customer_email=session.customer_details.email)
+           # return jsonify(error='Estudiante not found'), 404
 
-#     return jsonify(status=session.status, customer_email=customer_email, message="User subscription not activated")   
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+
 
 
 
