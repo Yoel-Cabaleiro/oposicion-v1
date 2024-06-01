@@ -65,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("token", token)
       },
 
-      logout: async() => {
+      logout: async () => {
         const token = localStorage.getItem('token');
         const url = process.env.BACK_URL + '/api/logout';
         const options = {
@@ -76,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
         if (!token) {
-          setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: []});
+          setStore({ login: false, estudiante: {}, estadisticasEstudiante: [], estadisticaSeleccionada: {}, preguntasSeleccionadas: [], categoriasSeleccionadas: [] });
           return { error: 'Pro no authenticated' };
         }
         const response = await fetch(url, options);
@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           localStorage.removeItem("token")
           console.log(data)
         }
-        
+
       },
 
       isLogged: () => {
@@ -333,11 +333,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         // const actions = getActions()
         if (response.ok) {
           const data = await response.json();
-          //   return { message: data.message };
+          // setStore({ estudiante: { ...store.estudiante, suscripcion: option } });
+          // console.log(store.estudiante)
+          // return { message: data.message };
           // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
           localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
-          // setStore(JSON.stringify({ clientSecret: data.clientSecret, sessionId: data.session_id }))
-
         } else {
           const dataError = await response.json();
           return { error: dataError.message }
@@ -345,6 +345,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
       // localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
+
 
 
     }
