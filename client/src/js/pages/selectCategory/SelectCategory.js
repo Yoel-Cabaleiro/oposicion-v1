@@ -7,6 +7,11 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 export default function SelectCategory() {
 
+    //  PENDIENTE //
+    // depende de la subscripcion pueden escoger solo una categoria o varias
+    //  Se debería poder modificar la eleccion seleccionada.
+    // que al darle al final click salga un alert para confirmar ("Estas seguro que quieres prácticar con la categoria Tal?" boton cotinuar, boton modificar )
+
     const navigate = useNavigate()
     const { store, actions } = useContext(Context)
     const [state, setState] = useState({});
