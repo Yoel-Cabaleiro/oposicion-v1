@@ -347,7 +347,8 @@ def create_checkout_session():
 # Función para crear estado de la trasnaccion y pasarsela al componente return
 def session_status():
     try:
-#         option = request.args.get('option')
+        # option = request.args.get('option')
+        suscripcion = request.args.get('option')
         session_id = request.args.get('session_id')
         
         if not session_id:
@@ -368,9 +369,13 @@ def session_status():
             estudiante = Estudiantes.query.filter_by(email=customer_email).first()
             if estudiante:
 #                 estudiante.suscripcion = option
-                suscripcion = request.args.get('option')
+                # suscripcion = request.args.get('option')
                 estudiante.suscripcion = suscripcion
                 db.session.commit()
+            # Hay que hacer que llegue la suscripcion a suscripcion, ahora la recibimos como none
+            # 
+            # 
+            print(session.status, session.customer_details.email, suscripcion)
             return jsonify(status=session.status, customer_email=session.customer_details.email)
         else:
             return jsonify(status=session.status, customer_email=session.customer_details.email)

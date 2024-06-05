@@ -337,7 +337,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           // console.log(store.estudiante)
           // return { message: data.message };
           // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
-          localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
+          localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id, option: option }))
         } else {
           const dataError = await response.json();
           return { error: dataError.message }
