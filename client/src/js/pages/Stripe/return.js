@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate, Link } from 'react-router-dom'
+import { Context } from "../../store/appContext";
 
 export function Return() {
+
+    const navigate = useNavigate()
+    const { store, actions } = useContext(Context)
+
     const [status, setStatus] = useState(null);
     const [customerEmail, setCustomerEmail] = useState('');
     const [error, setError] = useState(null);
     const [subscription, setSubscription] = useState('');
+    const [estudianteId, setEstudianteId] = useState(store.estudiante.id)
 
-    const handleClick = (subscription) => {
-        //  PENDIENTE //
-        // subscription
-        // actions.setCategoriasSeleccionadas(finalCategories);
-        // Cuando le demos al boton queremos pasarle subscription para actualizar el fetch de put de estudiante y al abrir el seleccionar categorias hacer condicional si es oneCategory que el lenght sea 1 y si es el otro que sea mas grande.
+    //  PENDIENTE //
+    // subscription
+    // actions.setCategoriasSeleccionadas(finalCategories);
+    // Cuando le demos al boton queremos pasarle subscription para actualizar el fetch de put de estudiante y al abrir el seleccionar categorias hacer condicional si es oneCategory que el lenght sea 1 y si es el otro que sea mas grande.
 
-        // 1. coges subscription y lo actualizas en el modelo
-        // 2. en el boton handleClick llamamos al endpoint de put de estudiante y cambiamos la subscripcion
+    // 1. coges subscription y lo actualizas en el modelo
+    // 2. en el boton handleClick llamamos al endpoint de put de estudiante y cambiamos la subscripcion
 
-        // EJEMPLO
-        // try: 
-        // AWAIT ACTION ACTUALIZAR ESTUDIANTE (SUSCRIPTION)
-        subscription
-        console.log(store.categoriasSeleccionadas)
-        navigate("/dashboard")
+    // EJEMPLO
+    // try: 
+    // AWAIT ACTION ACTUALIZAR ESTUDIANTE (SUSCRIPTION)
+    // subscription
 
-    }
 
+    // Cuando el usuario no se completa el pago, en el formulario mismo aparece el error que tiene y no le deja continuar.
 
     useEffect(() => {
         const queryString = window.location.search;
@@ -70,9 +73,29 @@ export function Return() {
         }
     }, [subscription]);
 
+
+    console.log(subscription)
+    console.log(store.estudiante)
+    console.log(store.login)
+
+    const handleClick = async () => {
+        try {
+            console.log(store.estudiante)
+            const result = await actions.updateSuscriptionEstudiante(store.estudiante.id, subscription);
+            if (result.error) {
+                console.log("error")
+                setError(result.error);
+            } else {
+                console.log("Suscripción actualizada exitosamente");
+                navigate("/selectCategory");
+            }
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
     if (error) {
         return console.log(error)
-        // <div>Error: {error}</div>;
     }
 
     if (status === "open") {
