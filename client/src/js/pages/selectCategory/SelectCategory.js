@@ -32,6 +32,7 @@ export default function SelectCategory() {
         }
     }, [store.categorias]);
 
+    console.log(store.estudiante)
 
 
     const handleGroupSelect = (group) => {

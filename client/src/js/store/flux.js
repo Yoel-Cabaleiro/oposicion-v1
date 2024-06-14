@@ -53,6 +53,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json();
           setToken(data.access_token);
+          // const store = getStore();
+          // console.log(store.estudiante)
           return { message: data.message };
         } else {
           const dataError = await response.json();
@@ -141,7 +143,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json()
           console.log(data.message)
-          // setToken(data.access_token);
+
+          // setStore({ estudiante: data });
+          setStore({ login: true })
+          setStore({ estudiante: data.estudiante })
+          // const store = getStore();
+          // console.log(store.estudiante)
+          // console.log(store.login)
           return data
         }
         if (!response.ok) {
@@ -343,10 +351,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           return { error: dataError.message }
         }
       },
-      // Almacenamos el clientsecret y la session id que nos da stripe en el local storage para pasarsela al formulario
-      // localStorage.setItem("payment", JSON.stringify({ clientSecret: data.clientSecret, session_id: data.session_id }))
 
-
+      updateSuscriptionEstudiante: async (estudianteId, subscription) => {
+        const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}`;
+        const options = {
+          method: "PUT",
+          body: JSON.stringify({
+            subscription
+          }),
+          headers: { "Content-Type": "application/json" }
+        }
+        const actions = getActions()
+        console.log("hola soy un mensaje ")
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          return { 'mensaje': data.mensaje, 'data': data.data, }
+        }
+        else {
+          return { 'error': 'Error al actualizar fallos' }
+        }
+      }
 
     }
   };
