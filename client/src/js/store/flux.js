@@ -336,7 +336,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }
         const response = await fetch(url, options);
-        // const actions = getActions()
         if (response.ok) {
           const data = await response.json();
           // setStore({ estudiante: { ...store.estudiante, suscripcion: option } });
@@ -354,9 +353,28 @@ const getState = ({ getStore, getActions, setStore }) => {
       //  ESTUDIANTE
       ////////////////////////////////
 
+      getEstudiante: async (estudianteId) => {
+        const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}`
+        const options = {
+          method: 'GET',
+          headers: { "Content-Type": "application/json" }
+        }
+
+        const response = await fetch(url, options)
+
+        if (response.ok) {
+          const data = await response.json()
+          console.log(data)
+          return { message: "Estudiante:", data };
+        } else {
+          const errorData = await response.json()
+          return { error: errorData.message, data: errorData.data };
+        }
+      },
 
       updateSuscriptionEstudiante: async (estudianteId, subscription) => {
         const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}`;
+        const actions = getActions()
         const store = getStore();
         const options = {
           method: "PUT",
@@ -371,7 +389,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             const data = await response.json()
             console.log(`La suscripcion del usuario ha sido actualizada: ${subscription}`)
-            // store.estudiante;
+            // Volver a traer el estudiante con la informacion de la suscripción actualizada.
+            const estudianteData = await actions.getEstudiante(estudianteId);
+            if (estudianteData.data) {
+              setStore({ estudiante: estudianteData.data.data });
+            }
             return { 'mensaje': data.mensaje, 'data': data.data, }
           } else {
             return { 'error': 'Error al actualizar fallos' }
