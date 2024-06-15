@@ -77,7 +77,7 @@ def register_user(email, password):
         db.session.rollback()
         return False, "Error al guardar el JTI: " + str(e)
 
-    return True, {"message": "Estudiante registrado y autenticado con éxito", "access_token": token}
+    return True, {"message": "Estudiante registrado y autenticado con éxito", "access_token": token, "estudiante": new_estudiante.serialized()}
 
 
 
