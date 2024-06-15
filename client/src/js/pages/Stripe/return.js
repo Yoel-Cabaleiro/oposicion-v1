@@ -80,6 +80,7 @@ export function Return() {
 
     const handleClick = async () => {
         try {
+            
             console.log(store.estudiante)
             const result = await actions.updateSuscriptionEstudiante(store.estudiante.id, subscription);
             if (result.error) {
