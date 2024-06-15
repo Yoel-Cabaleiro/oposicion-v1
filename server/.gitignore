@@ -55,7 +55,7 @@ node_modules/
 buil/
 public/
 migrations/
-instance/
+instance
 
 # ignore the dist directory were our bundle files are going to be
 !.gitkeep
