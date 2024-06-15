@@ -53,7 +53,6 @@ export function Return() {
                         const paymentDetails = localStorage.getItem("payment");
                         // lo parseamos de json a js para poder usarlo
                         const paymentData = JSON.parse(paymentDetails);
-                        console.log(paymentData.option)
                         // seteamos subscripcion con la option del localstorage ya guardada en nuestro js.
                         setSubscription(paymentData.option);
 
@@ -69,28 +68,36 @@ export function Return() {
 
     useEffect(() => {
         if (subscription) {
-            console.log('Subscription updated:', subscription);
+            // console.log('Subscription updated:', subscription);
         }
-    }, [subscription]);
+        // Cuando ha pagado, autentificar y metemos en el useEffect el store para que se cargue 
+        actions.authentication();
+    }, [subscription, store]);
 
 
-    console.log(subscription)
-    console.log(store.estudiante)
-    console.log(store.login)
 
     const handleClick = async () => {
         try {
-            
-            console.log(store.estudiante)
+            await actions.authentication();
+
+            // Verificar si el usuario está logueado
+            const isLogged = await actions.isLogged();
+            // Chequear si está el usuario logeado
+            if (!isLogged) {
+                setError("El usuario no está autenticado");
+                return;
+            }
+            actions.isLogged();
             const result = await actions.updateSuscriptionEstudiante(store.estudiante.id, subscription);
             if (result.error) {
-                console.log("error")
+                console.error("Error al actualizar la suscripción:", result.error);
                 setError(result.error);
             } else {
                 console.log("Suscripción actualizada exitosamente");
                 navigate("/selectCategory");
             }
         } catch (err) {
+            console.error("Error en handleClick:", err);
             setError(err.message);
         }
     }
