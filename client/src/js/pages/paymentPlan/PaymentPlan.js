@@ -12,6 +12,8 @@ export default function PaymentPlan(email) {
     const [state, setState] = useState({});
     const [userSubscription, setUserSubscription] = useState("")
 
+    
+
     // handleClickFreePlan = () => {
     //     setUserSubscription("Free Trial")
     //     store.user.subscription
@@ -21,6 +23,7 @@ export default function PaymentPlan(email) {
         setUserSubscription("oneCategory");
         await actions.selectedPaymentOption("oneCategory");
         navigate("/paymentdetails");
+        
     }
 
     const handleClickTwoCategories = async () => {
@@ -34,7 +37,8 @@ export default function PaymentPlan(email) {
         // if (!store.login) {
         //     navigate("/");
         // }
-        store.user
+        
+        
     }, []);
 
     return (

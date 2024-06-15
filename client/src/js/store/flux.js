@@ -142,11 +142,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         if (response.ok) {
           const data = await response.json()
-          console.log(data.message)
+          console.log(data.message.estudiante)
 
           // setStore({ estudiante: data });
           setStore({ login: true })
-          setStore({ estudiante: data.estudiante })
+          setStore({ estudiante: data.message.estudiante })
+          localStorage.setItem("token", token)
           // const store = getStore();
           // console.log(store.estudiante)
           // console.log(store.login)
