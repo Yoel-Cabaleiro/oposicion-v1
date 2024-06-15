@@ -13,20 +13,6 @@ export function Return() {
     const [subscription, setSubscription] = useState('');
     const [estudianteId, setEstudianteId] = useState(store.estudiante.id)
 
-    //  PENDIENTE //
-    // subscription
-    // actions.setCategoriasSeleccionadas(finalCategories);
-    // Cuando le demos al boton queremos pasarle subscription para actualizar el fetch de put de estudiante y al abrir el seleccionar categorias hacer condicional si es oneCategory que el lenght sea 1 y si es el otro que sea mas grande.
-
-    // 1. coges subscription y lo actualizas en el modelo
-    // 2. en el boton handleClick llamamos al endpoint de put de estudiante y cambiamos la subscripcion
-
-    // EJEMPLO
-    // try: 
-    // AWAIT ACTION ACTUALIZAR ESTUDIANTE (SUSCRIPTION)
-    // subscription
-
-
     // Cuando el usuario no se completa el pago, en el formulario mismo aparece el error que tiene y no le deja continuar.
 
     useEffect(() => {
@@ -79,7 +65,6 @@ export function Return() {
     const handleClick = async () => {
         try {
             await actions.authentication();
-
             // Verificar si el usuario está logueado
             const isLogged = await actions.isLogged();
             // Chequear si está el usuario logeado

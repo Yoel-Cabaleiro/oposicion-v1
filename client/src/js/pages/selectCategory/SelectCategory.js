@@ -29,8 +29,8 @@ export default function SelectCategory() {
         if (store.categorias) {
             const groups = new Set(store.categorias.map(categoria => categoria.grupo));
             setUniqueGroups(groups);
+            // console.log("las categorias son:", store.categorias);
         }
-        console.log(store.estudiante)
     }, [store.categorias]);
 
 
