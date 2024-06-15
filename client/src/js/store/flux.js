@@ -350,28 +350,38 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      ////////////////////////////////
+      //  ESTUDIANTE
+      ////////////////////////////////
+
+
       updateSuscriptionEstudiante: async (estudianteId, subscription) => {
         const url = process.env.BACK_URL + `/api/estudiantes/${estudianteId}`;
+        const store = getStore();
         const options = {
           method: "PUT",
           body: JSON.stringify({
-            subscription
+            "email": store.estudiante.email,
+            "suscripcion": subscription
           }),
           headers: { "Content-Type": "application/json" }
         }
-        const actions = getActions()
-        console.log("hola soy un mensaje ")
-        const response = await fetch(url, options)
-        if (response.ok) {
-          const data = await response.json()
-          return { 'mensaje': data.mensaje, 'data': data.data, }
-        }
-        else {
-          return { 'error': 'Error al actualizar fallos' }
-        }
-      }
-
-    }
+        try {
+          const response = await fetch(url, options)
+          if (response.ok) {
+            const data = await response.json()
+            console.log(`La suscripcion del usuario ha sido actualizada: ${subscription}`)
+            // store.estudiante;
+            return { 'mensaje': data.mensaje, 'data': data.data, }
+          } else {
+            return { 'error': 'Error al actualizar fallos' }
+          }
+        } catch (error) {
+          console.error(`Error en el fetch: ${error.message}`);
+          return { 'error': 'Error en el fetch' };
+        };
+      },
+    },
   };
 };
 
