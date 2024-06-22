@@ -12,10 +12,17 @@ export default function PaymentPlan(email) {
     const [state, setState] = useState({});
     const [userSubscription, setUserSubscription] = useState("")
 
-    // handleClickFreePlan = () => {
-    //     setUserSubscription("Free Trial")
-    //     store.user.subscription
-    // }
+    const handleClickFreePlan = async () => {
+        // setUserSubscription("freeTrial")
+        // const result = await actions.updateSuscriptionEstudiante(store.estudiante.id, userSubscription);
+        // if (result.error) {
+        //     console.error("Error al actualizar la suscripción:", result.error);
+        //     setError(result.error);
+        // } else {
+        //     console.log("Suscripción actualizada exitosamente");
+        //     navigate("/selectCategory");
+        // }
+    }
 
     const handleClickOneCategory = async () => {
         setUserSubscription("oneCategory");
@@ -51,7 +58,7 @@ export default function PaymentPlan(email) {
                         </ul>
                     </div>
                     <Link to="/selectcategory/">
-                        <button type="button" className="px-5 btn btn-dark btn-lg text-white border border-dark rounded-3 fw-light">Selecciona</button>
+                        <button type="button" className="px-5 btn btn-dark btn-lg text-white border border-dark rounded-3 fw-light" onClick={handleClickFreePlan}>Selecciona</button>
                     </Link>
                 </div>
                 <div className="text-center col-md-3 p-4 bg-grey">
