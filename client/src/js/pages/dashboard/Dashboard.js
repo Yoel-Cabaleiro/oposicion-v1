@@ -8,6 +8,10 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [selectedEstadistica, setSelectedEstadistica] = useState(null);
 
+  // 
+  // Las estadisticas que no se cargan son las de los usuarios que tienen algun campo sin rellenar, o estadisticas vacias!!!!!
+  // 
+
   useEffect(() => {
     if (!store.login) {
       navigate("/login");
@@ -31,6 +35,7 @@ export default function Dashboard() {
     };
     fetchData();
   }, []);
+
 
   const handleCategorySelect = async (estadistica) => {
     try {

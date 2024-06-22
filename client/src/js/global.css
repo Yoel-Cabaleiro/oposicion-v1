@@ -224,3 +224,10 @@ body::-webkit-scrollbar {
 .shadow {
   box-shadow: #070707;
 }
+
+.bg-gradient-white-to-gray {
+  background: linear-gradient(to bottom, white 50%, #d5d4d4);
+  min-height: 100vh;
+  margin: 0; /* Elimina cualquier margen adicional */
+  padding: 0; 
+}

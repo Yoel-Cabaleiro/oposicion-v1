@@ -186,6 +186,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: { "Content-Type": "application/json" }
         }
         const response = await fetch(url, options)
+        // console.log(categoriaId, estudianteId)
         if (response.ok) {
           const data = await response.json()
           return { mensaje: data.mensaje, data: data.data }
