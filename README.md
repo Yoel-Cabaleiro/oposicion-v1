@@ -35,18 +35,10 @@ Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
 [![EASYOP signup onboarding]([https://img.youtube.com/vi/M9jRrA6IwQk/maxresdefault.jpg)](https://www.youtube.com/watch?v=M9jRrA6IwQk)
 
 ## Uso de la Aplicación
-Registro e Inicio de Sesión:
-
-Los usuarios deben registrarse y crear una cuenta para acceder a todas las funcionalidades de EasyOP.
-Practicar Preguntas:
-
-Navega por las diferentes categorías y selecciona un conjunto de preguntas para practicar.
-Simulación de Exámenes:
-
-Realiza exámenes simulados para probar tus conocimientos bajo presión de tiempo.
-Revisión y Análisis:
-
-Revisa tus respuestas y utiliza las estadísticas para identificar áreas que necesitan mejora.
+- Registro e Inicio de Sesión:Los usuarios deben registrarse y crear una cuenta para acceder a todas las funcionalidades de EasyOP.
+- Practicar Preguntas: Navega por las diferentes categorías y selecciona un conjunto de preguntas para practicar.
+- Simulación de Exámenes: Realiza exámenes simulados para probar tus conocimientos bajo presión de tiempo.
+- Revisión y Análisis: Revisa tus respuestas y utiliza las estadísticas para identificar áreas que necesitan mejora.
 
 
 ## Features
