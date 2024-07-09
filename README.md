@@ -9,6 +9,13 @@ Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
   - Una categorìa (Único pago de 20€. Podrá prácticar la categoría escogida ilimitadamente).
   - Dos categorías (Único pago de 30€. Podrá escoger dos categorías y prácticar ilimitadamente todos los servicios de éstas).</p>
 
+## Características principales
+- Una colección de preguntas actualizadas y categorizadas según el temario oficial del Servicio Canario de Salud.
+- Simulación de Exámenes: Posibilidad de realizar exámenes simulados para practicar en condiciones similares a las del examen real.
+- Estadísticas de Rendimiento: Seguimiento del progreso individual con análisis detallados de rendimiento, áreas fuertes y débiles.
+- Interfaz Amigable: Diseño intuitivo y accesible para facilitar la navegación y el uso.
+- 
+
 #Vista Home
 ![Home](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/566f838a-d304-44a6-8f75-7883b480bba1)
 
@@ -22,12 +29,24 @@ Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
 ![ViewOfQuestions](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/49316f4f-1240-465f-a01a-743fc87234eb)
 
 #Demostracion en video del dashboard y el modo exámen.
-[![EASYOP signup onboarding]([https://img.youtube.com/vi/M9jRrA6IwQk/maxresdefault.jpg)](https://www.youtube.com/watch?v=M9jRrA6IwQk)
+[![EASYOP Vista Modo examen y dashboard]([https://img.youtube.com/vi/nkqcSuMTczU/maxresdefault.jpg)](https://www.youtube.com/watch?v=nkqcSuMTczU)
 
 #Demostracion en video del onboarding.
-[![Demostración de EasyOP](https://www.youtube.com/watch?v=M9jRrA6IwQk)
+[![EASYOP signup onboarding]([https://img.youtube.com/vi/M9jRrA6IwQk/maxresdefault.jpg)](https://www.youtube.com/watch?v=M9jRrA6IwQk)
 
+## Uso de la Aplicación
+Registro e Inicio de Sesión:
 
+Los usuarios deben registrarse y crear una cuenta para acceder a todas las funcionalidades de EasyOP.
+Practicar Preguntas:
+
+Navega por las diferentes categorías y selecciona un conjunto de preguntas para practicar.
+Simulación de Exámenes:
+
+Realiza exámenes simulados para probar tus conocimientos bajo presión de tiempo.
+Revisión y Análisis:
+
+Revisa tus respuestas y utiliza las estadísticas para identificar áreas que necesitan mejora.
 
 
 ## Features
@@ -56,6 +75,8 @@ Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
 - **Dashboard**
 - **PSW encryption**
 - **Password recovery**
+- **Practice test modes**
+- **Payment platform STRIPE**
 
 
 
