@@ -1,5 +1,4 @@
-# EASYOP 
-![EOlogo](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/a84012e1-5bfe-43ca-a963-c49768d55d20)
+# EASYOP ![EOlogo](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/a84012e1-5bfe-43ca-a963-c49768d55d20)
 
 Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
 
