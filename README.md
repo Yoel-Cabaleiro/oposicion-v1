@@ -22,7 +22,7 @@ Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
 ![ViewOfQuestions](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/49316f4f-1240-465f-a01a-743fc87234eb)
 
 #Demostracion en video del dashboard y el modo exámen.
-[![Demostración de EasyOP]([https://img.youtube.com/vi/1eEnboVooiY/maxresdefault.jpg)](https://www.youtube.com/watch?v=1eEnboVooiY)
+[![EASYOP signup onboarding]([https://img.youtube.com/vi/M9jRrA6IwQk/maxresdefault.jpg)](https://www.youtube.com/watch?v=M9jRrA6IwQk)
 
 #Demostracion en video del onboarding.
 [![Demostración de EasyOP](https://www.youtube.com/watch?v=M9jRrA6IwQk)
