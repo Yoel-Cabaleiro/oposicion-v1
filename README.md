@@ -1,14 +1,33 @@
-# App Template: React-Python Full Stack
+# EASYOP
+Tu Compañero Ideal para Preparar Oposiciones del Servicio Canario de Salud.
 
-Welcome to the **Template: React-Python Full Stack** project! This project serves as a template for full-stack web applications, encompassing both client and server components.
+## Descripción del proyecto
+<p>EasyOP es una aplicación web diseñada para ayudar a los aspirantes a oposiciones del Servicio Canario de Salud a practicar y prepararse para sus exámenes modo test.
+  El usuario podrá elegir la categoría o categorías dentro de los grupos que vayan a abrir plazas y podrá prácticar tanto en modo preguntas sueltas (sin una nota final, generando medias de todos los fallos y       aciertos) como en modo exámen (Deberá responder las preguntas primero y al finalizar el exámen aparecerá la nota del total simulando así un examen real.
+  Para poder disfrutar del servicio contamos con tres suscripciones: 
+  - Free Trial (disfruta de forma gratuita de nuestros exámenes, pero tendrás un límite de preguntas).
+  - Una categorìa (Único pago de 20€. Podrá prácticar la categoría escogida ilimitadamente).
+  - Dos categorías (Único pago de 30€. Podrá escoger dos categorías y prácticar ilimitadamente todos los servicios de éstas).</p>
 
-The frontend of the application is built using React, providing a modern and dynamic user interface. On the backend, Python and Flask are used to handle server-side logic and API endpoints.
+#Vista Home
+![Home](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/566f838a-d304-44a6-8f75-7883b480bba1)
 
-In addition to the basic architecture, this template includes essential functionality such as user authentication with login/logout features and password reset capabilities.
+#Signup
+![Signup](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/eee82b24-e8ac-4b9e-a339-ddba5ab0c169)
 
-To facilitate quick setup and usability, the template comes pre-configured with a SQLite database and a user table for managing logins. This allows for rapid development and deployment of your web application.
+#Login
+![Login](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/1ce03773-c2d6-4b98-8ddc-e64e6f736b94)
 
-Whether you're starting a new project or exploring full-stack development, this template provides a solid foundation to kickstart your web application development journey.
+#Vista del formato de preguntas sueltas.
+![ViewOfQuestions](https://github.com/Yoel-Cabaleiro/oposicion-v1/assets/131387591/49316f4f-1240-465f-a01a-743fc87234eb)
+
+#Demostracion en video del dashboard y el modo exámen.
+[![Demostración de EasyOP]([https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=VIDEO_ID](https://www.youtube.com/watch?v=nkqcSuMTczU))
+
+#Demostracion en video del onboarding.
+[![Demostración de EasyOP](https://www.youtube.com/watch?v=M9jRrA6IwQk)
+
+
 
 
 ## Features
@@ -38,6 +57,8 @@ Whether you're starting a new project or exploring full-stack development, this 
 - **PSW encryption**
 - **Password recovery**
 
+
+
 ## Getting Started
 
 Follow these steps to set up and start working with the template:
@@ -62,6 +83,7 @@ git clone https://github.com/thelore/template-react-python.git
   ```
   npm start
   ```
+
 
 3. **Start the server**:
 - Ensure you have Python 3.12 or above installed on your system (if not, [refer to this installation guide](https://kinsta.com/knowledgebase/install-python/)
@@ -104,61 +126,3 @@ Enjoy exploring the app template!
     - `services/`: backend logic
   - `assets`: html email and other utilities
 
-## Collaboration Instructions
-
-Thank you for your interest in contributing to the **template-react-python** repository! To collaborate effectively, please follow these guidelines:
-
-1. **Fork the Repository**: 
-
-Start by forking this repository to your GitHub account. This will create a copy of the project that you can freely experiment with.
-
-2. **Clone the Repository**: 
-
-After forking, clone the repository to your local machine using Git. You can do this by running the following command in your terminal:
-
-```sh
-git clone https://github.com/your-username/template-react-python.git
-```
-
-3. **Create a New Branch**:
-
-Before making any changes, create a new branch from `develop` for your contributions.
-- Move in the develop branch: `git checkout develop` 
-- Create a new Branch: `git checkout -b feature-name` use a descriptive branch name that reflects the purpose of your changes.
-
-**NOTE: do not branch from `main`! Make sure you are branching from develop**
-
-4. **Make Your Changes**: 
-
-Implement your desired changes or add new features to the project within your branch. Ensure that your changes align with the project's guidelines and coding standards.
-
-5. **Open a pull request (PR)** 
-
-Once ready, send a PR from your branch to the original repository in the `develop` branch. Provide a clear title and description, outlining the purpose and scope of your changes.
-
-**NOTE: do not push in the original `main` branch! Any pull request directed to main will be ignored**
-
-6. **Collaborate and Iterate**: 
-
-Engage in discussions with project maintainers and contributors through the PR comments. Be responsive to feedback and make necessary adjustments to your changes if required.
-
-7. **Merge and Celebrate**: 
-
-Once your PR has been reviewed and approved, a project maintainer will merge your changes into the main branch. Congratulations on your contribution!
-
-
-
-
-Thank you for helping to improve the **template-react-python** project. We appreciate your efforts and look forward to your contributions!
-
-
-## License
-
-This template project is licensed under the MIT License - see the [LICENSE.md](https://github.com/thelore85/template-react-python/blob/main/LICENSE.md)
- file for details.
-
----
-
-**Author**: thelore85
-
-**Website**: [piqus.it](https://piqus.it)
